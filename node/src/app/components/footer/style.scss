@@ -1,0 +1,40 @@
+footer {
+	
+	width: 100%;
+	position: relative;
+	float: left;
+	z-index: 10;
+
+	margin-top: 1.5em;
+	margin-bottom: 5.5em;
+
+	@media all and (min-width: $s) {
+	}
+	@media all and (orientation:landscape) {
+		margin-bottom: 1.5em;
+	}
+	@media all and (min-width: $m) {
+		margin-bottom: 1.5em;
+	}
+}
+
+footer div.item.info {
+	
+	margin-bottom: 0;
+	width: col-width(12,12);
+	text-align: center;
+	
+	@media all and (orientation:landscape) {
+		width: col-width(6,12);
+		text-align: left;
+		margin-bottom: .75em;
+	}
+	@media all and (min-width: $m) {
+		width: col-width(6,12);
+		text-align: left;
+		margin-bottom: .75em;
+	}
+	@media all and (min-width: $l) {
+		width: col-width(4,12);
+	}
+}

@@ -1,0 +1,90 @@
+////////////////////////
+// Variables
+//
+// All variables go here.
+////////////////////////
+
+$color_background: #f6f6f4;
+$color_background_transparent: rgba(246,246,244,0.75);
+$color_body_dark: #000;
+$color_white: #fff;
+$color_black: #000;
+
+//sort out landscape / portrait on mobile with orientation check
+$s: 400px; //larger / newer mobile - bigger font 
+$sm: 470px; //used for checking if mobile is in landscape, but  still not as big as $m
+$m: 768px; // break to portrait tablet - 1 col, header  and logo to the right
+$m1extra: 769px; // used to keep font size change on portrait tablet
+$xm: 1024px; // landscape tablet / wider desktop - for layout
+$l: 1280px; // landscape tablet / wider desktop - for font size
+$xl: 2048px; // max size - bigger font size
+$inner-max: 1910px;
+
+$font_size_xs: 12px;
+
+$font_size_s: 14px;
+$font_size_m: 18px;
+$font_size_l: 24px;
+$font_size_xl: 32px;
+
+$calc_font_size: calc( 16px + (24 - 16) * (100vw - 400px) / (1910 - 400) );
+
+
+$line_height: 1.5em;
+
+$transition_time: .15s;
+
+$ease-in-out: cubic-bezier(0.445, 0.05, 0.55, 0.95);
+
+$ease-out: cubic-bezier(0.39, 0.575, 0.565, 1);
+$ease-in: cubic-bezier(0.47, 0, 0.745, 0.715);
+
+$easing: cubic-bezier(0.19, 1, 0.22, 1);
+
+
+
+@-moz-keyframes spin {
+  0% {
+    -moz-transform: rotateY(0deg);
+  }
+
+  100% {
+    -moz-transform: rotateY(179deg);
+  }
+}
+@-webkit-keyframes spin {
+  0% {
+    -webkit-transform: rotateY(0deg);
+  }
+
+  100% {
+    -webkit-transform: rotateY(179deg);
+  }
+}
+@-o-keyframes spin {
+  0% {
+    -o-transform: rotateY(0deg);
+  }
+
+  100% {
+    -o-transform: rotateY(179deg);
+  }
+}
+@-ms-keyframes spin {
+  0% {
+    -ms-transform: rotateY(0deg);
+  }
+
+  100% {
+    -ms-transform: rotateY(179deg);
+  }
+}
+@keyframes spin {
+  0% {
+    transform: rotateY(0deg);
+  }
+
+  100% {
+    transform: rotateY(179deg);
+  }
+}

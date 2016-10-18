@@ -1,0 +1,39 @@
+main#page-about-contact {
+
+	section#about_contact {
+		
+		@include opacity(0);
+		@include transition(
+			opacity $transition_time*2 $ease-out
+		);
+		
+		&.visible {
+			@include opacity(1);
+		}
+		
+		.inner {
+			display: table;
+			padding-top: 8em;
+			padding-bottom: 6em;
+		}
+		
+		.group.about {
+			display: table-cell;
+			vertical-align: middle;
+			float: none;
+		}
+		
+		.item.text {
+			width: col-width(12,12);
+		
+			@media all and (min-width: $m) {
+				margin-left: col-width(1,12);
+				width: col-width(10,12);
+			}
+			@media all and (min-width: $l) {
+				margin-left: col-width(1,6);
+				width: col-width(4,6);
+			}
+		}
+	}
+}

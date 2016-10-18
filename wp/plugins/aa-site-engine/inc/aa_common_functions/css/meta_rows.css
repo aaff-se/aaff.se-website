@@ -1,0 +1,101 @@
+.clear {
+	clear: both;
+}
+
+div#rows.postbox {
+	background: #f1f1f1;
+}
+div#rows.postbox h2.hndle {
+	background: #fff;
+}
+
+img.uploadedmedia {
+	width:50%;
+	margin-right: 50%;
+	height:auto;
+	margin-top: 1em;
+}
+
+#side-sortables img.uploadedmedia {
+	width: 100%;
+	margin-right: 0;
+}
+
+.row.ui-sortable-helper {
+	opacity: 0.6;
+	border: none;
+}
+
+.row.ui-sortable-placeholder {
+	border: 1px dashed #e5e5e5;
+	visibility: visible !important;
+	background: transparent !important;
+}
+
+.row {
+	width:100%;
+	box-sizing: border-box;
+	padding: 0.5em;
+	position: relative;
+	margin: 0.5em 0;
+	min-width: 255px;
+    border: 1px solid #e5e5e5;
+    box-shadow: 0 1px 1px rgba(0,0,0,.04);
+    background: #fff;
+}
+
+a.addnewrow {
+	margin: 0.5em 0;
+}
+
+.row h4 {
+	cursor:move;
+	margin-top: 0;
+	width: 97%;
+	padding: 0 1.5% 0.5em;
+	border-bottom: 1px solid #e5e5e5;
+	line-height: 2em;
+	min-height: 2em;
+}
+
+.row .removerow, .row .removeslide {
+	float: right;
+	font-size:1.5em;
+	text-decoration: none;
+	position: absolute;
+	top: .5em;
+	right: 1.5%;
+	cursor: pointer;
+}
+
+.row div {
+	display: none;
+}
+
+.row.text div.text,
+.row.media div.media {
+	display: block;
+	padding-top: 1em;
+	margin-bottom: 1em;
+	border-top: 1px solid #e5e5e5;
+}
+
+
+.row select {
+	margin-bottom: 1em;
+}
+
+.row textarea {
+	width: 100%;
+}
+
+.row .typewrap {
+	display: block;
+	margin-bottom: 1em;
+}
+
+input[type="color"] {
+	padding: 0;
+	height: 2em;
+	width: 2em;
+}

@@ -1,0 +1,144 @@
+@import '../generic/fonts';
+@import '../generic/normalize';
+
+//fonts need to come first in order to work on windows mobile (still true?)
+
+@import "compass";
+@import "animate";
+@import "compass/support";
+@import "compass/utilities/general/clearfix";
+@import "compass/reset/utilities";
+@import "compass/css3";
+@import "compass/css3/opacity";
+@import "compass/css3/box-shadow";
+
+@import '../generic/functions';
+@import '../generic/variables';
+@import '../generic/mixins';
+@import '../generic/extendables';
+
+::selection {
+	background: $color_body_dark;
+	color: $color_background;
+}
+::-moz-selection { 
+	background: $color_body_dark;
+	color: $color_background;
+}
+
+body {
+	font-family: 'Pressura', monospace;
+	line-height: $line_height;
+	background: $color_background;
+	color: $color_body_dark;
+	position: relative;
+	font-variant-ligatures: no-common-ligatures;
+	-webkit-font-variant-ligatures: no-common-ligatures;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	font-size: $font_size_xs;
+	overflow-x: hidden;
+	
+	@include transition(
+		color $transition_time linear,
+		background $transition_time linear,
+		font-size $transition_time linear
+	);
+
+	@media all and (min-width: $s) {
+		font-size: $font_size_s;
+	}
+	
+	@media all and (min-width: $m1extra) {
+		font-size: $font_size_m;
+
+	}
+	@media all and (min-width: $l) {
+		font-size: $font_size_l;
+	}
+	@media all and (min-width: $xl) {
+		font-size: $font_size_xl;
+	}
+
+	&.the404 {
+		background: #250df6;
+		color: $color_white;
+		
+		a {
+			color: $color_white;
+		}
+	}
+}
+
+a,
+a:visited,
+a:focus {
+
+	position: relative;
+	text-decoration: none;
+	color: inherit;
+	background: none;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+a:hover,
+a:active {
+	text-decoration: none;
+}
+
+p a {
+	display: inline;
+}
+
+p.line {
+	overflow: hidden;
+	height: $line_height;
+	width: 100%;
+	word-break: break-all;
+}
+
+body.touch a:hover {
+	color: inherit;
+}
+
+body.touch a:active {
+	color: inherit;
+}
+
+.image, .svg .video {
+	width: 100%;
+	height: auto;
+	float: left;
+	display: block;
+	
+	&.loaded {
+		
+		img {
+			@include opacity(1);
+		}
+	}
+}
+
+img {
+	width: 100%;
+	height: auto;
+	display: block;
+	@include opacity(0);
+	@include transition(
+		opacity $transition_time*2 $ease-out
+	);
+}
+
+svg {
+	width: 100%;
+	height: auto;
+	display: block;
+	clear: both;
+	fill: currentColor;
+}
+
+video {
+	width: 100%;
+	height: auto;
+	display: block;
+}

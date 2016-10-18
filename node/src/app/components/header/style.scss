@@ -1,0 +1,67 @@
+header {
+	position: fixed;
+	z-index: 1000;
+	top:0;
+	right:0;
+	float: left;
+	text-align: right;
+
+	margin-top: 0;
+	padding: 1.75em 1em 0 0; 
+	width: auto;
+	
+	//solves 1px jerkiness in chrome
+	-webkit-backface-visibility: hidden;
+	backface-visibility: hidden;
+	
+	@include opacity(1);
+	
+	@include transition(
+		transform $transition_time*4 $easing,
+		opacity $transition_time $ease-out
+	);
+
+	@media all and (orientation:landscape) and (min-width: 470px) {
+		padding: 1.75em 2em 0 0; 
+	}
+	@media all and (min-width: $m) {
+		padding: 1.75em 2em 0 0; 
+	}
+	
+	a {
+		white-space: nowrap;
+	}
+}
+
+#root.loaded header {
+	
+	pointer-events: auto;
+	
+	@include opacity(1);
+	
+	@include transform( translateX(0) );
+
+	@include transition(
+		transform $transition_time*4 $easing,
+		opacity $transition_time*2 $ease-out
+	);
+
+
+}
+
+header,
+#root.loaded header.hidden {
+
+	pointer-events: none;
+
+	@include transition(
+		transform $transition_time*4 $easing,
+		opacity $transition_time $ease-out
+	);
+
+
+	@include transform( translateX(1em) );
+	@include opacity(0);
+	
+}
+

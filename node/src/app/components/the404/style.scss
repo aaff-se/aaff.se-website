@@ -1,0 +1,91 @@
+.page-notfound {
+	
+	main {
+		
+		.inner {
+			display: table;
+			padding-top: 8em;
+				padding-bottom: 13em;
+			@include transition(
+				min-height $transition_time*2 $ease-out
+			);
+		}
+		
+		.group {
+			display: table-cell;
+			vertical-align: middle;
+			float: none;
+		}
+
+		.item {
+
+			width: col-width(12,12);
+			
+			text-align: center;
+			
+			@media all and (orientation:landscape) and (min-width: 470px) {
+				text-align: left;
+			}
+			
+			@media all and (min-width: $m) {
+				text-align: left;
+			}
+		}
+
+	}
+	
+	footer {
+		position: absolute;
+		bottom: 0;
+		left: 0;
+	}
+}
+//for  work pages (ie direct decendants to .se/)
+.app-404 {
+	
+	main#page-work {
+		
+		margin-top: 0;
+		
+		section {
+			margin: 0 !important;
+		}
+		
+		.inner {
+			display: table;
+			padding-top: 8em;
+				padding-bottom: 13em;
+			@include transition(
+				min-height $transition_time*2 $ease-out
+			);
+		}
+		
+		.group {
+			display: table-cell;
+			vertical-align: middle;
+			float: none;
+		}
+
+		.item {
+
+			width: col-width(12,12);
+			
+			text-align: center;
+			
+			@media all and (orientation:landscape) and (min-width: 470px) {
+				text-align: left;
+			}
+			
+			@media all and (min-width: $m) {
+				text-align: left;
+			}
+		}
+
+	}
+	
+	footer {
+		position: absolute;
+		bottom: 0;
+		left: 0;
+	}
+}

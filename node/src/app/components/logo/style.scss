@@ -1,0 +1,55 @@
+div#logo {
+	width: 100%;
+	height: 6em;
+	bottom: 0;
+	padding-top: 2em;
+	right: 0;
+	display:block;
+	position: fixed;
+	text-align: center;
+	z-index: 100;
+	
+	pointer-events: none;
+	
+	@media all and (orientation:landscape) and (min-width: 470px) {
+		width: 6em;
+	}
+	@media all and (min-width: $m) {
+		width: 6em;
+	}
+	
+	a {
+		pointer-events: auto;
+		@include transform( translateY(0) );
+		@include transition(
+			transform $transition_time $ease-out
+		);
+		display: inline-block;
+		position: relative;
+		
+		&:hover {
+			
+			svg {
+				@include transform( rotateY(180deg) );
+			}
+		}
+	}
+	
+	svg {	
+		height: 2em;
+		width: 2em;
+
+		@include opacity(0);
+		@include transition(
+			transform $transition_time*2 $ease-out,
+			opacity $transition_time*2 $transition_time*2 $ease-out
+		);
+	}
+	
+	&.loaded {
+		
+		svg {
+			@include opacity(1);
+		}
+	}
+}

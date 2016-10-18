@@ -1,0 +1,66 @@
+main#page-about-contact {
+
+	section#archive {
+		
+		padding: 1em 0 0; 
+		
+		div.item.title {
+			width: col-width(12,12);
+				
+			@media all and (min-width: $xm) {
+				width: col-width(6,12);
+				padding-right: 1em;
+			}
+			@media all and (min-width: $l) {
+				width: col-width(4,12);
+			}
+			
+			h3.linked:after {
+				content: '→';
+				padding-left: .5em;
+				display: inline-block;
+				
+				@include transform( translateX(0) translateY(-0.05em) );
+
+				@include transition(
+					transform $transition_time*4 $easing
+				);
+			}
+			
+			h3.deadlink:after {
+				content: '†';
+				display: inline-block;
+				padding-left: .5em;
+				
+				@include transform( translateX(0) translateY(-0.05em) );
+
+				@include transition(
+					transform $transition_time*4 $easing
+				);
+			}
+			
+			
+		}
+
+		a:hover div.item.title h3.linked:after {
+			@include transform( translateX(.25em) translateY(-0.05em) );
+		}
+
+
+		div.item.info {
+			width: col-width(12,12);
+			
+			@media all and (min-width: $xm) {
+				width: col-width(6,12);
+			}
+			@media all and (min-width: $l) {
+				width: col-width(8,12);
+			}
+		}
+		
+		div.item.line {
+			width: col-width(12,12);
+							
+		}		
+	}
+}

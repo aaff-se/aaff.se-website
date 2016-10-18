@@ -1,0 +1,85 @@
+////////////////////////
+// Layout Partials
+//
+// Seperate your layout from design, building sub folders and partials
+//  in this folder, with everything being imported, in casading order,
+//  into this file.
+//
+// All box model properties go here
+////////////////////////
+
+/* =============================================================================
+   Layout
+   ========================================================================== */
+
+// This is the base layout for the whole site
+
+div {
+	box-sizing: border-box;
+}
+
+section {
+	width: 100%;
+	position: relative;
+	float: left;
+	z-index: 10;
+
+	&.full {
+		
+		.inner {
+			width: 100%;
+			padding:0 !important;
+		
+			.item {
+				padding: 0 !important;
+			}
+		}
+	}
+}
+
+.inner {
+	width: 100%;
+	padding: 0 2em;
+	position: relative;
+	margin: auto;
+
+	@media all and (orientation:landscape) and (min-width: 470px) {
+		padding: 0 6em;
+	}
+
+	@media all and (min-width: $m) {
+		padding: 0 6em;
+	}
+}
+
+.group {
+	width: 100%;
+	float: left;
+	position: relative;
+	margin: 0;
+}
+
+.item {
+	float: left;
+	position: relative;
+	
+	width: col-width(12,12);
+
+	margin: 1em 0;
+	padding: 0;
+	
+	//since linehight is .5 more, we need to cut .5 from the top/bottom margins: ie. .25 from each
+	&.text {
+		margin: .75em 0;
+	}
+}
+
+.clear {
+	clear: both;
+}
+
+//this way we can use new line in our textareas - without need for html parsing in react
+p, h1,h2,h3,h4,h5,h6 {
+	white-space: pre-line;
+}
+

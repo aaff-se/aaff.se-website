@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<!--
+
+Design & Build by Anton Andersson Form & Funktioner / aaff.se / 2016
+
+-->
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+		
+		<%= title %>
+
+		<link href="/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+		
+		<meta name="theme-color" content="#f6f6f4">
+		
+		<meta name="msapplication-tap-highlight" content="no" />
+		<!-- Allow web app to be run in full-screen mode. -->
+		<meta name="apple-mobile-web-app-capable"
+		content="yes">
+		
+		<!-- Make the app title different than the page title. -->
+		<meta name="apple-mobile-web-app-title"
+			content="aaff.se">
+		
+		<!-- Configure the status bar. -->
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		
+		<!-- Disable automatic phone number detection. -->
+		<meta name="format-detection" content="telephone=no">
+		
+		<!-- ICONS -->
+		
+		<link href="/images/192.png"
+			rel="icon" 
+			sizes="192x192">
+			
+		<link href="/images/128.png"
+			rel="icon" 
+			sizes="128x128">
+
+		<!-- iPad retina icon -->
+		<link href="/images/152.png"
+			sizes="152x152"
+			rel="apple-touch-icon-precomposed">
+		
+		<!-- iPad retina icon (iOS < 7) -->
+		<link href="/images/144.png"
+			sizes="144x144"
+			rel="apple-touch-icon-precomposed">
+		
+		<!-- iPad non-retina icon -->
+		<link href="/images/76.png"
+			sizes="76x76"
+			rel="apple-touch-icon-precomposed">
+		
+		<!-- iPad non-retina icon (iOS < 7) -->
+		<link href="/images/72.png"
+			sizes="72x72"
+			rel="apple-touch-icon-precomposed">
+		
+		<!-- iPhone 6 Plus icon -->
+		<link href="/images/180.png"
+			sizes="120x120"
+			rel="apple-touch-icon-precomposed">
+		
+		<!-- iPhone retina icon (iOS < 7) -->
+		<link href="/images/114.png"
+			sizes="114x114"
+			rel="apple-touch-icon-precomposed">
+		
+		<!-- iPhone non-retina icon (iOS < 7) -->
+		<link href="/images/57.png"
+			sizes="57x57"
+			rel="apple-touch-icon-precomposed">
+		
+		<!-- STARTUP IMAGES -->
+		
+		<!-- iPad retina portrait startup image -->
+		<link href="/images/1536x2008.png"
+			media="(device-width: 768px) and (device-height: 1024px)
+				and (-webkit-device-pixel-ratio: 2)
+				and (orientation: portrait)"
+			rel="apple-touch-startup-image">
+		
+		<!-- iPad retina landscape startup image -->
+		<link href="/images/1496x2048.png"
+			media="(device-width: 768px) and (device-height: 1024px)
+				and (-webkit-device-pixel-ratio: 2)
+				and (orientation: landscape)"
+			rel="apple-touch-startup-image">
+		
+		<!-- iPad non-retina portrait startup image -->
+		<link href="/images/768x1004.png"
+			media="(device-width: 768px) and (device-height: 1024px)
+				and (-webkit-device-pixel-ratio: 1)
+				and (orientation: portrait)"
+			rel="apple-touch-startup-image">
+		
+		<!-- iPad non-retina landscape startup image -->
+		<link href="/images/748x1024.png"
+			media="(device-width: 768px) and (device-height: 1024px)
+				and (-webkit-device-pixel-ratio: 1)
+				and (orientation: landscape)"
+			rel="apple-touch-startup-image">
+		
+		<!-- iPhone 6 Plus portrait startup image -->
+		<link href="/images/1242x2148.png"
+			media="(device-width: 414px) and (device-height: 736px)
+				and (-webkit-device-pixel-ratio: 3)
+				and (orientation: portrait)"
+			rel="apple-touch-startup-image">
+		
+		<!-- iPhone 6 Plus landscape startup image -->
+		<link href="/images/1182x2208.png"
+		media="(device-width: 414px) and (device-height: 736px)
+		     and (-webkit-device-pixel-ratio: 3)
+		     and (orientation: landscape)"
+		rel="apple-touch-startup-image">
+		
+		<!-- iPhone 6 startup image -->
+		<link href="/images/750x1294.png"
+			media="(device-width: 375px) and (device-height: 667px)
+				and (-webkit-device-pixel-ratio: 2)"
+			rel="apple-touch-startup-image">
+		
+		<!-- iPhone 5 startup image -->
+		<link href="/images/640x1096.png"
+			media="(device-width: 320px) and (device-height: 568px)
+				and (-webkit-device-pixel-ratio: 2)"
+			rel="apple-touch-startup-image">
+		
+		<!-- iPhone < 5 retina startup image -->
+		<link href="/images/640x920.png"
+			media="(device-width: 320px) and (device-height: 480px)
+				and (-webkit-device-pixel-ratio: 2)"
+			rel="apple-touch-startup-image">
+		
+		<!-- iPhone < 5 non-retina startup image -->
+		<link href="/images/320x460.png"
+			media="(device-width: 320px) and (device-height: 480px)
+				and (-webkit-device-pixel-ratio: 1)"
+			rel="apple-touch-startup-image">
+			
+		<meta name="msapplication-square70x70logo" content="/images/70.png">
+		<meta name="msapplication-square150x150logo" content="/images/150.png">
+		<meta name="msapplication-wide310x150logo" content="/images/310x150.png">
+		<meta name="msapplication-square310x310logo" content="/images/310.png">
+		<meta name="msapplication-TileImage" content="/images/144.png">
+		<meta name="msapplication-TileColor" content="#fafaf6">
+
+		<link rel="manifest" href="/manifest.json">
+
+		<%= meta %>
+		
+		<%= link %>
+		
+		<link rel="stylesheet" href="/bundle.css">
+		
+		<script>
+			(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+			})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+			ga('create', 'UA-77674337-1', 'auto');
+		</script>
+
+	</head>
+	
+	<body class="<%= bodyClass %>">
+		
+		<noscript>
+			<style>
+				div#root:after {opacity: 0 !important;}
+				div.app {opacity: 1 !important;}
+				header { pointer-events: auto !important; transform: translateX(0) !important; opacity: 1 !important;}
+				div#logo svg { opacity: 1 !important;}
+				div.image { background: none !important; }
+				img {display:none !important; }
+				img.noscript-img {display:block !important; opacity: 1 !important; }
+			</style>
+		</noscript>
+		
+		<div id="root"><%= app %></div>
+		
+		<script id="initLoad" type="text/javascript">
+			window.state = <%= state %>;
+			
+			var loadingTimeout = setTimeout(function(){
+				document.getElementById('root').className = 'loading';
+			}, 300);
+			
+			addEvent(window, 'load', function(){
+				clearTimeout(loadingTimeout);
+				document.getElementById('root').className = 'loaded';
+				document.getElementById('logo').className = 'loaded';
+				document.body.className = 'loaded <%= bodyClass %>';
+				
+				(function(d, t) {
+					var g = d.createElement(t),
+						s = d.getElementsByTagName(t)[0];
+					g.src = '/bundle.js';
+					s.parentNode.insertBefore(g, s);
+				}(document, 'script'));
+
+				var element = document.getElementById("initLoad");
+				element.parentNode.removeChild(element);
+			});
+			
+			function addEvent(element, eventName, fn) {
+				if (element.addEventListener)
+					element.addEventListener(eventName, fn, false);
+				else if (element.attachEvent)
+					element.attachEvent('on' + eventName, fn);
+			}
+		</script>
+
+	</body>
+</html>

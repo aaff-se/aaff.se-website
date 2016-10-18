@@ -1,0 +1,95 @@
+main#page-work {
+	
+	section.next-prev-nav {
+		
+		margin: 2em 0 2em;
+		
+		@media all and (orientation:landscape) and (min-width: 470px) {
+			margin: 3em 0 2em;
+		}
+		
+		@media all and (min-width: $m) {
+		margin: 3em 0 2em;
+		}
+		.item {
+			margin: .75em 0;
+
+			text-align: center;
+
+/*
+			@media all and (orientation:landscape) and (min-width: 470px) {
+				width: col-width(6,12);
+				
+				&.prev-link {
+					text-align: left;
+				}
+				&.next-link {
+					text-align: right;
+				}
+			}
+*/
+			
+			@media all and (min-width: $s) {
+				width: col-width(6,12);
+				
+				&.prev-link {
+					text-align: left;
+				}
+				&.next-link {
+					text-align: right;
+				}
+			}
+
+		}
+		
+		.prev-link {
+			
+			a {
+
+				&:before {
+					content: '←';
+					display: block;
+					position: absolute;
+					left: -1em;
+					top:0;
+					
+					@include transform( translateX(0) translateY(-0.05em) );
+					
+					@include transition(
+						transform $transition_time*4 $easing
+					);
+				}
+				&:hover:before {
+					@include transform( translateX(-0.25em) translateY(-0.05em) );
+				}
+			}
+		}
+		
+		.next-link {
+			
+			float: right;
+			
+			a {
+
+				&:after {
+					content: '→';
+					display: block;
+					position: absolute;
+					right: -1em;
+					top:0;
+					
+					@include transform( translateX(0) translateY(-0.05em) );
+
+					@include transition(
+						transform $transition_time*4 $easing
+					);
+				}
+				
+				&:hover:after {
+					@include transform( translateX(.25em) translateY(-0.05em) );
+				}
+			}
+		}
+		
+	}
+}

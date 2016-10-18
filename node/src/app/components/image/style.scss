@@ -1,0 +1,42 @@
+div.image
+{	
+	@include transform( translateZ(0) );
+
+	@include transition(
+		background $transition_time*2 $ease-out
+	);
+
+	&.loaded
+	{
+		background: none !important;
+	}
+	
+
+	&.main {
+		display: none;
+	}
+
+	@media all and (orientation:landscape) and (min-width: 470px) {
+		&.main {
+			display: block;
+		}
+		&.alternative {
+			display: none;
+		}
+	}
+	
+	@media all and (min-width: $m) {
+		&.main {
+			display: block;
+		}
+		&.alternative {
+			display: none;
+		}
+	}
+
+	img {
+		backface-visibility: hidden;
+		-webkit-backface-visibility: hidden;
+	}
+
+}

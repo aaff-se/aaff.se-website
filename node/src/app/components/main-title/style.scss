@@ -1,0 +1,79 @@
+div.main-title {
+	
+	float: left;
+	display: block;
+	position: relative;
+	padding: .75em 1em;
+	width: auto;
+	text-align: left;
+	
+	margin-top: 5.5em;
+	
+	@include opacity(0);
+	@include transition(
+		transform $transition_time*4 $easing,
+		opacity $transition_time $ease_out
+	);
+
+	@include transform(
+		translateX(1em)
+	);
+
+	@media all and (orientation:landscape) and (min-width: 470px) {
+		margin-top: 0;
+		position: fixed;
+		z-index: 999;
+		top:1.75em;
+		left:0;
+		padding: 0 0 0 2em;
+		text-align: left;
+		background: none;
+	}
+	
+	@media all and (min-width: $m) {
+		margin-top: 0;
+		position: fixed;
+		z-index: 999;
+		top:1.75em;
+		left:0;
+		padding: 0 0 0 2em;
+		text-align: left;
+		background: none;
+	}
+		
+	h2 {
+		text-transform: uppercase;
+	}
+	h3 {
+		text-transform: lowercase;
+	}
+	h2,h3 {
+		white-space: pre;
+	}
+}
+
+div.main-title.hidden {
+	display: none;
+}
+
+div.main-title.visible {
+	@include opacity(1);
+	@include transition(
+		transform $transition_time*4 $easing,
+		opacity $transition_time*2 $ease_out
+	);
+	@include transform(
+		translateX(0)
+	);
+}
+
+div.main-title.visible.fade-out {
+	@include opacity(0);
+	@include transition(
+		transform $transition_time*4 $easing,
+		opacity $transition_time $ease_out
+	);
+	@include transform(
+		translateX(- 1em )
+	);
+}
