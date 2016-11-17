@@ -65,3 +65,16 @@ header,
 	
 }
 
+header span {
+	display: inline-block;
+}
+
+header span.rest {
+	overflow: hidden;
+	width: 0;
+}
+
+header h1 a:hover span.rest {
+	width: auto;
+	max-width: 10em;
+}

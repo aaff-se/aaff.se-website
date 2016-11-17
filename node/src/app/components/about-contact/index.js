@@ -97,8 +97,17 @@ class AboutContact extends Component {
 						<Item className="text">
 							<p dangerouslySetInnerHTML={{__html: page.content}} />
 						</Item>
-						<Item className="text">
-							<p><a href={footer.phone_href}>{footer.phone_text}</a><br/><a href={footer.email_href}>{footer.email_text}</a></p>
+						<Item className="text half">
+							<p><a href={footer.phone_href}>{footer.phone_text}</a></p>
+						</Item>
+						<Item className="text half last">
+							<p><a href={footer.email_href}>{footer.email_text}</a></p>
+						</Item>
+						<Item className="text half">
+							<p><a target="_blank" href={footer.instagram}>instagram</a><br/><a target="_blank" href={footer.facebook}>facebook</a></p>
+						</Item>
+						<Item className="text half last">
+							<p><a target="_blank" href={footer.twitter}>twitter</a><br/><a target="_blank" href={footer.github}>github</a></p>
 						</Item>
 					</Group>
 					<div className="clear"></div>

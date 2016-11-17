@@ -35,5 +35,32 @@ main#page-about-contact {
 				width: col-width(4,6);
 			}
 		}
+		.item.text.half {
+			width: col-width(6,12);
+			
+			margin-bottom: 0;
+			@media all and (min-width: $m) {
+				margin-bottom: .75em;
+				margin-left: col-width(1,12);
+				width: col-width(5,12);
+			}
+			@media all and (min-width: $l) {
+				margin-left: col-width(1,6);
+				width: col-width(2,6);
+			}
+		}
+		.item.text.half.last {
+			width: col-width(12,12);
+			margin-top: 0;
+			@media all and (min-width: $m) {
+				margin-top: .75em;
+				margin-left: 0;
+				width: col-width(5,12);
+			}
+			@media all and (min-width: $l) {
+				margin-left: 0;
+				width: col-width(2,6);
+			}
+		}
 	}
 }
