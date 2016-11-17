@@ -15,12 +15,12 @@ add_action('admin_menu', 'add_menu_page_aa_sc_footer');
 
 function add_menu_page_aa_sc_footer() {
 	add_menu_page(
-		'Footer Content', //page title
-		'Footer Content', //menu title
+		'Contact info', //page title
+		'Contact info', //menu title
 		'manage_options', //capability
 		'footercontent', //page slug
 		'page_function_aa_sc_footer', //page content function
-		'dashicons-media-text', //icon
+		'dashicons-phone', //icon
 		101 //menu position (higher number = lower priority)
 	);
 }
@@ -57,9 +57,9 @@ function page_function_aa_sc_footer() {
 
 	<div class="wrap">
 		
-		<h2>Footer content</h2>
+		<h2>Contact info</h2>
 		
-		<p>This content is used in the footer throughout the site</p>
+		<p>Contact info used throughout the site</p>
 		
 		<form method="post" action="options.php">
 			
@@ -90,6 +90,30 @@ function page_function_aa_sc_footer() {
 					
 					<td><h3>Phone href</h3></td>
 					<td><input class="widefat" type="text" name="aa_sc_footer[phone_href]" value="<?php echo esc_html($options['phone_href']); ?>"></td>
+					
+				</tr>
+				<tr valign="top">
+					
+					<td><h3>instagram link</h3></td>
+					<td><input class="widefat" type="text" name="aa_sc_footer[instagram]" value="<?php echo esc_html($options['instagram']); ?>"></td>
+					
+				</tr>
+				<tr valign="top">
+					
+					<td><h3>facebook link</h3></td>
+					<td><input class="widefat" type="text" name="aa_sc_footer[facebook]" value="<?php echo esc_html($options['facebook']); ?>"></td>
+					
+				</tr>
+				<tr valign="top">
+					
+					<td><h3>twitter link</h3></td>
+					<td><input class="widefat" type="text" name="aa_sc_footer[twitter]" value="<?php echo esc_html($options['twitter']); ?>"></td>
+					
+				</tr>
+				<tr valign="top">
+					
+					<td><h3>github link</h3></td>
+					<td><input class="widefat" type="text" name="aa_sc_footer[github]" value="<?php echo esc_html($options['github']); ?>"></td>
 					
 				</tr>
 				

@@ -26,6 +26,10 @@
 	color: $color_background;
 }
 
+::-webkit-scrollbar {
+	width: 0;
+}
+
 body {
 	font-family: 'Pressura', monospace;
 	line-height: $line_height;

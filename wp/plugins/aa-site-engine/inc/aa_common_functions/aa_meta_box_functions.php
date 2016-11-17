@@ -51,7 +51,7 @@ function aa_meta_textarea_function($post=false,$array) {
 	
 	$data = get_post_meta($post->ID, $name, true);
 	
-	$html = '<textarea rows="4" class="widefat"name="'.$name.'">'.esc_textarea( esc_html($data) ).'</textarea>';
+	$html = '<textarea rows="4" class="widefat"name="'.$name.'">'.esc_textarea( $data ).'</textarea>';
 	
 	echo $html;
 }
