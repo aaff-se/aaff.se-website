@@ -63,11 +63,20 @@ function aa_get_image_data($id){
 	}
 	
 	unset($temp_image);
-
+	
+/*
+	$temp_image = wp_get_attachment_image_src($id, 'micro');
+	
+		$type = pathinfo($temp_image, PATHINFO_EXTENSION);
+	$data = file_get_contents($temp_image);
+	$base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
+*/
+	
 	$return = array();
 	
 	$return['alt'] = $image_post->post_title;
 	$return['color'] = $color;
+//	$return['inlined'] = $base64;
 	$return['data'] = $all_images;
 	$return['width'] = $full_image[1];
 	$return['height'] = $full_image[2];

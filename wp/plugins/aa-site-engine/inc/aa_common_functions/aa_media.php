@@ -7,6 +7,7 @@ add_filter( 'jpeg_quality', 'aa_jpeg_quality_function', 10, 2 );
 
 //add_theme_support( 'post-thumbnails' );
 
+add_image_size( 'micro', 128, 9999, false );
 add_image_size( 'xxs', 612, 9999, false ); // auto resized for mobile
 add_image_size( 'xs', 1224, 9999, false ); // auto resized for mobile
 add_image_size( 's', 1836, 9999, false );
