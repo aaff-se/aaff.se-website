@@ -7,7 +7,7 @@ add_filter( 'jpeg_quality', 'aa_jpeg_quality_function', 10, 2 );
 
 //add_theme_support( 'post-thumbnails' );
 
-add_image_size( 'micro', 128, 9999, false );
+add_image_size( 'micro', 60, 9999, false );
 add_image_size( 'xxs', 612, 9999, false ); // auto resized for mobile
 add_image_size( 'xs', 1224, 9999, false ); // auto resized for mobile
 add_image_size( 's', 1836, 9999, false );
@@ -49,3 +49,24 @@ function aa_add_image_attachment_fields_to_save($post, $attachment) {
 }
 // now attach our function to the hook.
 add_filter("attachment_fields_to_save", "aa_add_image_attachment_fields_to_save", null , 2);
+
+
+
+// define the wp_generate_attachment_metadata callback 
+function aa_add_micro_inlined_metadata($meta) {
+	
+
+	$file = wp_upload_dir();
+	$file = trailingslashit($file['url']).$meta['sizes']['micro']['file'];
+	
+	$type = pathinfo($file, PATHINFO_EXTENSION);
+	$data = file_get_contents($file);
+	$meta['micro_inlined'] = 'data:image/' . $type . ';base64,' . base64_encode($data);
+	unset($file);
+
+	return $meta;
+
+}
+
+// add the filter 
+add_filter( 'wp_generate_attachment_metadata', 'aa_add_micro_inlined_metadata', 10, 2 );

@@ -25,6 +25,7 @@ main#page-home {
 			margin:0;
 		}
 		
+/*
 		.item.image-wrapper {
 			.image {
 				@include opacity(.95);
@@ -38,6 +39,7 @@ main#page-home {
 				);
 			}
 		}
+*/
 		
 		.title {
 			position: absolute;
@@ -120,28 +122,32 @@ main#page-home section.last {
 */
 
 
+/*
 main#page-home section.current {
 	.item.image-wrapper {
-		.image {
+		.image.loaded {
 			@include opacity(1);
 			-webkit-filter: none;
 			filter: none;
 		}
 	}
 }
+*/
 
 
 html.touchevents {
 	
 	main#page-home section.current {
 		
+/*
 		.item.image-wrapper {
-			.image {
+			.image.loaded {
 				@include opacity(1);
 				-webkit-filter: none;
 				filter: none;
 			}
 		}
+*/
 		
 		.title {
 			@include opacity(1);

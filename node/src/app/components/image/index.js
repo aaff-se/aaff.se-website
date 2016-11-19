@@ -199,7 +199,9 @@ class Image extends Component {
 		const state = this.state;
 		const classes = classnames( 'image', {'loaded': state.loaded && state.visible }, className);
 		const src = (state.loaded && state.visible ? state.src : this.placeholderSrc);
-		const styles = {backgroundColor: (image.color ? image.color : '#ffffff')};
+		//const src = (state.loaded && state.visible ? state.src : image.base64);
+		//const styles = {backgroundColor: (image.color ? image.color : '#ffffff')};
+		const styles = {backgroundImage: 'url(' + image.inlined + ')' };
 		return <div className={classes} style={styles}>
 			<img src={src} width={image.width} height={image.height} alt={image.alt || ''} />
 			<noscript dangerouslySetInnerHTML={this.noscriptImageHTML()} />

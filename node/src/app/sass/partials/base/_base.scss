@@ -125,7 +125,7 @@ img {
 	display: block;
 	@include opacity(0);
 	@include transition(
-		opacity $transition_time*2 $ease-out
+		opacity $transition_time $ease-out
 	);
 }
 
