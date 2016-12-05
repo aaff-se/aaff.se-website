@@ -64,7 +64,8 @@ function aa_get_image_data($id){
 	
 	unset($temp_image);
 	
-	
+	//$temp_image = wp_get_attachment_image_src($id, 'micro');
+
 	
 	$meta = wp_get_attachment_metadata($id);
 	$base64 = $meta['micro_inlined'];

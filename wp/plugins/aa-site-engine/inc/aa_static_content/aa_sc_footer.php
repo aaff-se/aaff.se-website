@@ -106,6 +106,12 @@ function page_function_aa_sc_footer() {
 				</tr>
 				<tr valign="top">
 					
+					<td><h3>linkedIn link</h3></td>
+					<td><input class="widefat" type="text" name="aa_sc_footer[linkedin]" value="<?php echo esc_html($options['linkedin']); ?>"></td>
+					
+				</tr>
+				<tr valign="top">
+					
 					<td><h3>twitter link</h3></td>
 					<td><input class="widefat" type="text" name="aa_sc_footer[twitter]" value="<?php echo esc_html($options['twitter']); ?>"></td>
 					

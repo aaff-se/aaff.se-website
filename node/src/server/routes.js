@@ -4,6 +4,7 @@ import express from 'express';
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 import Helmet from 'react-helmet';
+import cacheLayer from 'lib/cache-layer';
 
 import log from 'lib/log';
 import bootstrapper from './bootstrapper';
@@ -18,16 +19,16 @@ function renderApp(req, res) {
 		const head = Helmet.rewind();
 		
 		const bodyClass = (state.statusCode === 404 ? 'the404' : '');
-		
-		res
-		.header('Link', "</bundle.js>; rel=preload; as=script, </bundle.css>; rel=preload; as=style")
+		res 
+		//.header('Link', "</bundle.js>; rel=preload; as=script")
 		.render('app', {
 			title: head.title,
 			meta: head.meta,
 			link: head.link,
 			state: JSON.stringify(state),
 			app: AppString,
-			bodyClass: bodyClass
+			bodyClass: bodyClass,
+			cache: JSON.stringify(cacheLayer.getAll())
 		});
 	})
 	.catch(error => log('server route error', error, error.stack));

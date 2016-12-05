@@ -55,6 +55,9 @@ function applyData(response, type) {
 	if (response.data.statusCode) {
 		changeSet.statusCode = response.data.statusCode;
 	}
+	if (response.url) {
+		changeSet.initCacheUrl = response.url;
+	}
 	Object.assign(_state, changeSet);
 	log('Loaded', type, _state[type]);
 }

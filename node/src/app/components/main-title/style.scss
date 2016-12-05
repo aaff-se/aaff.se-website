@@ -1,3 +1,5 @@
+
+
 div.main-title {
 	
 	float: left;
@@ -76,4 +78,24 @@ div.main-title.visible.fade-out {
 	@include transform(
 		translateX(- 1em )
 	);
+}
+
+div.main-title {
+	display: none;
+	@media all and (orientation:landscape) and (min-width: 470px) {
+		display: block;
+	}
+	@media all and (min-width: $m) {
+		display: block;
+	}
+}
+
+div.page-container div.main-title {
+	display: block;
+	@media all and (orientation:landscape) and (min-width: 470px) {
+		display: none;
+	}
+	@media all and (min-width: $m) {
+		display: none;
+	}
 }

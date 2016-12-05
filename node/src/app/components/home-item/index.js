@@ -34,7 +34,8 @@ class HomeItem extends Component {
 	componentDidMount() {
 		event.add(window, 'scroll', this.handleScroll);
 		event.add(window, 'resize', this.handleResize);
-		this.handleScroll();
+		setTimeout(this.handleScroll, 250);
+
 	}
 	
 	componentWillUnmount() {

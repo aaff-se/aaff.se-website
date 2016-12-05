@@ -107,7 +107,7 @@ class AboutContact extends Component {
 							<p><a target="_blank" href={footer.instagram}>instagram</a><br/><a target="_blank" href={footer.facebook}>facebook</a></p>
 						</Item>
 						<Item className="text half last">
-							<p><a target="_blank" href={footer.twitter}>twitter</a><br/><a target="_blank" href={footer.github}>github</a></p>
+							<p><a target="_blank" href={footer.linkedin}>linkedin</a><br/><a target="_blank" href={footer.twitter}>twitter</a><br/><a target="_blank" href={footer.github}>github</a></p>
 						</Item>
 					</Group>
 					<div className="clear"></div>

@@ -66,8 +66,9 @@ class Image extends Component {
 	handleScroll() {
 		if(!this.node)
 			this.node = ReactDOM.findDOMNode(this);
-			
-		if (inViewport(this.node, undefined, 250)) {
+//			let viewportThreshold = ( document.documentElement.clientHeight *(documentElement.clientWidth / documentElement.clientHeight) );
+//			if(viewportThreshold > 1.5 ) viewportThreshold = 1.5; 
+		if (inViewport(this.node, undefined, 0)) {
 			this.setState({ visible: true });
 			
 			//image have come in view, remove scroll listeners as we only need to check resizes from now on

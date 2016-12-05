@@ -76,18 +76,21 @@ class App extends Component {
 			switch(pageId) {
 				case 'home':
 					page = <PageContainer {...this.state} className={"page-" + pageData.slug} key={"page-"+pageData.slug}>
+						{this.getMainTitle()}
 						<Home {...this.state} />
 						<Footer data={footer} />
 					</PageContainer>;
 					break;
 				case 'about-contact':
 					page = <PageContainer {...this.state} className={"page-" + pageData.slug} key={"page-"+pageData.slug}>
+						{this.getMainTitle()}
 						<AboutContact {...this.state}  />
 						<Footer data={footer} />
 					</PageContainer>;
 					break;
 				case 'work':
 					page = <PageContainer {...this.state} className={"page-" + pageData.slug} key={"page-"+pageData.slug}>
+						{this.getMainTitle()}
 						<Work {...this.state} />
 						<Footer data={footer} />
 					</PageContainer>;

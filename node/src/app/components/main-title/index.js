@@ -71,7 +71,6 @@ class MainTitle extends Component {
 	componentWillEnter(didEnterCallback) {
 		
 		this.setTransitionClassHidden();
-		
 		didEnterCallback();
 		
 	}
@@ -80,9 +79,9 @@ class MainTitle extends Component {
 	//we run all the timeouts in this function, to make sure we can remove all the timeouts if a link is clicked
 	componentDidEnter() {
 		
-		//first we remove the hidden class and after a while set visible
-		this.timeouts[this.timeouts.length] = setTimeout(this.setTransitionClass, 50);
-		this.timeouts[this.timeouts.length] = setTimeout(this.setTransitionClassVisible, 150);
+		this.timeouts[this.timeouts.length] = setTimeout(this.setTransitionClass, 150);
+		
+		this.timeouts[this.timeouts.length] = setTimeout(this.setTransitionClassVisible, 200);
 		
 	}
 	

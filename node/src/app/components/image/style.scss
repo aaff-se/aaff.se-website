@@ -42,6 +42,7 @@ div.image
 	img {
 		backface-visibility: hidden;
 		-webkit-backface-visibility: hidden;
+		image-rendering: auto;
 	}
 
 }

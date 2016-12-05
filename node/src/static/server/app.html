@@ -6,7 +6,9 @@ Design & Build by Anton Andersson Form & Funktioner / aaff.se / 2016
 -->
 <html>
 	<head>
+
 		<meta charset="UTF-8">
+		
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 		
 		<%= title %>
@@ -32,6 +34,7 @@ Design & Build by Anton Andersson Form & Funktioner / aaff.se / 2016
 		
 		<!-- ICONS -->
 		
+<!--
 		<link href="/images/192.png"
 			rel="icon" 
 			sizes="192x192">
@@ -39,6 +42,7 @@ Design & Build by Anton Andersson Form & Funktioner / aaff.se / 2016
 		<link href="/images/128.png"
 			rel="icon" 
 			sizes="128x128">
+-->
 
 		<!-- iPad retina icon -->
 		<link href="/images/152.png"
@@ -155,8 +159,10 @@ Design & Build by Anton Andersson Form & Funktioner / aaff.se / 2016
 		<%= meta %>
 		
 		<%= link %>
-		
+
 		<link rel="stylesheet" href="/bundle.css">
+		<link rel="preload" href="/spritemap.svg" as="image">
+		<link rel="preload" href="/fonts/pressura.woff" as="font" as="font" type="font/woff2" crossorigin>
 		
 		<script>
 			(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -186,6 +192,7 @@ Design & Build by Anton Andersson Form & Funktioner / aaff.se / 2016
 		
 		<script id="initLoad" type="text/javascript">
 			window.state = <%= state %>;
+			window.initCache = <%= cache %>;
 			
 			var loadingTimeout = setTimeout(function(){
 				document.getElementById('root').className = 'loading';
@@ -197,12 +204,14 @@ Design & Build by Anton Andersson Form & Funktioner / aaff.se / 2016
 				document.getElementById('logo').className = 'loaded';
 				document.body.className = 'loaded <%= bodyClass %>';
 				
+
 				(function(d, t) {
 					var g = d.createElement(t),
 						s = d.getElementsByTagName(t)[0];
 					g.src = '/bundle.js';
 					s.parentNode.insertBefore(g, s);
 				}(document, 'script'));
+
 
 				var element = document.getElementById("initLoad");
 				element.parentNode.removeChild(element);

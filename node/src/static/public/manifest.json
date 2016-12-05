@@ -1,5 +1,9 @@
 {
-  "name": "aaff.se",
-  "start_url": "/",
-  "display": "standalone"
+	"name": "aaff.se",
+	"start_url": "/",
+	"display": "standalone",
+	"icons": {
+		"128": "/images/128.png",
+		"192": "/images/192.png"
+	}
 }

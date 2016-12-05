@@ -11,6 +11,8 @@ class PageContainer extends Component {
 		this.state = {transitionClass: 'visible'};
 		this.setTransitionClassVisible = this.setTransitionClassVisible.bind(this);
 		this.setTransitionClass = this.setTransitionClass.bind(this);
+		this.clearTimeouts = this.clearTimeouts.bind(this);
+		this.timeouts = [];
 	}
 
 	setTransitionClass(theClass="") {
@@ -38,6 +40,13 @@ class PageContainer extends Component {
 
 	}
 	
+	clearTimeouts() {
+		let i=0;
+		while (i < this.timeouts.length) {
+			clearTimeout(this.timeouts[i]);
+			i++;
+		}
+	}
 	componentWillAppear(didAppearCallback) {
 		didAppearCallback();
 	}
@@ -46,12 +55,15 @@ class PageContainer extends Component {
 	}
 	
 	componentWillEnter(didEnterCallback) {
+		
 		this.setTransitionClass('hidden');
 		
-		setTimeout(this.setTransitionClass, 160);
+		this.timeouts[this.timeouts.length] = setTimeout(this.setTransitionClass, 150);
+		
 		if(window.location.hash)
-			setTimeout(this.scrollToAnchor, 290);
-		setTimeout(didEnterCallback, 300);
+			this.timeouts[this.timeouts.length] = setTimeout(this.scrollToAnchor, 175);
+			
+		this.timeouts[this.timeouts.length] = setTimeout(didEnterCallback, 300);
 	}
 	
 	componentDidEnter() {
@@ -63,6 +75,7 @@ class PageContainer extends Component {
 	componentWillLeave(didLeaveCallback) {
 		this.setTransitionClass('fade-out visible');
 		this.maybeSetBodyOverflowScroll();
+		this.clearTimeouts();
 		setTimeout(didLeaveCallback, 150);
 	}
 	

@@ -14,6 +14,7 @@ export default function (requiredData, apply) {
 		dataCollection.forEach((data, index) => {
 			const params = requiredData[index];
 			apply(params.get ? params.get(data) : data, CamelCase(params.type));
+			log(data);
 		});
 	}).catch(error => log('Fetch error', error, error.stack));
 }
