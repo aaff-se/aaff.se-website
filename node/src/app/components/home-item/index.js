@@ -52,13 +52,12 @@ class HomeItem extends Component {
 	handleScroll() {
 		
 		//check if this section is centered
-		const {isCurrent }  = this.state;
+		const {isCurrent}  = this.state;
 		
 		if(!this.node)
 			this.node = ReactDOM.findDOMNode(this);
 			
 		if(inCenter(this.node) || inFull(this.node)) {
-			
 			if(!isCurrent){
 				this.setState({isCurrent: true});
 			}
@@ -77,7 +76,7 @@ class HomeItem extends Component {
 	
 	render() {
 		const { data,className } = this.props;
-		const {sectionStyle, isCurrent }  = this.state;
+		const {sectionStyle, isCurrent}  = this.state;
 		const classNames = classnames( className, {'current': isCurrent });
 		
 		return <Section className={classNames}>

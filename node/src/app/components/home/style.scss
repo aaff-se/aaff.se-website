@@ -50,8 +50,7 @@ main#page-home {
 			padding:0;
 			pointer-events: none;
 			@include transform(
-				//translateY(-50%)
-				translateX(-2em)
+				translate3d(-2em,0,0)
 			);
 			@include opacity(0);
 
@@ -62,14 +61,12 @@ main#page-home {
 			
 			@media all and (orientation:landscape) and (min-width: 470px) {
 				@include transform(
-					//translateY(-50%)
-					translateX(-5em)
+					translate3d(-5em,0,0)
 				);
 			}
 			@media all and (min-width: $m) {
 				@include transform(
-					//translateY(-50%)
-					translateX(-5em)
+					translate3d(-5em,0,0)
 				);
 			}
 			
@@ -88,8 +85,7 @@ main#page-home {
 				@include opacity(1);
 
 				@include transform(
-					//translateY(-50%)
-					translateX(-1em)
+					translate3d(-1em,0,0)
 				);
 				
 				@include transition(
@@ -99,15 +95,13 @@ main#page-home {
 
 				@media all and (orientation:landscape) and (min-width: 470px) {
 					@include transform(
-						//translateY(-50%)
-						translateX(-4em)
+						translate3d(-4em,0,0)
 					);
 				}
 				
 				@media all and (min-width: $m) {
 					@include transform(
-						//translateY(-50%)
-						translateX(-4em)
+						translate3d(-4em,0,0)
 					);
 				}
 			}
@@ -153,21 +147,18 @@ html.touchevents {
 			@include opacity(1);
 			
 			@include transform(
-				//translateY(-50%)
-				translateX(-1em)
+				translate3d(-1em,0,0)
 			);
 			
 			@media all and (orientation:landscape) and (min-width: 470px) {
 				@include transform(
-					//translateY(-50%)
-					translateX(-4em)
+					translate3d(-4em,0,0)
 				);
 			}
 			
 			@media all and (min-width: $m) {
 				@include transform(
-					//translateY(-50%)
-					translateX(-4em)
+					translate3d(-4em,0,0)
 				);
 			}
 		}

@@ -53,14 +53,14 @@ main#page-work {
 					left: -1em;
 					top:0;
 					
-					@include transform( translateX(0) translateY(-0.05em) );
+					@include transform( translate3d(0,-0.05em,0) );
 					
 					@include transition(
 						transform $transition_time*4 $easing
 					);
 				}
 				&:hover:before {
-					@include transform( translateX(-0.25em) translateY(-0.05em) );
+					@include transform( translate3d(-0.25em,-0.05em,0) );
 				}
 			}
 		}
@@ -78,7 +78,7 @@ main#page-work {
 					right: -1em;
 					top:0;
 					
-					@include transform( translateX(0) translateY(-0.05em) );
+					@include transform( translate3d(0,-0.05em,0) );
 
 					@include transition(
 						transform $transition_time*4 $easing
@@ -86,7 +86,7 @@ main#page-work {
 				}
 				
 				&:hover:after {
-					@include transform( translateX(.25em) translateY(-0.05em) );
+					@include transform( translate3d(-0.25em,-0.05em,0) );
 				}
 			}
 		}

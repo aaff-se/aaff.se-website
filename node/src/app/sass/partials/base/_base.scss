@@ -34,6 +34,7 @@ body {
 	position: relative;
 	font-variant-ligatures: no-common-ligatures;
 	-webkit-font-variant-ligatures: no-common-ligatures;
+	font-smoothing: antialiased;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	font-size: $font_size_xs;
@@ -59,7 +60,7 @@ body {
 	@media all and (min-width: $xl) {
 		font-size: $font_size_xl;
 	}
-
+	
 	&.the404 {
 		background: #250df6;
 		color: $color_white;

@@ -2,8 +2,12 @@
 	width: 100%;
 	float: left;
 	display: block;
+	position: absolute;
+	z-index: 100;
+	top:0;
+	left:0;
 	@include opacity(0);
-	@include transform( translateX(1em) );
+	@include transform( translate3d(1em,0,0) );
 	@include transition(
 		transform $transition_time*4 $easing,
 		opacity $transition_time $ease_out
@@ -16,7 +20,7 @@
 
 .page-container.visible {
 	@include opacity(1);
-	@include transform( translateX(0) );
+	@include transform( translate3d(0,0,0) );
 	@include transition(
 		transform $transition_time*4 $easing,
 		opacity $transition_time*2 $ease_out
@@ -27,7 +31,7 @@
 
 .page-container.visible.fade-out {
 	@include opacity(0);
-	@include transform( translateX(-1em) );
+	@include transform( translate3d(-1em,0,0) );
 	@include transition(
 		transform $transition_time*4 $easing,
 		opacity $transition_time $ease_out

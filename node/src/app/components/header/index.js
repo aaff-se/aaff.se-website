@@ -29,6 +29,7 @@ class Header extends Component {
 	}
 	
 	handleScroll() {
+		console.log('header scroll handler');
 		const { prevScroll } = this.state; 
 		const thisScroll = window.pageYOffset;
 		let visible = true;

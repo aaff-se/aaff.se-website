@@ -20,7 +20,6 @@ div#logo {
 	
 	a {
 		pointer-events: auto;
-		@include transform( translateY(0) );
 		@include transition(
 			transform $transition_time $ease-out
 		);

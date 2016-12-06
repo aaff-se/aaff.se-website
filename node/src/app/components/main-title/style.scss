@@ -18,7 +18,7 @@ div.main-title {
 	);
 
 	@include transform(
-		translateX(1em)
+		translate3d(1em,0,0)
 	);
 
 	@media all and (orientation:landscape) and (min-width: 470px) {
@@ -65,7 +65,7 @@ div.main-title.visible {
 		opacity $transition_time*2 $ease_out
 	);
 	@include transform(
-		translateX(0)
+		translate3d(0,0,0)
 	);
 }
 
@@ -76,7 +76,7 @@ div.main-title.visible.fade-out {
 		opacity $transition_time $ease_out
 	);
 	@include transform(
-		translateX(- 1em )
+		translate3d(-1em,0,0)
 	);
 }
 

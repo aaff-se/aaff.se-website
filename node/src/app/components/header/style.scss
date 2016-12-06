@@ -39,7 +39,7 @@ header {
 	
 	@include opacity(1);
 	
-	@include transform( translateX(0) );
+	@include transform( translate3d(0,0,0) );
 
 	@include transition(
 		transform $transition_time*4 $easing,
@@ -59,8 +59,7 @@ header,
 		opacity $transition_time $ease-out
 	);
 
-
-	@include transform( translateX(1em) );
+	@include transform( translate3d(1em,0,0) );
 	@include opacity(0);
 	
 }

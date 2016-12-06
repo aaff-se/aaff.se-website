@@ -61,7 +61,7 @@ class PageContainer extends Component {
 		this.timeouts[this.timeouts.length] = setTimeout(this.setTransitionClass, 150);
 		
 		if(window.location.hash)
-			this.timeouts[this.timeouts.length] = setTimeout(this.scrollToAnchor, 175);
+			this.timeouts[this.timeouts.length] = setTimeout(this.scrollToAnchor, 275);
 			
 		this.timeouts[this.timeouts.length] = setTimeout(didEnterCallback, 300);
 	}

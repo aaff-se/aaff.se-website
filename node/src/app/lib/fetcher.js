@@ -20,10 +20,12 @@ function fetcher (config) {
 
 	const url = mergedConfig.api() + mergedConfig.url + (process.env.NODE_ENV === 'development' ? '?dev' : '');
 	
+
 	const loadObj = {
 		url: url,
 		timestamp: Math.round(Date.now() / 1000)
 	};
+	
 	let cache = cacheLayer.get(loadObj);
 
 	if(cache) { log('Cache Fetching:', url); return (mergedConfig.success ? mergedConfig.success(cache.data) : cache.data ); }

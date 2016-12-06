@@ -11,9 +11,11 @@ const offset = (element) => {
 };
 
 const inViewport = (element, container, threshold=0) => {
+/*
 	if (isHidden(element)) {
 		return false;
 	}
+*/
 
 	let top, left, bottom, right;
 
