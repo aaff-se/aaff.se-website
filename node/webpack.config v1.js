@@ -64,14 +64,14 @@ const uglifyPlugin = new webpack.optimize.UglifyJsPlugin({
 
 
 app_plugins.prod = [
-	new ExtractTextPlugin({filename: 'bundle.css', allChunks: true}),
+	new ExtractTextPlugin('bundle.css', {allChunks: true}),
 	new webpack.DefinePlugin({
 		'process.env': env
 	}),
 	uglifyPlugin
 ];
 app_plugins.dev = [
-	new ExtractTextPlugin({filename: 'bundle.css', allChunks: true}),
+	new ExtractTextPlugin('bundle.css', {allChunks: true}),
 	new webpack.DefinePlugin({
 		'process.env': env
 	})
@@ -95,15 +95,12 @@ const appLoaders = [
 		include: SRC_APP_DIR,
 		loader: 'babel-loader',
 		query: {
-			presets: [
-				'react',
-				['es2015', {'modules': false}]
-			]
+			presets: ['es2015', 'react']
 		}
 	},
 	{
 		test: /\.scss$/,
-		loader: ExtractTextPlugin.extract({fallbackLoader: 'style-loader', loader: `css-loader!sass-loader?includePaths[]=${COMPASS_MIXINS_DIR}` })
+		loader: ExtractTextPlugin.extract('style-loader', `css-loader!sass-loader?includePaths[]=${COMPASS_MIXINS_DIR}`  )
 	}
 ];
 
@@ -113,10 +110,7 @@ const serverLoaders = [
 		include: BASE_DIR,
 		loader: 'babel-loader',
 		query: {
-			presets: [
-				'react',
-				['es2015', {'modules': false}]
-			]
+			presets: ['es2015', 'react']
 		}
 	},
 	{
@@ -152,7 +146,7 @@ module.exports = [
 			filename: 'bundle.js'
 		},
 		module: {
-			rules: appLoaders
+			loaders: appLoaders
 		},
 		resolve: {
 			alias: clientAliases
@@ -177,17 +171,15 @@ module.exports = [
 		},
 		externals: /^[a-z\-0-9]+$/,
 		module: {
-			rules: serverLoaders
+			loaders: serverLoaders
 		},
 		resolve: {
 			alias: serverAliases
 		},
 		plugins: (PROD ? server_plugins.prod : server_plugins.dev)
 	},
-
 	{
 		name: 'static-content',
-		entry: './src/nullentry.js',
 		output: {
 			filename: 'test.txt'
 		},
@@ -200,6 +192,5 @@ module.exports = [
 			])
 		]
 	}
-
 
 ];
