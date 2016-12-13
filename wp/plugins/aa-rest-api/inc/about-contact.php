@@ -34,7 +34,8 @@ function aa_rest_about_contact($data){
 			'slug' => 'about-contact',
 			'content' => $options['text'],
 			'seo' => array(
-				'title' => 'About / Contact - AAFF'
+				'title' => 'About / Contact - AAFF',
+				'desc' => $options['seo']
 			),
 			'archive' => $pruned_project_archive_posts
 		)

@@ -8,13 +8,14 @@ add_filter( 'jpeg_quality', 'aa_jpeg_quality_function', 10, 2 );
 //add_theme_support( 'post-thumbnails' );
 
 add_image_size( 'micro', 60, 9999, false );
-add_image_size( 'xxs', 612, 9999, false ); // auto resized for mobile
-add_image_size( 'xs', 1224, 9999, false ); // auto resized for mobile
-add_image_size( 's', 1836, 9999, false );
-add_image_size( 'm', 2448, 9999, false ); 
-add_image_size( 'l', 3060, 9999, false ); //maximum size w/o retina
-add_image_size( 'xl', 3672, 9999, false ); 
-add_image_size( 'xxl', 4896, 9999, false ); // retina full width - maybe just get the full image?
+add_image_size( 's612', 612, 9999, false ); // auto resized for mobile
+add_image_size( 's918', 918, 9999, false ); // auto resized for mobile
+add_image_size( 's1224', 1224, 9999, false ); // auto resized for mobile
+add_image_size( 's1836', 1836, 9999, false );
+add_image_size( 's2448', 2448, 9999, false ); 
+add_image_size( 's3060', 3060, 9999, false ); //maximum size w/o retina
+add_image_size( 's3672', 3672, 9999, false ); 
+add_image_size( 's4896', 4896, 9999, false ); // retina full width - maybe just get the full image?
 
 
 
@@ -36,7 +37,7 @@ function aa_add_image_attachment_fields_to_edit($form_fields, $post) {
    return $form_fields;
 }
 // now attach our function to the hook
-add_filter("attachment_fields_to_edit", "aa_add_image_attachment_fields_to_edit", null, 2);
+//add_filter("attachment_fields_to_edit", "aa_add_image_attachment_fields_to_edit", null, 2);
 
 function aa_add_image_attachment_fields_to_save($post, $attachment) {
   // $attachment part of the form $_POST ($_POST[attachments][postID])
@@ -48,7 +49,7 @@ function aa_add_image_attachment_fields_to_save($post, $attachment) {
   return $post;
 }
 // now attach our function to the hook.
-add_filter("attachment_fields_to_save", "aa_add_image_attachment_fields_to_save", null , 2);
+//add_filter("attachment_fields_to_save", "aa_add_image_attachment_fields_to_save", null , 2);
 
 
 
@@ -61,6 +62,7 @@ function aa_add_micro_inlined_metadata($meta) {
 	
 	$type = pathinfo($file, PATHINFO_EXTENSION);
 	$data = file_get_contents($file);
+	
 	$meta['micro_inlined'] = 'data:image/' . $type . ';base64,' . base64_encode($data);
 	unset($file);
 
@@ -69,4 +71,4 @@ function aa_add_micro_inlined_metadata($meta) {
 }
 
 // add the filter 
-add_filter( 'wp_generate_attachment_metadata', 'aa_add_micro_inlined_metadata', 10, 2 );
+add_filter( 'wp_generate_attachment_metadata', 'aa_add_micro_inlined_metadata', 20, 1 );

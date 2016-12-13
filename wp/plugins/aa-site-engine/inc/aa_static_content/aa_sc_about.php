@@ -70,6 +70,12 @@ function page_function_aa_sc_about() {
 				
 				<tr valign="top">
 					
+					<td><h3>SEO desc</h3></td>
+					<td><textarea rows="5" class="widefat" type="text" name="aa_sc_about[seo]"><?php echo esc_textarea($options['seo']); ?></textarea></td>
+					
+				</tr>
+				<tr valign="top">
+					
 					<td><h3>Main text</h3></td>
 					<td><textarea rows="5" class="widefat" type="text" name="aa_sc_about[text]"><?php echo esc_textarea($options['text']); ?></textarea></td>
 					

@@ -20,7 +20,8 @@ function aa_rest_home($data){
 			'slug' => 'home',
 			'content' => $pruned_work_posts,
 			'seo' => array(
-				'title' => 'Anton Andersson Form & Funktioner'
+				'title' => html_entity_decode(get_bloginfo('name')),
+				'desc' => html_entity_decode(get_bloginfo('description'))
 			)
 		)
 	);
