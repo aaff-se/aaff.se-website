@@ -37,7 +37,7 @@ class Image extends Component {
 		event.add(window, 'resize', this.handleResize);
 		event.add(window, 'scroll', this.handleScroll);
 		this.handleResize();
-		this.extratimeout = setTimeout(this.handleResizeTimeout, 500);
+		//this.extratimeout = setTimeout(this.handleResizeTimeout, 500);
 	}
 	
 	handleResizeTimeout(){

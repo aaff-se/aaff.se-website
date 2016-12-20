@@ -86,7 +86,7 @@ main#page-work {
 				}
 				
 				&:hover:after {
-					@include transform( translate3d(-0.25em,-0.05em,0) );
+					@include transform( translate3d(0.25em,-0.05em,0) );
 				}
 			}
 		}

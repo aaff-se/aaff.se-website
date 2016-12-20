@@ -68,8 +68,7 @@ function aa_work_admin_init(){
 	add_meta_box("rows", "Main Content", "aa_work_rows_function", "aa_work", "normal", "low");
 	add_meta_box("client", "Client", "aa_meta_textinput_function", "aa_work", "side", "low", 'client');
 	add_meta_box("type", "Type", "aa_meta_textinput_function", "aa_work", "side", "low", 'type');
-	add_meta_box("seodesc", "SEO page Description", "aa_meta_textarea_function", "aa_work", "side", "low", 'seodesc');
-//	add_meta_box("seodesc", "SEO page Description", "aa_meta_seo_description_function", "aa_work", "side", "low");
+	add_meta_box("seodesc", "Meta Description", "aa_meta_textarea_function", "aa_work", "side", "low", 'seodesc');
 	add_meta_box("thumb-main", "Main Thumbnail", "aa_meta_thumbnail_function", "aa_work", "side", "low", 'thumb-main');
 	add_meta_box("thumb-alternative", "Alternative Thumbnail (optional - used for mobile if present)", "aa_meta_thumbnail_function", "aa_work", "side", "low", 'thumb-alternative');
 	

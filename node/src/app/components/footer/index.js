@@ -36,10 +36,6 @@ Footer.defaultProps = {
 		'phone_href': '',
 		'email_text': '',
 		'email_href': '',
-		'instagram': '',
-		'facebook': '',
-		'twitter': '',
-		'github': ''
 	}
 };
 

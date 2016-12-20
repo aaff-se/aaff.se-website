@@ -12,7 +12,7 @@ const routes = {
 		patterns: ['/'],
 		data: () => [{
 			url: 'aa/v1/home',
-			type: 'page',
+			type: 'dynamic',
 			slug: 'home',
 			async: ['related_content']
 		}]
@@ -24,7 +24,7 @@ const routes = {
 		patterns: ['/about-contact'],
 		data: slug => [{
 			url: `aa/v1/about-contact`,
-			type: 'page',
+			type: 'dynamic',
 			slug: 'about-contact',
 			async: ['related_content']
 
@@ -36,7 +36,7 @@ const routes = {
 		patterns: ['/:cid'],
 		data: slug => [{
 			url: `aa/v1/work/${slug}`,
-			type: 'page',
+			type: 'dynamic',
 			slug: slug,
 			async: ['related_content']
 		}]

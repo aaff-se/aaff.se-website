@@ -5,17 +5,6 @@ div.image
 	overflow: hidden;
 	background-size: 100%;
 	image-rendering: pixelated;
-/*
-	@include transition(
-		background $transition_time*2 $ease-out
-	);
-
-	&.loaded
-	{
-		background: none !important;
-	}
-*/
-	
 
 	&.main {
 		display: none;
@@ -43,6 +32,7 @@ div.image
 		backface-visibility: hidden;
 		-webkit-backface-visibility: hidden;
 		image-rendering: auto;
+		-ms-interpolation-mode: bicubic;
 	}
 
 }

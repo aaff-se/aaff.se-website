@@ -3,6 +3,7 @@
 function aa_rest_about_contact($data){
 	$post = get_page_by_path('about-contact');
 	$options = get_option('aa_sc_about');
+	$meta_options = get_option('aa_sc_meta');
 	$args = array(
 		'post_type' => 'aa_archive',
 		'posts_per_page' => -1
@@ -33,8 +34,14 @@ function aa_rest_about_contact($data){
 		'content' => array(
 			'slug' => 'about-contact',
 			'content' => $options['text'],
+/*
 			'seo' => array(
 				'title' => 'About / Contact - AAFF',
+				'desc' => $options['seo']
+			),
+*/
+			'meta' => array(
+				'title' => 'About / Contact - ' . $meta_options['short_title'],
 				'desc' => $options['seo']
 			),
 			'archive' => $pruned_project_archive_posts
@@ -43,6 +50,7 @@ function aa_rest_about_contact($data){
 	
 	unset($pruned_project_archive_posts);
 	unset($options);
+	unset($meta_options);
 
 	return (object) $array;
 }

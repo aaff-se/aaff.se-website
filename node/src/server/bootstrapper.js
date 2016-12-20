@@ -7,13 +7,8 @@ import DataLoader from './data-loader';
 import RoutePattern from 'route-pattern';
 import virtualUrl from 'app/flux/virtualurl';
 import Routes from 'app/flux/routes';
+import GlobalLoads from 'app/flux/global-loads';
 
-const globalLoads = [
-	{
-		url: 'aa/v1/global/footer',
-		type: 'footer'
-	}
-];
 let _state;
 
 function navigate(urlString) {
@@ -42,7 +37,7 @@ function navigate(urlString) {
 function applyRoute(page, params, hash, itemsToLoad, statusCode) {
 	return Promise.all([
 		setPage(page, params, hash, statusCode || 200),
-		loadData([].concat(globalLoads, itemsToLoad))
+		loadData([].concat(GlobalLoads, itemsToLoad))
 	]).then(responses => responses[1]);
 }
 

@@ -19,10 +19,19 @@ function aa_rest_home($data){
 		'content' => array(
 			'slug' => 'home',
 			'content' => $pruned_work_posts,
+/*
 			'seo' => array(
 				'title' => html_entity_decode(get_bloginfo('name')),
 				'desc' => html_entity_decode(get_bloginfo('description'))
+			),
+*/
+/*
+			'meta' => array(
+				'title' => html_entity_decode(get_bloginfo('name')),
+				'desc' => html_entity_decode(get_bloginfo('description'))
 			)
+*/
+
 		)
 	);
 	

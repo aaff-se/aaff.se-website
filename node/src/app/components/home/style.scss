@@ -49,6 +49,7 @@ main#page-home {
 			width: 100%;
 			padding:0;
 			pointer-events: none;
+			z-index: 5;
 			@include transform(
 				translate3d(-2em,0,0)
 			);

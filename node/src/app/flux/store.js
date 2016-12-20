@@ -96,9 +96,9 @@ const Store = Object.assign(
 			//stop work pages from loading twice - also works for wildcard 404s
 			if(newParams.cid) slug = newParams.cid;
 			
-			if(_state.page && _state.page.slug !== slug) {
-				_state.page = null;
-			} else if(_state.page && _state.page.slug === slug) {
+			if(_state.dynamic && _state.dynamic.slug !== slug) {
+				_state.dynamic = null;
+			} else if(_state.dynamic && _state.dynamic.slug === slug) {
 				return;
 			};
 

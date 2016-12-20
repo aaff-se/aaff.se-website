@@ -4,11 +4,10 @@ import cons from 'consolidate';
 import express from 'express';
 import path from 'path';
 import camelCase from 'lodash/camelCase';
-import capitalize from 'lodash/capitalize';
+import log from 'lib/log';
 
 import routes from './routes.js';
 
-const isProduction = process.env.NODE_ENV === 'production';
 const port = 3000;
 const publicPath = path.resolve(__dirname, '../../build/public');
 
@@ -25,4 +24,4 @@ app.use(express.static( publicPath ));
 
 app.use('/', routes);
  
-app.listen(3000, () => console.log('Server running'));
+app.listen(3000, () => log('Server running'));

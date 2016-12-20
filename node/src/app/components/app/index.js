@@ -58,7 +58,6 @@ class App extends Component {
 	
 	onChangeStore(state) {
 		this.setState(state);
-
 		if(state.statusCode === 404) {
 			document.body.className = 'the404 loaded';
 		} else {
@@ -68,31 +67,31 @@ class App extends Component {
 	}
 
 	getPage(pageId) {
-		const { currentPage, page: pageData, footer} = this.state;
+		const { dynamic: dynamicData, contact} = this.state;
 		let page;
-		if(!pageData) {
+		if(!dynamicData) {
 			page = null;
 		} else {
 			switch(pageId) {
 				case 'home':
-					page = <PageContainer {...this.state} className={"page-" + pageData.slug} key={"page-"+pageData.slug}>
+					page = <PageContainer {...this.state} className={"page-" + dynamicData.slug} key={"page-"+dynamicData.slug}>
 						{this.getMainTitle()}
 						<Home {...this.state} />
-						<Footer data={footer} />
+						<Footer data={contact} />
 					</PageContainer>;
 					break;
 				case 'about-contact':
-					page = <PageContainer {...this.state} className={"page-" + pageData.slug} key={"page-"+pageData.slug}>
+					page = <PageContainer {...this.state} className={"page-" + dynamicData.slug} key={"page-"+dynamicData.slug}>
 						{this.getMainTitle()}
 						<AboutContact {...this.state}  />
-						<Footer data={footer} />
+						<Footer data={contact} />
 					</PageContainer>;
 					break;
 				case 'work':
-					page = <PageContainer {...this.state} className={"page-" + pageData.slug} key={"page-"+pageData.slug}>
+					page = <PageContainer {...this.state} className={"page-" + dynamicData.slug} key={"page-"+dynamicData.slug}>
 						{this.getMainTitle()}
 						<Work {...this.state} />
-						<Footer data={footer} />
+						<Footer data={contact} />
 					</PageContainer>;
 					break;
 			}
@@ -101,22 +100,22 @@ class App extends Component {
 		return page;
 	}
 	getMainTitle() {
-		const { currentPage, page: pageData} = this.state;
+		const { dynamic: dynamicData} = this.state;
 		let mainTitle;
-		if(!pageData) {
+		if(!dynamicData) {
 			mainTitle = null;
-		} else if(!pageData.maintitle) {
+		} else if(!dynamicData.maintitle) {
 			mainTitle = null;
 		} else {
 			
-			mainTitle = <MainTitle {...this.state} key={"page-title-"+pageData.slug} />;
+			mainTitle = <MainTitle {...this.state} key={"page-title-"+dynamicData.slug} />;
 		}
 		return mainTitle;
 	}
 
 	render() {
 		const state = this.state;
-		const { page: pageData } = state;
+		const { dynamic: dynamicData } = state;
 		
 		//should be fetched from state later
 		const appClasses = classnames('app', { 'app-404' : (state.statusCode === 404) });
@@ -153,7 +152,7 @@ class App extends Component {
 				<PageContainer {...this.state} key="page-notfound" className="page-notfound">
 					
 					<The404 {...this.state} />
-					<Footer data={state.footer} />
+					<Footer data={state.contact} />
 					
 				</PageContainer>
 				<Logo />
@@ -163,38 +162,38 @@ class App extends Component {
 			
 			return <div className={appClasses}>
 				<Meta 
-					title={get(state, 'page.seo.title') || 'Anton Andersson Form & Funktioner'} 
+					title={get(state, 'dynamic.meta.title') || get(state, 'meta.title') || ''} 
 					meta={[
 						{
 							name: "description",
-							content: get(state, 'page.seo.desc') || 'Freelancing graphic designer and web developer. Creating form and functions for clients of all sorts and sizes.'
+							content: get(state, 'dynamic.meta.desc') || get(state, 'meta.desc') || ''
 						}, {
 							property: "og:description",
-							content: get(state, 'page.seo.desc') || 'Freelancing graphic designer and web developer. Creating form and functions for clients of all sorts and sizes.'
+							content: get(state, 'dynamic.meta.desc') || get(state, 'meta.desc') || ''
 						}, {
 							name: "author",
-							content: 'Anton Andersson Form & Funktioner'
+							content: get(state, 'meta.title') || ''
 						}, {
 							property: "og:image",
-							content: get(state, 'page.seo.image') || 'https://www.aaff.se/images/aaff-meta-bw.jpg'
+							content: get(state, 'dynamic.meta.image') || get(state, 'meta.image') || ''
 						}, {
 							property: "og:title",
-							content: get(state, 'page.seo.title') || 'Anton Andersson Form & Funktioner'
+							content: get(state, 'dynamic.meta.title') || get(state, 'meta.title') || ''
 						}, {
 							property: "og:type",
 							content: 'website'
 						}, {
 							name: "twitter:card",
-							content:get(state, 'page.seo.twittercard') || 'summary'
+							content:get(state, 'dynamic.meta.twittercard') || get(state, 'meta.twittercard') || ''
 						}, {
 							name: "twitter:description",
-							content: get(state, 'page.seo.desc') || 'Freelancing graphic designer and web developer. Creating form and functions for clients of all sorts and sizes.'
+							content: get(state, 'dynamic.meta.desc') || get(state, 'meta.desc') || ''
 						}, {
 							name: "twitter:image",
-							content: get(state, 'page.seo.image') || 'https://www.aaff.se/images/aaff-meta-bw.jpg'
+							content: get(state, 'dynamic.meta.image') || get(state, 'meta.image') || ''
 						}, {
 							name: "twitter:title",
-							content: get(state, 'page.seo.title') || 'Anton Andersson Form & Funktioner'
+							content: get(state, 'dynamic.meta.title') || get(state, 'meta.title') || ''
 						}
 					]}
 				/>

@@ -82,6 +82,11 @@ class HomeItem extends Component {
 		return <Section className={classNames}>
 			
 			<Group href={data.link} title={data.client + ' - ' + data.type}>
+
+				<Item className="title">
+					<h2>{data.client}</h2><h3>{data.type}</h3>
+				</Item>
+
 				<Item className="image-wrapper">
 				
 					{(data.image.main && !data.image.alternative ? <Image image={data.image.main} /> : null)}
@@ -91,9 +96,6 @@ class HomeItem extends Component {
 					{(data.image.alternative ? <Image className="alternative" image={data.image.alternative} /> : null)}
 				</Item>
 			
-				<Item className="title">
-					<h2>{data.client}</h2><h3>{data.type}</h3>
-				</Item>
 			</Group>
 			
 		</Section>;

@@ -10,20 +10,12 @@ import window from 'adaptors/window';
 
 import virtualUrl from './virtualurl';
 import Routes from './routes';
+import GlobalLoads from './global-loads';
 import Actions from './actions';
 
-const globalLoads = [
-
-	{
-		url: 'aa/v1/global/footer',
-		type: 'footer'
-	}
-
-];
-
-function applyRoute(page, params, hash, itemsToLoad, statusCode=200) {
-	Flux.goTo(page, params, hash, statusCode);
-	Flux.loadData([].concat(globalLoads, itemsToLoad));
+function applyRoute(page, params, hash, itemsToLoad, statusCode) {
+	Flux.goTo(page, params, hash, statusCode || 200);
+	Flux.loadData([].concat(GlobalLoads, itemsToLoad));
 }
 
 function getHash(vurl) {

@@ -15,14 +15,14 @@ class Work extends Component {
 	}
 	
 	render() {
-		const { currentPage, page } = this.props;
+		const { currentPage, dynamic } = this.props;
 		let i = 0;
 		return <main id={"page-"+currentPage}>
-			{page.content.map(workRow => {
+			{dynamic.content.map(workRow => {
 				i++;
 				return <WorkRow key={`row-${i}`} data={workRow} />;
 			})}
-			<WorkNext prevpost={page.prevpost} nextpost={page.nextpost} />
+			<WorkNext prevpost={dynamic.prevpost} nextpost={dynamic.nextpost} />
 		</main>
 	}
 	

@@ -133,10 +133,10 @@ class MainTitle extends Component {
 		const state = this.state;
 		const classes = classnames( 'main-title', state.transitionClass, {'fade-out': !state.visible} )
 		
-		const { page } = this.props;
+		const { dynamic } = this.props;
 		return <div className={classes}>
-			{(page.maintitle ? <h2>{page.maintitle}</h2> : null)}
-			{(page.subtitle ? <h3>{page.subtitle}</h3> : null)}
+			{(dynamic.maintitle ? <h2>{dynamic.maintitle}</h2> : null)}
+			{(dynamic.subtitle ? <h3>{dynamic.subtitle}</h3> : null)}
 		</div>;
 	}
 	

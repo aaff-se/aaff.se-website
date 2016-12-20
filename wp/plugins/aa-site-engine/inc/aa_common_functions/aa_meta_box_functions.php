@@ -93,7 +93,6 @@ function aa_meta_thumbnail_function($post=false,$array) {
 			
 		$html .= '<input class="mediaid" type="hidden" name="'.$name.'"  value="'.esc_html($data).'">';
 		
-		
 	$html .= '</div>';
 		
 	echo $html;

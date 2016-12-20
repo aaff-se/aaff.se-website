@@ -2,6 +2,7 @@
 	
 function aa_rest_work($data) {
 	$post = get_page_by_path($data['slug'], OBJECT, 'aa_work');
+	$meta_options = get_option('aa_sc_meta');
 	
 	//dont send draft or pending posts to the public site
 	//both drafts and pending can be viewed on the stg site, but only pending shows up on the front page
@@ -47,13 +48,13 @@ function aa_rest_work($data) {
 	$type = get_post_meta($post->ID, 'type', true);
 	$seodesc = get_post_meta($post->ID, 'seodesc', true);
 	$meta_image_id = get_post_meta($post->ID, 'thumb-main', true);
-	$meta_image = wp_get_attachment_image_src($meta_image_id, 'm');
+	$meta_image = wp_get_attachment_image_src($meta_image_id, 's1224');
 	$raw_content = get_post_meta($post->ID, 'rows', true);
 	$content = aa_prepare_work_rows($raw_content);
 	unset($raw_content);
 	
 	$seo = array();
-	$seo['title'] = $post->post_title . ' - AAFF';
+	$seo['title'] = $post->post_title . ' - ' . $meta_options['short_title'];
 	if($seodesc) $seo['desc'] = $seodesc;
 	if($meta_image) $seo['image'] = $meta_image[0];
 	$seo['twittercard'] = 'summary_large_image';
@@ -64,7 +65,8 @@ function aa_rest_work($data) {
 			'content' => $content,
 			'client' => $client,
 			'type' => $type,
-			'seo' => $seo,
+//			'seo' => $seo,
+			'meta' => $seo,
 			'maintitle' => $client,
 			'subtitle' => $type
 		)

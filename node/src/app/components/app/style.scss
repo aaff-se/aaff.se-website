@@ -14,9 +14,6 @@ div#root div.app {
 
 div#root.loaded div.app {
 	@include opacity(1);
-	@include transition(
-		opacity $transition_time*2 $ease-out
-	);
 }
 
 div#root:after {

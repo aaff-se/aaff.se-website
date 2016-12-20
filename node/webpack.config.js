@@ -14,7 +14,7 @@ if(PROD) {
 	VERBOSE = false;
 };
 
-const env = {
+let env = {
 	'NODE_ENV': NODE_ENV,
 	'VERBOSE': VERBOSE,
 	'API_URL': API_URL
@@ -26,7 +26,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 //needs compass-mixins installed
-const COMPASS_MIXINS_DIR = path.resolve(__dirname, './node_modules/compass-mixins/lib'); 
+const COMPASS_MIXINS_DIR = path.resolve(__dirname, './node_modules/compass-mixins/lib');
 
 const BASE_DIR = path.resolve(__dirname);
 
@@ -37,7 +37,6 @@ const SRC_STATIC_DIR = path.resolve(__dirname, 'src/static');
 const BUILD_DIR = path.resolve(__dirname, 'build');
 const BUILD_PUBLIC_DIR = path.resolve(__dirname, 'build/public');
 const BUILD_SERVER_DIR = path.resolve(__dirname, 'build/server');
-
 
 let app_plugins = {};
 let server_plugins = {};
@@ -62,7 +61,6 @@ const uglifyPlugin = new webpack.optimize.UglifyJsPlugin({
 	}
 });
 
-
 app_plugins.prod = [
 	new ExtractTextPlugin({filename: 'bundle.css', allChunks: true}),
 	new webpack.DefinePlugin({
@@ -86,7 +84,7 @@ server_plugins.prod = [
 server_plugins.dev = [
 	new webpack.DefinePlugin({
 		'process.env': env
-	})
+	}),
 ];
 
 const appLoaders = [
@@ -184,7 +182,6 @@ module.exports = [
 		},
 		plugins: (PROD ? server_plugins.prod : server_plugins.dev)
 	},
-
 	{
 		name: 'static-content',
 		entry: './src/nullentry.js',
@@ -200,6 +197,4 @@ module.exports = [
 			])
 		]
 	}
-
-
 ];
