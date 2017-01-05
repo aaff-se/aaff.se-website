@@ -69,7 +69,7 @@ function aa_get_image_data($id){
 	$base64 = $meta['micro_inlined'];
 	
 	//if thumbnail rebuild have screwed up our metadata...
-	if($base64 === 'data:image/jpg;base64,') {
+	if($base64 === 'data:image/jpg;base64,' || !trim($base64)) {
 		$temp_image = wp_get_attachment_image_src($id, 'micro');
 		if($temp_image) {
 
@@ -82,7 +82,7 @@ function aa_get_image_data($id){
 			$imagedataencoded = base64_encode($imagedata);
 			$base64 = 'data:image/' . $type . ';base64,'.$imagedataencoded;
 			$meta['micro_inlined'] = $base64;
-			wp_update_attachment_metadata($meta,$id);
+			wp_update_attachment_metadata($id,$meta);
 		}
 	}
 	

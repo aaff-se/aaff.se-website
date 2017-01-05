@@ -1,5 +1,6 @@
 'use strict'
 
+import fs from 'fs';
 import express from 'express';
 import React from 'react';
 import ReactDOMServer from 'react-dom/server';
@@ -30,6 +31,8 @@ function renderApp(req, res) {
 			bodyClass: bodyClass,
 			cache: JSON.stringify(cacheLayer.getAll())
 		});
+		
+		
 	})
 	.catch(error => log('server route error', error, error.stack));
 }
