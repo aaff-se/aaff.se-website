@@ -33,6 +33,7 @@ const BASE_DIR = path.resolve(__dirname);
 const SRC_APP_DIR = path.resolve(__dirname, 'src/app');
 const SRC_SERVER_DIR = path.resolve(__dirname, 'src/server');
 const SRC_STATIC_DIR = path.resolve(__dirname, 'src/static');
+const SRC_SW_DIR = path.resolve(__dirname, 'src/sw');
 
 const BUILD_DIR = path.resolve(__dirname, 'build');
 const BUILD_PUBLIC_DIR = path.resolve(__dirname, 'build/public');
@@ -122,6 +123,20 @@ const serverLoaders = [
 	}
 ];
 
+const swLoaders = [
+	{
+		test: /\.js$/,
+		include: BASE_DIR,
+		loader: 'babel-loader',
+		query: {
+			presets: [
+				['es2015', {'modules': false}]
+			]
+		}
+	}
+];
+
+
 const serverAliases = {
 	adaptors: path.resolve(SRC_APP_DIR, 'adaptors/server'),
 	app: path.resolve(SRC_APP_DIR),
@@ -195,5 +210,29 @@ module.exports = [
 				}
 			])
 		]
+	},
+	{
+		name: 'serviceworker',
+		target: 'web',
+		context: SRC_SW_DIR,
+		node: {
+		  __dirname: false,
+		  __filename: false,
+		},
+		entry: {
+			sw: './sw.js'
+		},
+		output: {
+			path: BUILD_PUBLIC_DIR,
+			filename: 'sw.js'
+		},
+		externals: /^[a-z\-0-9]+$/,
+		module: {
+			rules: swLoaders
+		},
+		resolve: {
+			alias: clientAliases
+		},
+		plugins: (PROD ? server_plugins.prod : server_plugins.dev)
 	}
 ];

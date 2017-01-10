@@ -2,6 +2,7 @@ import { polyfill } from 'es6-promise';
 import fetch from 'isomorphic-fetch';
 import pick from 'lodash/pick';
 
+//should this be kept now that we have service workers? maybe at least for the server? - yeah, its good as fallback for when sw are not available, 
 import cacheLayer from 'lib/cache-layer';
 
 import log from 'lib/log';
@@ -12,22 +13,20 @@ let ajaxes = {};
 
 let defaultConfig = require('adaptors/proxy-url').default();
 
-
 function fetcher (config) {
 	const mergedConfig = Object.assign({}, defaultConfig, config);
 	
 	//if we run in development mode, we can fetch draft posts through our api by setting $_GET['dev'] below
-
 	const url = mergedConfig.api() + mergedConfig.url + (process.env.NODE_ENV === 'development' ? '?dev' : '');
-	
 
 	const loadObj = {
 		url: url,
 		timestamp: Math.round(Date.now() / 1000)
 	};
 	
+	
 	let cache = cacheLayer.get(loadObj);
-
+	
 	if(cache) { log('Cache Fetching:', url); return (mergedConfig.success ? mergedConfig.success(cache.data) : cache.data ); }
 	
 	log('Fetching:', url);
@@ -41,7 +40,6 @@ function fetcher (config) {
 					throw new Error('Bad response from server');
 				}
 			}
-
 			return response.json().then(data => {
 				let res = {
 					postsPaginationTotal: response.headers.get('X-WP-TotalPages'),
@@ -55,7 +53,6 @@ function fetcher (config) {
 				});
 				return res;
 			});
-			
 		});
 	if(mergedConfig.success) {
 		req

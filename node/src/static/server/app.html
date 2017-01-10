@@ -159,8 +159,12 @@ Design & Build by Anton Andersson Form & Funktioner / aaff.se / 2016
 		<%= meta %>
 		
 		<%= link %>
-
-		<link rel="preload" href="/fonts/pressura.woff" as="font" as="font" type="font/woff" crossorigin>
+		
+		<script type="text/javascript">
+			if("serviceWorker" in navigator)
+				navigator.serviceWorker.register('/sw.js');
+		</script>
+		
 		<link rel="stylesheet" href="/bundle.css">
 		
 		<script>
