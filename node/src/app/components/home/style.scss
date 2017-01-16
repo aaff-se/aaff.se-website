@@ -1,17 +1,16 @@
 main#page-home {
-	margin-top: 5.5em;
+	margin-top: 5em;
 
 	@media all and (orientation:landscape) and (min-width: 470px) {
-		margin-top: 3.5em;
+		margin-top: 3em;
 	}
 	@media all and (min-width: $m) {
-		margin-top:  3.5em;
+		margin-top: 3em;
 	}
 	
 	section {
 		
 		padding: 1em 0;
-		
 		
 		@media all and (orientation:landscape) and (min-width: 470px) {
 			padding: 3em 0;
@@ -43,7 +42,7 @@ main#page-home {
 		
 		.title {
 			position: absolute;
-			top: 2em;
+			top: 1.5em;
 //			top: 50%;
 			left:0;
 			width: 100%;

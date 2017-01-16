@@ -7,23 +7,29 @@ class Footer extends Component {
 	
 	constructor(props) {
 		super(props);
-		this.data = props.data;
 	}
-
+	
+	linelength(string){
+		if(!string) return '';
+		let returnStr = '';
+		let length = string.length;
+		while (length--)
+			returnStr += '-';
+		return returnStr;
+	}
+	
 	render() {
 
-		const data = this.data;
-		const {style} = this.props;
+		const {contact, meta} = this.props;
 		return <footer>
 			<Section>
+				<Item className="text title">
+					<p>{meta.title}<br/>{this.linelength(meta.title)}</p>
+				</Item>
 				<Item className="text info">
 					<p>
-						<a href={data.phone_href}>{data.phone_text}</a><br/>
-					</p>
-				</Item>
-				<Item className="text info last">
-					<p>
-						<a href={data.email_href}>{data.email_text}</a>
+						<a href={contact.phone_href}>{contact.phone_text}</a><br/>
+						<a href={contact.email_href}>{contact.email_text}</a>
 					</p>
 				</Item>
 			</Section>
@@ -31,12 +37,8 @@ class Footer extends Component {
 	}
 }
 Footer.defaultProps = {
-	data : {
-		'phone_text': '',
-		'phone_href': '',
-		'email_text': '',
-		'email_href': '',
-	}
+	meta: {},
+	contact: {}
 };
 
 export default Footer;

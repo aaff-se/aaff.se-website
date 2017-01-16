@@ -77,21 +77,21 @@ class App extends Component {
 					page = <PageContainer {...this.state} className={"page-" + dynamicData.slug} key={"page-"+dynamicData.slug}>
 						{this.getMainTitle()}
 						<Home {...this.state} />
-						<Footer data={contact} />
+						<Footer {...this.state} />
 					</PageContainer>;
 					break;
 				case 'about-contact':
 					page = <PageContainer {...this.state} className={"page-" + dynamicData.slug} key={"page-"+dynamicData.slug}>
 						{this.getMainTitle()}
 						<AboutContact {...this.state}  />
-						<Footer data={contact} />
+						<Footer {...this.state} />
 					</PageContainer>;
 					break;
 				case 'work':
 					page = <PageContainer {...this.state} className={"page-" + dynamicData.slug} key={"page-"+dynamicData.slug}>
 						{this.getMainTitle()}
 						<Work {...this.state} />
-						<Footer data={contact} />
+						<Footer {...this.state} />
 					</PageContainer>;
 					break;
 			}
@@ -152,7 +152,7 @@ class App extends Component {
 				<PageContainer {...this.state} key="page-notfound" className="page-notfound">
 					
 					<The404 {...this.state} />
-					<Footer data={state.contact} />
+					<Footer {...this.state} />
 					
 				</PageContainer>
 				<Logo />
@@ -200,17 +200,17 @@ class App extends Component {
 				
 				<Header />
 					
-					<ReactTransitionGroup component="div" className="transition-wrapper">
+				<ReactTransitionGroup component="div" className="transition-wrapper">
+				
+					{this.getMainTitle()}
 					
-						{this.getMainTitle()}
-						
-					</ReactTransitionGroup>
-					
-					<ReactTransitionGroup component="div" className="transition-wrapper">
-					
-						{this.getPage(state.currentPage)}
-					
-					</ReactTransitionGroup>
+				</ReactTransitionGroup>
+				
+				<ReactTransitionGroup component="div" className="transition-wrapper">
+				
+					{this.getPage(state.currentPage)}
+				
+				</ReactTransitionGroup>
 						
 				<Logo />
 

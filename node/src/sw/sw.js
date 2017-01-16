@@ -19,7 +19,7 @@ toolbox.router.get(/\.(woff|svg|json|jpg|jpeg|gif|png)$/, toolbox.cacheFirst, {
 });
 
 // might get updated, lets keep them for a day
-toolbox.router.get(/(www|ww2|stg).aaff.se.*\.(js|css)/, toolbox.cacheFirst, {
+toolbox.router.get(/(www|ww2|stg)\.aaff.se.*\.(js|css)/, toolbox.cacheFirst, {
 	cache: {
 		name: 'staticSomeTime',
 		maxAgeSeconds: 86400
@@ -27,9 +27,8 @@ toolbox.router.get(/(www|ww2|stg).aaff.se.*\.(js|css)/, toolbox.cacheFirst, {
 	}
 });
 
-
 //cache the pages, but not for longer than a session (15 mins) - to make sure that the app cache is updated
-toolbox.router.get(/(www|ww2|stg).aaff.se/, toolbox.cacheFirst, {
+toolbox.router.get(/(www|ww2|stg)\.aaff.se/, toolbox.cacheFirst, {
 	cache: {
 		name: 'localPages',
 		maxAgeSeconds: 900
@@ -38,7 +37,6 @@ toolbox.router.get(/(www|ww2|stg).aaff.se/, toolbox.cacheFirst, {
 
 // GA should only go through network
 toolbox.router.get(/google-analytics/, toolbox.networkOnly);
-
 
 //if not sure, get network first
 toolbox.router.default = toolbox.networkFirst;

@@ -66,7 +66,8 @@ app_plugins.prod = [
 	new ExtractTextPlugin({filename: 'bundle.css', allChunks: true}),
 	new webpack.DefinePlugin({
 		'process.env': env
-	})
+	}),
+	uglifyPlugin
 ];
 app_plugins.dev = [
 	new ExtractTextPlugin({filename: 'bundle.css', allChunks: true}),
