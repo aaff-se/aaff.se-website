@@ -160,14 +160,12 @@ Design & Build by Anton Andersson Form & Funktioner / aaff.se / 2016
 		
 		<%= link %>
 		
-<!--
 		<script type="text/javascript">
 			if("serviceWorker" in navigator)
 				navigator.serviceWorker.register('/sw.js');
 		</script>
--->
 		
-		<link rel="stylesheet" href="/bundle.css">
+		<link rel="stylesheet" href="/<%= cssFile %>">
 		
 		<script>
 			(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -211,7 +209,7 @@ Design & Build by Anton Andersson Form & Funktioner / aaff.se / 2016
 				(function(d, t) {
 					var g = d.createElement(t),
 						s = d.getElementsByTagName(t)[0];
-					g.src = '/bundle.js';
+					g.src = '/<%= jsFile %>';
 					s.parentNode.insertBefore(g, s);
 				}(document, 'script'));
 

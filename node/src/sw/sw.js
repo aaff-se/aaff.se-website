@@ -12,18 +12,9 @@ toolbox.router.get(/cms.aaff.se\/wp-json/, toolbox.fastest, {
 });
 
 // shouldn't change without a file name change as well, just cache hard.
-toolbox.router.get(/\.(woff|svg|json|jpg|jpeg|gif|png)$/, toolbox.cacheFirst, {
+toolbox.router.get(/\.(woff|svg|json|jpg|jpeg|gif|png|js|css)$/, toolbox.cacheFirst, {
 	cache: {
 		name: 'staticForever'
-	}
-});
-
-// might get updated, lets keep them for a day
-toolbox.router.get(/(www|ww2|stg)\.aaff.se.*\.(js|css)/, toolbox.cacheFirst, {
-	cache: {
-		name: 'staticSomeTime',
-		maxAgeSeconds: 86400
-
 	}
 });
 
@@ -44,7 +35,5 @@ toolbox.router.default = toolbox.networkFirst;
 toolbox.precache([
 	'/fonts/pressura.woff',
 	'/spritemap.svg',
-	'/bundle.css',
-	'/bundle.js',
 	'/manifest.json'
 ]);

@@ -24,7 +24,8 @@ const path = require('path');
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-
+const CleanWebpackPlugin = require('clean-webpack-plugin');
+ 
 //needs compass-mixins installed
 const COMPASS_MIXINS_DIR = path.resolve(__dirname, './node_modules/compass-mixins/lib');
 
@@ -41,6 +42,7 @@ const BUILD_SERVER_DIR = path.resolve(__dirname, 'build/server');
 
 let app_plugins = {};
 let server_plugins = {};
+let sw_plugins = {};
 
 const uglifyPlugin = new webpack.optimize.UglifyJsPlugin({
 	sourceMap: false,
@@ -61,32 +63,89 @@ const uglifyPlugin = new webpack.optimize.UglifyJsPlugin({
 		comments: false
 	}
 });
-
+let options = {
+	children: true,
+	chunks: false
+};
 app_plugins.prod = [
-	new ExtractTextPlugin({filename: 'bundle.css', allChunks: true}),
+	new CleanWebpackPlugin(['build'], {
+		root: BASE_DIR,
+		verbose: false, 
+		dry: false,
+		exclude: ['buld/public/.well-known']
+
+	}),
+	new ExtractTextPlugin({filename: '[chunkhash].css', allChunks: true}),
 	new webpack.DefinePlugin({
 		'process.env': env
 	}),
-	uglifyPlugin
+	uglifyPlugin,
+	function() {
+		this.plugin("done", function(stats) {
+			require("fs").writeFileSync(
+				path.join(BUILD_SERVER_DIR, "stats.json"),
+			JSON.stringify(stats.toJson().assetsByChunkName));
+		});
+	}
+
 ];
 app_plugins.dev = [
-	new ExtractTextPlugin({filename: 'bundle.css', allChunks: true}),
+	new CleanWebpackPlugin(['build'], {
+		root: BASE_DIR,
+		verbose: true, 
+		dry: false,
+	}),
+	new ExtractTextPlugin({filename: '[chunkhash].css', allChunks: true}),
 	new webpack.DefinePlugin({
 		'process.env': env
-	})
+	}),
+	function() {
+		this.plugin("done", function(stats) {
+			require("fs").writeFileSync(
+				path.join(BUILD_SERVER_DIR, "stats.json"),
+			JSON.stringify(stats.toJson().assetsByChunkName));
+		});
+	}
 ];
 
 server_plugins.prod = [
 	new webpack.DefinePlugin({
 		'process.env': env
 	}),
-	uglifyPlugin
+	uglifyPlugin,
+	new CopyWebpackPlugin([{
+		from: {
+			glob: SRC_STATIC_DIR,
+			dot: true
+		},
+		to: BUILD_DIR
+	}])
 ];
 server_plugins.dev = [
 	new webpack.DefinePlugin({
 		'process.env': env
 	}),
+	new CopyWebpackPlugin([{
+		from: {
+			glob: SRC_STATIC_DIR,
+			dot: true
+		},
+		to: BUILD_DIR
+	}])
 ];
+
+sw_plugins.prod = [
+	new webpack.DefinePlugin({
+		'process.env': env
+	}),
+	uglifyPlugin
+];
+sw_plugins.dev = [
+	new webpack.DefinePlugin({
+		'process.env': env
+	})
+];
+
 
 const appLoaders = [
 	{
@@ -137,12 +196,11 @@ const swLoaders = [
 	}
 ];
 
-
 const serverAliases = {
 	adaptors: path.resolve(SRC_APP_DIR, 'adaptors/server'),
 	app: path.resolve(SRC_APP_DIR),
 	components: path.resolve(SRC_APP_DIR, 'components'),
-	lib: path.resolve(SRC_APP_DIR, 'lib')
+	lib: path.resolve(SRC_APP_DIR, 'lib'),
 }
 
 const clientAliases = {
@@ -154,7 +212,7 @@ const clientAliases = {
 
 module.exports = [
 	{
-		name: 'client-app',
+		name: 'client',
 		target: 'web',
 		context: SRC_APP_DIR,
 		entry: {
@@ -162,7 +220,7 @@ module.exports = [
 		},
 		output: {
 			path: BUILD_PUBLIC_DIR,
-			filename: 'bundle.js'
+			filename: '[chunkhash].js'
 		},
 		module: {
 			rules: appLoaders
@@ -173,7 +231,7 @@ module.exports = [
 		plugins: (PROD ? app_plugins.prod : app_plugins.dev)
 	},
 	{
-		name: 'server-backend',
+		name: 'server',
 		target: 'node',
 		context: SRC_SERVER_DIR,
 		node: {
@@ -198,21 +256,6 @@ module.exports = [
 		plugins: (PROD ? server_plugins.prod : server_plugins.dev)
 	},
 	{
-		name: 'static-content',
-		entry: './src/nullentry.js',
-		output: {
-			filename: 'test.txt'
-		},
-		plugins: [
-			new CopyWebpackPlugin([
-				{
-					from: SRC_STATIC_DIR,
-					to: BUILD_DIR
-				}
-			])
-		]
-	},
-	{
 		name: 'serviceworker',
 		target: 'web',
 		context: SRC_SW_DIR,
@@ -234,6 +277,6 @@ module.exports = [
 		resolve: {
 			alias: clientAliases
 		},
-		plugins: (PROD ? server_plugins.prod : server_plugins.dev)
+		plugins: (PROD ? sw_plugins.prod : sw_plugins.dev)
 	}
 ];

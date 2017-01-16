@@ -13,10 +13,10 @@ class ArchiveList extends Component {
 
 	constructor(props) {
 		super(props);
-	
 	}
 	
 	render() {
+		let test = {};
 		const { archiveItems } = this.props;
 		return <Section id="archive">
 			<Group>

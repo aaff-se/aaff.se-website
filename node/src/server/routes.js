@@ -12,6 +12,7 @@ import bootstrapper from './bootstrapper';
 import App from 'components/app';
 
 let router = express.Router();
+let stats = JSON.parse(fs.readFileSync(__dirname + '/stats.json', 'utf8'));
 
 function renderApp(req, res) {
 	bootstrapper(`${req.protocol}://${req.hostname}${req.originalUrl}`, process.env.API_URL, process.env.API_URL)
@@ -19,6 +20,7 @@ function renderApp(req, res) {
 		const AppString = ReactDOMServer.renderToString(<App state={state} />);
 		const head = Helmet.rewind();
 		
+
 		const bodyClass = (state.statusCode === 404 ? 'the404' : '');
 		res 
 		//.header('Link', "</bundle.js>; rel=preload; as=script")
@@ -29,6 +31,8 @@ function renderApp(req, res) {
 			state: JSON.stringify(state),
 			app: AppString,
 			bodyClass: bodyClass,
+			jsFile: stats.app[0],
+			cssFile: stats.app[1],
 			cache: JSON.stringify(cacheLayer.getAll())
 		});
 		
