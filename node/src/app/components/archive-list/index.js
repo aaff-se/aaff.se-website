@@ -16,7 +16,6 @@ class ArchiveList extends Component {
 	}
 	
 	render() {
-		let test = {};
 		const { archiveItems } = this.props;
 		return <Section id="archive">
 			<Group>
