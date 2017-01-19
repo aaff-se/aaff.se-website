@@ -8,7 +8,6 @@ const API_URL = JSON.stringify('https://cms.aaff.se');
 let NODE_ENV =  JSON.stringify('development');
 let VERBOSE = true;
 
-
 if(PROD) {
 	NODE_ENV = JSON.stringify('production');
 	VERBOSE = false;
@@ -27,7 +26,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
  
 //needs compass-mixins installed
-const COMPASS_MIXINS_DIR = path.resolve(__dirname, './node_modules/compass-mixins/lib');
+const COMPASS_MIXINS_DIR = path.resolve(__dirname, 'node_modules/compass-mixins/lib');
 
 const BASE_DIR = path.resolve(__dirname);
 

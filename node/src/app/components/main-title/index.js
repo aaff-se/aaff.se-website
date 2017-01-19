@@ -17,7 +17,7 @@ class MainTitle extends Component {
 			prevScroll: 0,
 			transitionClass: 'visible'
 		};
-		this.handleScroll = throttle(this.handleScroll.bind(this), 200);
+		this.handleScroll = throttle(this.handleScroll.bind(this), 20);
 
 		this.setTransitionClassVisible = this.setTransitionClassVisible.bind(this);
 		this.setTransitionClassHidden = this.setTransitionClassHidden.bind(this);

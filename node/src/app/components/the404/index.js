@@ -14,7 +14,7 @@ class The404 extends Component {
 		super(props);
 		this.state = props.state;
 		this.state.height = '100vh';
-		this.handleResize = debounce(this.handleResize.bind(this), 200);
+		this.handleResize = debounce(this.handleResize.bind(this), 20);
 	}
 	
 	componentDidMount() {
@@ -53,7 +53,8 @@ class The404 extends Component {
 		};
 		
 		return <main id={"page-"+currentPage}>
-			<section >
+			<canvas id="bg-canvas"></canvas> 
+			<section>
 				<div style={style} className="inner">
 					<Group>
 						<Item className="text">

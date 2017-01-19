@@ -13,6 +13,11 @@ Design & Build by Anton Andersson Form & Funktioner / aaff.se / 2016
 		
 		<%= title %>
 
+		<script type="text/javascript">
+			if("serviceWorker" in navigator)
+				navigator.serviceWorker.register('/sw.js');
+		</script>
+
 		<link href="/favicon.ico" rel="shortcut icon" type="image/x-icon" />
 		
 		<meta name="theme-color" content="#f6f6f4">
@@ -32,19 +37,6 @@ Design & Build by Anton Andersson Form & Funktioner / aaff.se / 2016
 		<!-- Disable automatic phone number detection. -->
 		<meta name="format-detection" content="telephone=no">
 		
-		<!-- ICONS -->
-		
-<!--
-		<link href="/images/192.png"
-			rel="icon" 
-			sizes="192x192">
-			
-		<link href="/images/128.png"
-			rel="icon" 
-			sizes="128x128">
--->
-
-		<!-- iPad retina icon -->
 		<link href="/images/152.png"
 			sizes="152x152"
 			rel="apple-touch-icon-precomposed">
@@ -159,11 +151,6 @@ Design & Build by Anton Andersson Form & Funktioner / aaff.se / 2016
 		<%= meta %>
 		
 		<%= link %>
-		
-		<script type="text/javascript">
-			if("serviceWorker" in navigator)
-				navigator.serviceWorker.register('/sw.js');
-		</script>
 		
 		<link rel="stylesheet" href="/<%= cssFile %>">
 		

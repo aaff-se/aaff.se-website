@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
-import throttle from'lodash/throttle';
+import throttle from 'lodash/throttle';
 import classnames from 'classnames';
 
-import event from 'app/lib/event';
+import event from 'lib/event';
 
 import Link from 'components/link';
 
@@ -14,7 +14,7 @@ class Header extends Component {
 			visible: true,
 			prevScroll: 0
 		};
-		this.handleScroll = throttle(this.handleScroll.bind(this), 200);
+		this.handleScroll = throttle(this.handleScroll.bind(this), 20);
 	}
 
 	componentDidMount() {

@@ -4,9 +4,9 @@ import debounce from'lodash/debounce';
 import throttle from'lodash/throttle';
 import classnames from 'classnames';
 
-import isRetina from 'app/lib/isretina';
-import inViewport from 'app/lib/inviewport';
-import event from 'app/lib/event';
+import isRetina from 'lib/isretina';
+import inViewport from 'lib/inviewport';
+import event from 'lib/event';
 
 class Image extends Component {
 	
@@ -17,8 +17,7 @@ class Image extends Component {
 			visible: false,
 			imageWidth: null,
 			currentWidth: 0,
-			src: null,
-			srcToLoad: null
+			src: null
 		};
 		this.isRetina = isRetina();
 		this.onImageLoad = this.onImageLoad.bind(this);
@@ -134,8 +133,7 @@ class Image extends Component {
 				if( (thisImageData.width / multiple) >= state.imageWidth && state.imageWidth > state.currentWidth ) {
 					
 					this.setState({ 
-						currentWidth: thisImageData.width,
-						srcToLoad: thisImageData.src
+						currentWidth: thisImageData.width
 					 });
 					 newSrc = thisImageData.src;
 					 set = true;
@@ -150,8 +148,7 @@ class Image extends Component {
 				
 				let lastImage = image.data[(image.data.length-1)];
 				this.setState({ 
-					currentWidth: lastImage.width,
-					srcToLoad: lastImage.src
+					currentWidth: lastImage.width
 				 });
 				 newSrc = lastImage.src;
 			}
@@ -160,6 +157,7 @@ class Image extends Component {
 		if(newSrc) {
 			this.imgObj = new window.Image();
 			this.imgObj.onload = this.onImageLoad;
+			this.imgObj.onerror = this.onImageLoad;
 			this.imgObj.src = newSrc;
 			
 			//the biggest image have been loaded, remove all listeners and cancel future functions
@@ -179,7 +177,7 @@ class Image extends Component {
 	onImageLoad() {
 		this.setState({ 
 			loaded: true,
-			src:  this.state.srcToLoad
+			src: this.imgObj.src
 		});
 		delete this.imgObj;
 	}
@@ -188,7 +186,8 @@ class Image extends Component {
 		const {image, className} = this.props;
 		if(!image.data.length) return {__html: ''};
 		
-		const middleImageI = Math.floor(image.data.length/2);
+		let middleImageI = Math.floor(image.data.length/2);
+		if(middleImageI < 1) middleImageI = 1;
 		
 		const imageHtml = '<img class="noscript-img ' + className + '" src="' + image.data[middleImageI].src + '" width="' + image.width + '" height="' + image.height + '" alt="' + (image.alt ? image.alt : '') + '" />';
 		
