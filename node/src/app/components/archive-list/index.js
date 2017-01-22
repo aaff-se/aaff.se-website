@@ -7,7 +7,6 @@ import ArchiveItem from 'components/archive-item';
 import Section from 'components/parts/section';
 import Group from 'components/parts/group';
 import Item from 'components/parts/item';
-import Svg from 'components/svg';
 
 class ArchiveList extends Component {
 
