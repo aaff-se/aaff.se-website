@@ -26,9 +26,7 @@ class ArchiveList extends Component {
 				</Item>
 			</Group>
 			
-			
 			{archiveItems.map(archiveItem => { 
-				if(!ArchiveItem) return;
 				return <ArchiveItem key={`archive-item-${archiveItem.id}`} data={archiveItem} />; 
 			})}
 		</Section>;
