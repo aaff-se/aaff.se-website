@@ -37,6 +37,7 @@ body {
 	font-smoothing: antialiased;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
+	text-rendering: geometricPrecision;
 	font-size: $font_size_xs;
 	overflow-x: hidden;
 	
@@ -126,7 +127,7 @@ img {
 	display: block;
 	@include opacity(0);
 	@include transition(
-		opacity $transition_time $ease-out
+		opacity $transition_time*2 $ease-out
 	);
 }
 
