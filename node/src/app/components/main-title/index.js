@@ -27,6 +27,8 @@ class MainTitle extends Component {
 		this.clearTimeouts = this.clearTimeouts.bind(this);
 		
 		this.timeouts = [];
+		
+		this.fadeTime = 300;
 	}
 
 	setTransitionClass(theClass="") {
@@ -79,9 +81,9 @@ class MainTitle extends Component {
 	//we run all the timeouts in this function, to make sure we can remove all the timeouts if a link is clicked
 	componentDidEnter() {
 		
-		this.timeouts[this.timeouts.length] = setTimeout(this.setTransitionClass, 150);
+		this.timeouts[this.timeouts.length] = setTimeout(this.setTransitionClass, this.fadeTime);
 		
-		this.timeouts[this.timeouts.length] = setTimeout(this.setTransitionClassVisible, 200);
+		this.timeouts[this.timeouts.length] = setTimeout(this.setTransitionClassVisible, (this.fadeTime * 1.5));
 		
 	}
 	
@@ -89,7 +91,7 @@ class MainTitle extends Component {
 		//just remove it
 		this.clearTimeouts();
 		this.setTransitionClassFadeout();
-		setTimeout(didLeaveCallback, 150);
+		setTimeout(didLeaveCallback, this.fadeTime);
 	}
 	
 	componentDidLeave() {

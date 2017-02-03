@@ -13,10 +13,9 @@ class Home extends Component {
 	
 	render() {
 		const { currentPage, dynamic } = this.props;
-		const contentLength = dynamic.content.length;
 		return <main id={"page-"+currentPage}>
 			{dynamic.content.map((homeItem, index) => { 
-				return <HomeItem key={`home-item-${index}`} data={homeItem} className={(contentLength == (index+1) ? 'last':'')} />; 
+				return <HomeItem key={`home-item-${index}`} data={homeItem} />; 
 			})}
 		</main>;
 			

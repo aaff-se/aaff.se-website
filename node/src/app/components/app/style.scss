@@ -1,18 +1,18 @@
 div#root {
 	position: relative;
 	z-index: 1;
-}
-
-div#root div.app {
-	width: 100%;
-	overflow-x: hidden;
 	@include opacity(0);
 	@include transition(
 		opacity $transition_time*2 $ease-out
 	);
 }
 
-div#root.loaded div.app {
+div#root div.app {
+	width: 100%;
+	overflow-x: hidden;
+}
+
+div#root.loaded {
 	@include opacity(1);
 }
 

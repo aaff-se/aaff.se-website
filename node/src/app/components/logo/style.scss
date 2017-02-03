@@ -2,53 +2,73 @@ div#logo {
 	width: 100%;
 	height: 6em;
 	bottom: 0;
-	padding-top: 2em;
 	right: 0;
-	display:block;
+	display:table;
 	position: fixed;
-	text-align: center;
 	z-index: 100;
-	
 	pointer-events: none;
+	//perspective: 4em;
 	
+	@include opacity(0);
+	
+	@include transition(
+		opacity $transition_time*2 $transition_time*2 $ease-out
+
+	);
+
 	@media all and (orientation:landscape) and (min-width: 470px) {
 		width: 6em;
+		pointer-events: auto;
 	}
 	@media all and (min-width: $m) {
 		width: 6em;
+		pointer-events: auto;
+	}
+	
+	.inner-wrapper {
+		vertical-align: middle;
+		display: table-cell;
+		text-align: center;
+		line-height: 1em;
+		transform-style: preserve-3d;
+		@include transition(
+			transform $transition_time*2 $easeOutQuad
+		);
+		@include transform(rotateY(0deg));
+
+	}
+	
+	.inner-wrapper.animating {
+		@include transform(rotateY(90deg));
+		@include transition(
+			transform $transition_time*2 $easeInQuad
+		);
 	}
 	
 	a {
 		pointer-events: auto;
+		display: inline-block;
+		position: relative;
+		font-size: 1em;
+		line-height: 1em;
+	}
+	
+	svg {
+		height: 2em;
+		width: 2em;
+		display: block;
+		position: relative;
+		
+	}
+	
+}
+
+div#logo.loaded {
+	@include opacity(1);
+}
+
+div#logo:hover .inner-wrapper {
 		@include transition(
 			transform $transition_time $ease-out
 		);
-		display: inline-block;
-		position: relative;
-		
-		&:hover {
-			
-			svg {
-				@include transform( rotateY(180deg) );
-			}
-		}
-	}
-	
-	svg {	
-		height: 2em;
-		width: 2em;
-
-		@include opacity(0);
-		@include transition(
-			transform $transition_time*2 $ease-out,
-			opacity $transition_time*2 $transition_time*2 $ease-out
-		);
-	}
-	
-	&.loaded {
-		
-		svg {
-			@include opacity(1);
-		}
-	}
 }

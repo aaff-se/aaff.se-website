@@ -117,6 +117,7 @@ body.touch a:active {
 		
 		img {
 			@include opacity(1);
+			background: none;
 		}
 	}
 }
@@ -125,10 +126,6 @@ img {
 	width: 100%;
 	height: auto;
 	display: block;
-	@include opacity(0);
-	@include transition(
-		opacity $transition_time*2 $ease-out
-	);
 }
 
 svg {

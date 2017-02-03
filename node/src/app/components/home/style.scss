@@ -55,8 +55,8 @@ main#page-home {
 			@include opacity(0);
 
 			@include transition(
-				transform $transition_time*4 $easing,
-				opacity $transition_time $ease-out
+				transform $transition_time*6 $easing,
+				opacity $transition_time*2 $ease-out
 			);
 			
 			@media all and (orientation:landscape) and (min-width: 470px) {
@@ -89,8 +89,8 @@ main#page-home {
 				);
 				
 				@include transition(
-					transform $transition_time*4 $easing,
-					opacity $transition_time*2 $ease-out
+					transform $transition_time*6 $easing,
+					opacity $transition_time*2 $ease-in
 				);
 
 				@media all and (orientation:landscape) and (min-width: 470px) {

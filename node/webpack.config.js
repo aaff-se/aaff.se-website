@@ -71,7 +71,7 @@ app_plugins.prod = [
 		root: BASE_DIR,
 		verbose: false, 
 		dry: false,
-		exclude: ['buld/public/.well-known']
+		exclude: ['./build/public/.well-known']
 
 	}),
 	new ExtractTextPlugin({filename: '[chunkhash].css', allChunks: true}),

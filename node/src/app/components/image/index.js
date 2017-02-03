@@ -23,25 +23,18 @@ class Image extends Component {
 		this.onImageLoad = this.onImageLoad.bind(this);
 		this.largestWindowWidth = 0;
 		this.handleResize = debounce(this.handleResize.bind(this), 200);
+		this.handleResizeFunc = this.handleResizeFunc.bind(this);
 		this.handleScroll = throttle(this.handleScroll.bind(this), 200);
-		this.handleResizeTimeout = this.handleResizeTimeout.bind(this);
 		this.imgObj = null;
 		this.placeholderSrc = "data:image/svg+xml;charset=utf-8,%3Csvg xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg' viewBox%3D'0 0 " + props.image.width + " "+ props.image.height +"'%2F%3E";
 		this.node = null;
 		this.eventNode = null;
-		this.extratimeout = false;
 	}
 	
 	componentDidMount() {
 		event.add(window, 'resize', this.handleResize);
 		event.add(window, 'scroll', this.handleScroll);
-		this.handleResize();
-		//this.extratimeout = setTimeout(this.handleResizeTimeout, 500);
-	}
-	
-	handleResizeTimeout(){
-		this.extratimeout = false;
-		this.handleResize();
+		this.handleResizeFunc();
 	}
 	
 	componentWillUnmount() {
@@ -58,18 +51,15 @@ class Image extends Component {
 			this.imgObj.onload = null;
 			delete this.imgObj;
 		}
-		if(this.extratimeout)
-			clearTimeout(this.extratimeout);
+		if(this.imgLoadTimeout)
+			clearTimeout(this.imgLoadTimeout);
 	}
 
 	handleScroll() {
 		if(!this.node)
 			this.node = ReactDOM.findDOMNode(this);
-//			let viewportThreshold = ( document.documentElement.clientHeight *(documentElement.clientWidth / documentElement.clientHeight) );
-//			if(viewportThreshold > 1.5 ) viewportThreshold = 1.5; 
 		if (inViewport(this.node, undefined, 0)) {
 			this.setState({ visible: true });
-			
 			//image have come in view, remove scroll listeners as we only need to check resizes from now on
 			if (this.handleScroll.cancel) {
 				this.handleScroll.cancel();
@@ -79,15 +69,18 @@ class Image extends Component {
 			//have we loaded the image and stored all the vars yet? maybe not if we come from a transition
 			if(!this.state.imageWidth) {
 				this.handleResize();
+				
 			} else {
 				this.loadImage();
 			}
 		}
 	}
-
-	handleResize() {
+	handleResize(){
+		this.handleResizeFunc();
+	}
+	handleResizeFunc() {
 		let windowWidth = document.documentElement.clientWidth;
-		
+
 		//only do calc if we haven't done it for this size already - or if we couldn't get any proper data
 		if(this.largestWindowWidth < windowWidth || !this.state.imageWidth ) {
 			
@@ -108,6 +101,11 @@ class Image extends Component {
 				
 		}
 		
+		if(this.state.visible && !this.state.loaded) {
+			this.loadImage();
+			return;
+		}
+		
 		//is it hidden? then check if it is in view now
 		if(!this.state.visible) {
 			this.handleScroll();
@@ -118,7 +116,6 @@ class Image extends Component {
 		const {image} = this.props;
 		const state = this.state;
 		let newSrc = false;
-		
 		//if the srcs exists, we have a width, and dont already use the biggest one:
 		if(image.data.length && state.imageWidth && (image.data[(image.data.length-1)].width !== state.currentWidth) ) {
 			
@@ -155,10 +152,19 @@ class Image extends Component {
 		}
 		
 		if(newSrc) {
-			this.imgObj = new window.Image();
-			this.imgObj.onload = this.onImageLoad;
-			this.imgObj.onerror = this.onImageLoad;
-			this.imgObj.src = newSrc;
+//			this.imgObj = new window.Image();
+//			this.imgObj.onload = this.onImageLoad;
+//			this.imgObj.onerror = this.onImageLoad;
+//			this.imgObj.src = newSrc;
+
+
+
+// try to handle the imgs straight in the browser with progressive jpgs instead 
+			this.setState({ 
+				src: newSrc,
+				loaded: true
+			});
+
 			
 			//the biggest image have been loaded, remove all listeners and cancel future functions
 			if(newSrc === image.data[(image.data.length-1)].src) {
@@ -176,8 +182,8 @@ class Image extends Component {
 	
 	onImageLoad() {
 		this.setState({ 
-			loaded: true,
-			src: this.imgObj.src
+			src: this.imgObj.src,
+			loaded: true
 		});
 		delete this.imgObj;
 	}
@@ -198,7 +204,7 @@ class Image extends Component {
 		const {image, className} = this.props;
 		const state = this.state;
 		const classes = classnames( 'image', {'loaded': state.loaded && state.visible }, className);
-		const src = (state.loaded && state.visible ? state.src : this.placeholderSrc);
+		const src = (state.src ? state.src : this.placeholderSrc);
 		//const src = (state.loaded && state.visible ? state.src : image.base64);
 		//const styles = {backgroundColor: (image.color ? image.color : '#ffffff')};
 		const styles = {backgroundImage: 'url(' + image.inlined + ')' };

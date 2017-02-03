@@ -13,8 +13,8 @@ div.main-title {
 	
 	@include opacity(0);
 	@include transition(
-		transform $transition_time*4 $easing,
-		opacity $transition_time $ease_out
+		transform $transition_time*6 $easing,
+		opacity $transition_time*2 $ease_in
 	);
 
 	@include transform(
@@ -61,8 +61,8 @@ div.main-title.hidden {
 div.main-title.visible {
 	@include opacity(1);
 	@include transition(
-		transform $transition_time*4 $easing,
-		opacity $transition_time*2 $ease_out
+		transform $transition_time*6 $easing,
+		opacity $transition_time*2 $ease_in
 	);
 	@include transform(
 		translate3d(0,0,0)
@@ -72,8 +72,8 @@ div.main-title.visible {
 div.main-title.visible.fade-out {
 	@include opacity(0);
 	@include transition(
-		transform $transition_time*4 $easing,
-		opacity $transition_time $ease_out
+		transform $transition_time*6 $easing,
+		opacity $transition_time*2 $ease_out
 	);
 	@include transform(
 		translate3d(-1em,0,0)

@@ -13,6 +13,8 @@ class PageContainer extends Component {
 		this.setTransitionClass = this.setTransitionClass.bind(this);
 		this.clearTimeouts = this.clearTimeouts.bind(this);
 		this.timeouts = [];
+		
+		this.fadeTime = 300;
 	}
 
 	setTransitionClass(theClass="") {
@@ -58,12 +60,12 @@ class PageContainer extends Component {
 		
 		this.setTransitionClass('hidden');
 		
-		this.timeouts[this.timeouts.length] = setTimeout(this.setTransitionClass, 150);
+		this.timeouts[this.timeouts.length] = setTimeout(this.setTransitionClass, this.fadeTime);
 		
 		if(window.location.hash)
-			this.timeouts[this.timeouts.length] = setTimeout(this.scrollToAnchor, 275);
+			this.timeouts[this.timeouts.length] = setTimeout(this.scrollToAnchor, (this.fadeTime * 1.5));
 			
-		this.timeouts[this.timeouts.length] = setTimeout(didEnterCallback, 300);
+		this.timeouts[this.timeouts.length] = setTimeout(didEnterCallback, (this.fadeTime * 2));
 	}
 	
 	componentDidEnter() {
@@ -76,7 +78,7 @@ class PageContainer extends Component {
 		this.setTransitionClass('fade-out visible');
 		this.maybeSetBodyOverflowScroll();
 		this.clearTimeouts();
-		setTimeout(didLeaveCallback, 150);
+		setTimeout(didLeaveCallback, this.fadeTime);
 	}
 	
 	componentDidLeave() {

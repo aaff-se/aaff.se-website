@@ -5,7 +5,8 @@ div.image
 	overflow: hidden;
 	background-size: 100%;
 	image-rendering: pixelated;
-
+	-ms-interpolation-mode: nearest-neighbor;
+	
 	&.main {
 		display: none;
 	}

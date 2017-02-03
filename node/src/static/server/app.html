@@ -14,8 +14,9 @@ Design & Build by Anton Andersson Form & Funktioner / aaff.se / 2016
 		<%= title %>
 
 		<script type="text/javascript">
-			if("serviceWorker" in navigator)
+			if("serviceWorker" in navigator) {
 				navigator.serviceWorker.register('/sw.js');
+			}
 		</script>
 
 		<link href="/favicon.ico" rel="shortcut icon" type="image/x-icon" />
@@ -169,7 +170,7 @@ Design & Build by Anton Andersson Form & Funktioner / aaff.se / 2016
 		<noscript>
 			<style>
 				div#root:after {opacity: 0 !important;}
-				div.app {opacity: 1 !important;}
+				div#root {opacity: 1 !important;}
 				header { pointer-events: auto !important; transform: translateX(0) !important; opacity: 1 !important;}
 				div#logo svg { opacity: 1 !important;}
 				div.image { background: none !important; }
@@ -183,33 +184,35 @@ Design & Build by Anton Andersson Form & Funktioner / aaff.se / 2016
 		<script id="initLoad" type="text/javascript">
 			window.state = <%= state %>;
 			window.initCache = <%= cache %>;
-			var loadingTimeout = setTimeout(function(){
-				document.getElementById('root').className = 'loading';
-			}, 300);
+			(function(){
+				var loadingTimeout = setTimeout(function(){
+					document.getElementById('root').className = 'loading';
+				}, 300);
+				
+				addEvent(window, 'load', function(){
+					clearTimeout(loadingTimeout);
+					document.getElementById('root').className = 'loaded';
+					document.body.className = 'loaded <%= bodyClass %>';
+	
+					(function(d, t) {
+						var g = d.createElement(t),
+							s = d.getElementsByTagName(t)[0];
+						g.src = '/<%= jsFile %>';
+						s.parentNode.insertBefore(g, s);
+					}(document, 'script'));
+	
+					var element = document.getElementById("initLoad");
+					element.parentNode.removeChild(element);
+				});
 			
-			addEvent(window, 'load', function(){
-				clearTimeout(loadingTimeout);
-				document.getElementById('root').className = 'loaded';
-				document.getElementById('logo').className = 'loaded';
-				document.body.className = 'loaded <%= bodyClass %>';
+				function addEvent(element, eventName, fn) {
+					if (element.addEventListener)
+						element.addEventListener(eventName, fn, false);
+					else if (element.attachEvent)
+						element.attachEvent('on' + eventName, fn);
+				}
+			}());
 
-				(function(d, t) {
-					var g = d.createElement(t),
-						s = d.getElementsByTagName(t)[0];
-					g.src = '/<%= jsFile %>';
-					s.parentNode.insertBefore(g, s);
-				}(document, 'script'));
-
-				var element = document.getElementById("initLoad");
-				element.parentNode.removeChild(element);
-			});
-			
-			function addEvent(element, eventName, fn) {
-				if (element.addEventListener)
-					element.addEventListener(eventName, fn, false);
-				else if (element.attachEvent)
-					element.attachEvent('on' + eventName, fn);
-			}
 		</script>
 
 	</body>

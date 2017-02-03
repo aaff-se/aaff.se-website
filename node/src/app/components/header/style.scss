@@ -17,8 +17,8 @@ header {
 	@include opacity(1);
 	
 	@include transition(
-		transform $transition_time*4 $easing,
-		opacity $transition_time $ease-out
+		transform $transition_time*6 $easing,
+		opacity $transition_time*2 $ease-in
 	);
 
 	@media all and (orientation:landscape) and (min-width: 470px) {
@@ -42,8 +42,8 @@ header {
 	@include transform( translate3d(0,0,0) );
 
 	@include transition(
-		transform $transition_time*4 $easing,
-		opacity $transition_time*2 $ease-out
+		transform $transition_time*6 $easing,
+		opacity $transition_time*2 $ease-in
 	);
 
 
@@ -55,8 +55,8 @@ header,
 	pointer-events: none;
 
 	@include transition(
-		transform $transition_time*4 $easing,
-		opacity $transition_time $ease-out
+		transform $transition_time*6 $easing,
+		opacity $transition_time*2 $ease-out
 	);
 
 	@include transform( translate3d(1em,0,0) );

@@ -9,15 +9,10 @@ import ReactDOM from 'react-dom';
 import Meta from "react-helmet";
 import ReactTransitionGroup from 'react-addons-transition-group';
 import classnames from 'classnames';
-import lodash from 'lodash';
 
 import get from 'lodash/get';
 import find from 'lodash/find';
 import includes from 'lodash/includes';
-
-// TODO: see if there's a better way to get fonts in
-//import 'adaptors/localfont';
-//We now use regular font files with expires headers instead, not giving away the font code by default...
 
 import window from 'adaptors/window';
 
@@ -33,7 +28,6 @@ import Logo from 'components/logo';
 import PageContainer from 'components/page-container';
 
 import MainTitle from 'components/main-title';
-
 
 import The404 from 'components/the404';
 import Home from 'components/home';
@@ -148,14 +142,19 @@ class App extends Component {
 						}
 					]}
 				/>
+
 				<Header />
+
 				<PageContainer {...this.state} key="page-notfound" className="page-notfound">
 					
 					<The404 {...this.state} />
+
 					<Footer {...this.state} />
 					
 				</PageContainer>
-				<Logo />
+
+				<Logo {...this.state} />
+
 			</div>;
 			
 		} else {
@@ -212,8 +211,8 @@ class App extends Component {
 				
 				</ReactTransitionGroup>
 						
-				<Logo />
-
+				<Logo {...this.state} />
+				
 			</div>;
 		}
 	}
