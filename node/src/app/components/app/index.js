@@ -7,7 +7,7 @@ import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 
 import Meta from "react-helmet";
-import ReactTransitionGroup from 'react-addons-transition-group';
+import ReactTransitionGroup from 'react-transition-group/TransitionGroup';
 import classnames from 'classnames';
 
 import get from 'lodash/get';

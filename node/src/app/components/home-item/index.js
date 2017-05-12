@@ -1,6 +1,7 @@
 'use strict';
 
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 import ReactDOM from 'react-dom';
 import classnames from 'classnames';
 
@@ -102,7 +103,7 @@ class HomeItem extends Component {
 	}
 	
 }
-HomeItem.propTypes = { data: React.PropTypes.object };
+HomeItem.propTypes = { data: PropTypes.object };
 HomeItem.defaultProps = { 
 	data: {},
 	className: {},
@@ -111,4 +112,3 @@ HomeItem.defaultProps = {
 };
 
 export default HomeItem;
-

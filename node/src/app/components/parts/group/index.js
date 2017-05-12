@@ -3,6 +3,7 @@
 import React, {Component} from 'react';
 import classnames from 'classnames';
 import Link from 'components/link';
+import ExtLink from 'components/extlink';
 
 class Group extends Component {
 
@@ -15,7 +16,7 @@ class Group extends Component {
 		const classes = classnames('group', className);
 		
 		if(href && target === "_blank") {
-			return <a id={id || ''} className={classes} href={href} title={title || ""} target={target}>{children}</a>
+			return <ExtLink id={id || ''} className={classes} href={href} title={title || ""} target={target}>{children}</ExtLink>
 		} else if(href) {
 			return <Link id={id || ''} className={classes} href={href} title={title || ""}>{children}</Link>
 		} else {

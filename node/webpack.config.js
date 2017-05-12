@@ -24,6 +24,7 @@ const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+const fs = require('fs-extra');
  
 //needs compass-mixins installed
 const COMPASS_MIXINS_DIR = path.resolve(__dirname, 'node_modules/compass-mixins/lib');
@@ -81,9 +82,10 @@ app_plugins.prod = [
 	uglifyPlugin,
 	function() {
 		this.plugin("done", function(stats) {
-			require("fs").writeFileSync(
+			fs.outputFile(
 				path.join(BUILD_SERVER_DIR, "stats.json"),
-			JSON.stringify(stats.toJson().assetsByChunkName));
+				JSON.stringify(stats.toJson().assetsByChunkName)
+			);
 		});
 	}
 
@@ -100,9 +102,10 @@ app_plugins.dev = [
 	}),
 	function() {
 		this.plugin("done", function(stats) {
-			require("fs").writeFileSync(
+			fs.outputFile(
 				path.join(BUILD_SERVER_DIR, "stats.json"),
-			JSON.stringify(stats.toJson().assetsByChunkName));
+				JSON.stringify(stats.toJson().assetsByChunkName)
+			);
 		});
 	}
 ];
@@ -160,7 +163,10 @@ const appLoaders = [
 	},
 	{
 		test: /\.scss$/,
-		loader: ExtractTextPlugin.extract({fallbackLoader: 'style-loader', loader: `css-loader!sass-loader?includePaths[]=${COMPASS_MIXINS_DIR}` })
+		loader: ExtractTextPlugin.extract({
+			fallback: 'style-loader', 
+			use: `css-loader!sass-loader?includePaths[]=${COMPASS_MIXINS_DIR}`
+		})
 	}
 ];
 

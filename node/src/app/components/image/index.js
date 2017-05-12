@@ -25,6 +25,7 @@ class Image extends Component {
 		this.handleResize = debounce(this.handleResize.bind(this), 200);
 		this.handleResizeFunc = this.handleResizeFunc.bind(this);
 		this.handleScroll = throttle(this.handleScroll.bind(this), 200);
+		this.imgLoadTimeout=null;
 		this.imgObj = null;
 		this.placeholderSrc = "data:image/svg+xml;charset=utf-8,%3Csvg xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg' viewBox%3D'0 0 " + props.image.width + " "+ props.image.height +"'%2F%3E";
 		this.node = null;
@@ -34,7 +35,11 @@ class Image extends Component {
 	componentDidMount() {
 		event.add(window, 'resize', this.handleResize);
 		event.add(window, 'scroll', this.handleScroll);
-		this.handleResizeFunc();
+		
+		this.imgLoadTimeout=setTimeout(()=>{
+			this.handleResizeFunc();
+			console.log('timeoutFunc');
+		},350);
 	}
 	
 	componentWillUnmount() {

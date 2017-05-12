@@ -1,6 +1,7 @@
 'use strict';
 
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 
 import ArchiveItem from 'components/archive-item';
 
@@ -33,7 +34,7 @@ class ArchiveList extends Component {
 	}
 	
 }
-ArchiveList.propTypes = { archiveItems: React.PropTypes.array };
+ArchiveList.propTypes = { archiveItems: PropTypes.array };
 ArchiveList.defaultProps = { archiveItems: [] };
 
 export default ArchiveList;

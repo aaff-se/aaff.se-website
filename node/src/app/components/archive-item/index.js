@@ -1,6 +1,7 @@
 'use strict';
 
 import React, {Component} from 'react';
+import PropTypes from 'prop-types';
 
 import classnames from 'classnames';
 
@@ -37,7 +38,7 @@ class ArchiveItem extends Component {
 	}
 	
 }
-ArchiveItem.propTypes = { data: React.PropTypes.object };
+ArchiveItem.propTypes = { data: PropTypes.object };
 ArchiveItem.defaultProps = { data: {} };
 
 export default ArchiveItem;
