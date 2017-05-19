@@ -30,7 +30,7 @@ function setUrl(url, replace) {
 			window.history.replaceState(null, null, url);
 	} else {
 		if(window.history.pushState)
-		window.history.pushState(null, null, url);
+			window.history.pushState(null, null, url);
 	}
 }
 

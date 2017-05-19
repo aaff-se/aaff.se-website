@@ -17,19 +17,18 @@ let stats = JSON.parse(fs.readFileSync(__dirname + '/stats.json', 'utf8'));
 function renderApp(req, res) {
 	bootstrapper(`${req.protocol}://${req.hostname}${req.originalUrl}`, process.env.API_URL, process.env.API_URL)
 	.then((state) => {
-		const AppString = ReactDOMServer.renderToString(<App state={state} />);
+		const appString = ReactDOMServer.renderToString(<App state={state} />);
 		const head = Helmet.rewind();
-		
-
 		const bodyClass = (state.statusCode === 404 ? 'the404' : '');
+
 		res 
-		//.header('Link', "</bundle.js>; rel=preload; as=script")
+		//.header('Link', '</' + stats.app[0] + '>; rel=preload; as=script')
 		.render('app', {
 			title: head.title,
 			meta: head.meta,
 			link: head.link,
 			state: JSON.stringify(state),
-			app: AppString,
+			app: appString,
 			bodyClass: bodyClass,
 			jsFile: stats.app[0],
 			cssFile: stats.app[1],
