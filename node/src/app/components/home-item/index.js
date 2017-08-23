@@ -35,7 +35,7 @@ class HomeItem extends Component {
 	componentDidMount() {
 		event.add(window, 'scroll', this.handleScroll);
 		event.add(window, 'resize', this.handleResize);
-		setTimeout(this.handleScroll, 250);
+		setTimeout(this.handleScroll, 350);
 
 	}
 	
@@ -53,7 +53,7 @@ class HomeItem extends Component {
 	handleScroll() {
 		
 		//check if this section is centered
-		const {isCurrent}  = this.state;
+		const {isCurrent} = this.state;
 		
 		if(!this.node)
 			this.node = ReactDOM.findDOMNode(this);

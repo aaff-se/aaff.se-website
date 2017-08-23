@@ -14,7 +14,7 @@ const routes = {
 			url: 'aa/v1/home',
 			type: 'dynamic',
 			slug: 'home',
-			async: ['related_content']
+			async: ['related_content','background_sync']
 		}]
 	},
 		
@@ -26,7 +26,7 @@ const routes = {
 			url: `aa/v1/about-contact`,
 			type: 'dynamic',
 			slug: 'about-contact',
-			async: ['related_content']
+			async: ['related_content','background_sync']
 
 		}]
 	},
@@ -38,7 +38,7 @@ const routes = {
 			url: `aa/v1/work/${slug}`,
 			type: 'dynamic',
 			slug: slug,
-			async: ['related_content']
+			async: ['related_content','background_sync']
 		}]
 	},
 	

@@ -45,7 +45,6 @@ function applyData(response, type) {
 		changeSet.statusCode = response.data.statusCode;
 	}
 
-
 	Object.assign(_state, changeSet);
 	log('Loaded', type, _state[type]);
 	Store.emit('change', _state);
@@ -68,12 +67,12 @@ function applyMorePosts(response, type) {
 */
 
 function getApplyFunctionFor(dependency) {
-	let func;
+	let func  = () => {};
 	switch(dependency) {
 		case 'related_content':
 			func = applyRelatedContent;
 			break;
-		}
+	}
 	return func;
 }
 
@@ -143,6 +142,7 @@ const Store = Object.assign(
 		},
 		
 		initiateAsyncLoadsFor(itemsToLoad) {
+			log(itemsToLoad);
 			itemsToLoad.filter(item => item.async).forEach(item => {
 				item.async.forEach(dependency => {
 					DataLoader(get(_state[item.type], dependency, []).map(url => {

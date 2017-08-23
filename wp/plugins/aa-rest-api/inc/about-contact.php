@@ -45,6 +45,7 @@ function aa_rest_about_contact($data){
 				'desc' => $options['seo']
 			),
 			'archive' => $pruned_project_archive_posts
+
 		)
 	);
 	
