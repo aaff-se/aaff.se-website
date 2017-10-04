@@ -39,27 +39,31 @@ body {
 	-moz-osx-font-smoothing: grayscale;
 	text-rendering: geometricPrecision;
 	font-size: $font_size_xs;
+	font-size: $font_size_xs_vw;
 	overflow-x: hidden;
 	
 	@include transition(
 		color $transition_time linear,
-		background $transition_time linear,
-		font-size $transition_time linear
+		background $transition_time linear
 	);
 
 	@media all and (min-width: $s) {
 		font-size: $font_size_s;
+		font-size: $font_size_s_vw;
 	}
 	
 	@media all and (min-width: $m1extra) {
 		font-size: $font_size_m;
+		font-size: $font_size_m_vw;
 
 	}
 	@media all and (min-width: $l) {
 		font-size: $font_size_l;
+		font-size: $font_size_l_vw;
 	}
 	@media all and (min-width: $xl) {
 		font-size: $font_size_xl;
+		font-size: $font_size_xl_vw;
 	}
 	
 	&.the404 {

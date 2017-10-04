@@ -23,11 +23,19 @@ $xl: 2048px; // max size - bigger font size
 $inner-max: 1910px;
 
 $font_size_xs: 12px;
+$font_size_xs_vw: 3.5vw; 
 
 $font_size_s: 14px;
+$font_size_s_vw: 3.5vw; 
+
 $font_size_m: 18px;
+$font_size_m_vw: 2.5vw; 
+
 $font_size_l: 24px;
+$font_size_l_vw: 1.75vw; 
+
 $font_size_xl: 32px;
+$font_size_xl_vw: 1.75vw; 
 
 $calc_font_size: calc( 16px + (24 - 16) * (100vw - 400px) / (1910 - 400) );
 
