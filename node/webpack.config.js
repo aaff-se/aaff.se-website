@@ -165,7 +165,8 @@ const appLoaders = [
 		test: /\.scss$/,
 		loader: ExtractTextPlugin.extract({
 			fallback: 'style-loader', 
-			use: `css-loader!sass-loader?includePaths[]=${COMPASS_MIXINS_DIR}`
+//			use: `css-loader!sass-loader?includePaths[]=${COMPASS_MIXINS_DIR}`
+			use: `css-loader!sass-loader`
 		})
 	}
 ];

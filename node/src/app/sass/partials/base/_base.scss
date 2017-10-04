@@ -3,15 +3,6 @@
 
 //fonts need to come first in order to work on windows mobile (still true?)
 
-@import "compass";
-@import "animate";
-@import "compass/support";
-@import "compass/utilities/general/clearfix";
-@import "compass/reset/utilities";
-@import "compass/css3";
-@import "compass/css3/opacity";
-@import "compass/css3/box-shadow";
-
 @import '../generic/functions';
 @import '../generic/variables';
 @import '../generic/mixins';

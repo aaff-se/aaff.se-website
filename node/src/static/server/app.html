@@ -169,7 +169,7 @@ Design & Build by Anton Andersson Form & Funktioner / aaff.se / 2016
 		
 		<noscript>
 			<style>
-				div#root:after {opacity: 0 !important;}
+				body:after {opacity: 0 !important;}
 				div#root {opacity: 1 !important;}
 				header { pointer-events: auto !important; transform: translateX(0) !important; opacity: 1 !important;}
 				div#logo svg { opacity: 1 !important;}
@@ -187,7 +187,8 @@ Design & Build by Anton Andersson Form & Funktioner / aaff.se / 2016
 			(function(){
 				var loadingTimeout = setTimeout(function(){
 					document.getElementById('root').className = 'loading';
-				}, 300);
+					document.body.className = 'loading <%= bodyClass %>';
+				}, 150);
 				
 				addEvent(window, 'load', function(){
 					clearTimeout(loadingTimeout);

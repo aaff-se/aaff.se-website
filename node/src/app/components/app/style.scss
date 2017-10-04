@@ -16,7 +16,7 @@ div#root.loaded {
 	@include opacity(1);
 }
 
-div#root:after {
+body:after {
 	content: '';
 	display: block;
 	clear:both;
@@ -48,9 +48,9 @@ main {
 	z-index: 10;
 }
 
-div#root.loading:after {
+body.loading:after {
 	@include opacity(1);
 }
-body.the404 div#root.loading:after {
+body.the404.loading:after {
 	@include opacity(0.1);
 }

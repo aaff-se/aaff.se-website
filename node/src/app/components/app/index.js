@@ -1,7 +1,5 @@
 'use strict'
 
-//import {} from './style.scss';
-
 import 'adaptors/svg4everybody';
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';

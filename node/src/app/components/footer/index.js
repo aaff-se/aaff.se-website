@@ -1,3 +1,5 @@
+'use strict';
+
 import React, {Component} from 'react';
 import Section from 'components/parts/section';
 import Group from 'components/parts/group';

@@ -1,3 +1,5 @@
+'use strict';
+
 import React, {Component} from 'react';
 import throttle from 'lodash/throttle';
 import classnames from 'classnames';
