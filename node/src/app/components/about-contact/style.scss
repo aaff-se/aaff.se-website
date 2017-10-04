@@ -39,6 +39,11 @@ main#page-about-contact {
 			width: col-width(6,12);
 			
 			margin-bottom: 0;
+
+			@media all and (orientation:landscape) and (min-width: $sm) {
+				margin-bottom: .75em;
+				width: col-width(5,12);
+			}
 			@media all and (min-width: $m) {
 				margin-bottom: .75em;
 				margin-left: col-width(1,12);
@@ -52,6 +57,11 @@ main#page-about-contact {
 		.item.text.half.last {
 			width: col-width(12,12);
 			margin-top: 0;
+			@media all and (orientation:landscape) and (min-width: $sm) {
+				margin-top: .75em;
+				margin-left: 0;
+				width: col-width(5,12);
+			}
 			@media all and (min-width: $m) {
 				margin-top: .75em;
 				margin-left: 0;

@@ -10,7 +10,7 @@ footer {
 
 	@media all and (min-width: $s) {
 	}
-	@media all and (orientation:landscape) {
+	@media all and (orientation:landscape) and (min-width: $sm) {
 		margin-bottom: 1.5em;
 	}
 	@media all and (min-width: $m) {
@@ -24,7 +24,7 @@ footer div.item.title {
 	width: col-width(12,12);
 	text-align: center;
 	
-	@media all and (orientation:landscape) {
+	@media all and (orientation:landscape) and (min-width: $sm) {
 		width: col-width(8,12);
 		text-align: left;
 	}
@@ -39,7 +39,7 @@ footer div.item.info {
 	width: col-width(12,12);
 	text-align: center;
 	
-	@media all and (orientation:landscape) {
+	@media all and (orientation:landscape) and (min-width: $sm) {
 		width: col-width(4,12);
 		text-align: left;
 	}

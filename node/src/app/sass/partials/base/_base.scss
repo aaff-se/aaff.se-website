@@ -43,10 +43,17 @@ body {
 		font-size: $font_size_s_vw;
 	}
 	
+	@media all and (orientation:landscape) and (min-width: $sm) {
+		font-size: $font_size_m;
+		font-size: $font_size_m_vw;
+	}
 	@media all and (min-width: $m1extra) {
 		font-size: $font_size_m;
 		font-size: $font_size_m_vw;
-
+	}
+	@media all and (min-width: $xm) {
+		font-size: $font_size_xm;
+		font-size: $font_size_xm_vw;
 	}
 	@media all and (min-width: $l) {
 		font-size: $font_size_l;
