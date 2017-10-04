@@ -34,8 +34,8 @@ body {
 	overflow-x: hidden;
 	
 	@include transition(
-		color $transition_time linear,
-		background $transition_time linear
+		color $transition_time*1.5 $transition_time*3 linear,
+		background $transition_time*1.5 $transition_time*3 linear
 	);
 
 	@media all and (min-width: $s) {
@@ -62,6 +62,11 @@ body {
 	@media all and (min-width: $xl) {
 		font-size: $font_size_xl;
 		font-size: $font_size_xl_vw;
+	}
+	
+	&.inv {
+		background: $color_background_inv;
+		color: $color_body_dark_inv;
 	}
 	
 	&.the404 {

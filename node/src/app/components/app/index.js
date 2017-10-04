@@ -50,8 +50,12 @@ class App extends Component {
 	
 	onChangeStore(state) {
 		this.setState(state);
+		
+		//also set body classes here, we shouldn't really - but let's do it anyway!
 		if(state.statusCode === 404) {
-			document.body.className = 'the404 loaded';
+			document.body.className = 'loaded the404';
+		} else if(state.currentPage === 'about-contact') {
+			document.body.className = 'loaded inv';
 		} else {
 			document.body.className = 'loaded';
 		}

@@ -25,7 +25,7 @@ class PageContainer extends Component {
 	
 	maybeSetBodyOverflowScroll() {
 		if(document.documentElement.scrollHeight > document.documentElement.clientHeight) {
-			document.getElementsByTagName("body")[0].style.overflowY = 'scroll';
+			document.body.style.overflowY = 'scroll';
 		}
 	}
 	
@@ -70,7 +70,7 @@ class PageContainer extends Component {
 	
 	componentDidEnter() {
 		this.setTransitionClass('visible');
-		document.getElementsByTagName("body")[0].style.overflowY = '';
+		document.body.style.overflowY = '';
 
 	}
 	

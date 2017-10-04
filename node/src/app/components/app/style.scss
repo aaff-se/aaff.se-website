@@ -51,6 +51,7 @@ main {
 body.loading:after {
 	@include opacity(1);
 }
+body.inv.loading:after,
 body.the404.loading:after {
 	@include opacity(0.1);
 }
