@@ -128,7 +128,14 @@ class Image extends Component {
 			
 			let i = 0;
 			let set = false;
-			let multiple = this.isRetina ? 2 : 1; 
+			let multiple = 1;
+			if(window.devicePixelRatio)
+				multiple = window.devicePixelRatio
+			else 
+				multiple = this.isRetina ? 2 : 1;
+			
+			console.log(multiple);
+			console.log(window.devicePixelRatio);
 			
 			while(i < image.data.length) {
 				
