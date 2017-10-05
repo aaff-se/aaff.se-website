@@ -13,16 +13,17 @@ import App from 'components/app';
 
 let router = express.Router();
 let stats = JSON.parse(fs.readFileSync(__dirname + '/stats.json', 'utf8'));
-let bodyClass = '';
+
 
 function renderApp(req, res) {
 	bootstrapper(`${req.protocol}://${req.hostname}${req.originalUrl}`, process.env.API_URL, process.env.API_URL)
 	.then((state) => {
 		const appString = ReactDOMServer.renderToString(<App state={state} />);
 		const head = Helmet.rewind();
-		if(state.statusCode === 404 ) bodyClass = 'the404';
-		if(state.currentPage === 'about-contact' ) bodyClass = 'inv';
-		
+		let bodyClass = '';
+		if(state.statusCode === 404 ){ bodyClass = 'the404'; }
+		if(state.currentPage === 'about-contact' ){ bodyClass = 'inv'; }
+		console.log('the body class: ' + bodyClass);
 		res 
 		//.header('Link', '</' + stats.app[0] + '>; rel=preload; as=script')
 		.render('app', {
@@ -34,7 +35,7 @@ function renderApp(req, res) {
 			bodyClass: bodyClass,
 			jsFile: stats.app[0],
 			cssFile: stats.app[1],
-			cache: JSON.stringify(cacheLayer.getAll())
+			cache: JSON.stringify(cacheLayer.getAll()),
 		});
 		
 		
