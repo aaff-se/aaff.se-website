@@ -7,6 +7,7 @@ import ReactDOMServer from 'react-dom/server';
 import Helmet from 'react-helmet';
 import cacheLayer from 'lib/cache-layer';
 
+import window from 'adaptors/window';
 import log from 'lib/log';
 import bootstrapper from './bootstrapper';
 import App from 'components/app';
@@ -36,6 +37,7 @@ function renderApp(req, res) {
 			jsFile: stats.app[0],
 			cssFile: stats.app[1],
 			cache: JSON.stringify(cacheLayer.getAll()),
+			dev: window.env.verbose
 		});
 		
 		

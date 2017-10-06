@@ -14,7 +14,7 @@ Design & Build by Anton Andersson Form & Funktioner / aaff.se / 2016
 		<%= title %>
 
 		<script type="text/javascript">
-			if("serviceWorker" in navigator) {
+			if("serviceWorker" in navigator && !<%= dev %>) {
 				navigator.serviceWorker.register('/sw.js');
 			}
 		</script>
