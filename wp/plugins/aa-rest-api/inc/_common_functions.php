@@ -154,6 +154,8 @@ function aa_prepare_work_rows($content){
 			
 		}
 		
+		$this_row['full'] = ($row['full'] ? true : false);
+		
 		$return[] = $this_row;
 		
 	}

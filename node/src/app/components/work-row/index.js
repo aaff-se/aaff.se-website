@@ -37,9 +37,9 @@ class WorkRow extends Component {
 	
 	render() {
 		const { data } = this.props;
-		
-		return <Section>
-				{this.itemContent(data)}
+		const className = (data.full ? 'full':'');
+		return <Section className={className}>
+			{this.itemContent(data)}
 		</Section>
 	}
 	

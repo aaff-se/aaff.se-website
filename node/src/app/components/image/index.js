@@ -145,10 +145,10 @@ class Image extends Component {
 					
 					this.setState({ 
 						currentWidth: thisImageData.width
-					 });
-					 newSrc = thisImageData.src;
-					 set = true;
-					 break;
+					});
+					newSrc = thisImageData.src;
+					set = true;
+					break;
 				}
 				i++;
 				thisImageData = null;
@@ -166,19 +166,10 @@ class Image extends Component {
 		}
 		
 		if(newSrc) {
-//			this.imgObj = new window.Image();
-//			this.imgObj.onload = this.onImageLoad;
-//			this.imgObj.onerror = this.onImageLoad;
-//			this.imgObj.src = newSrc;
-
-
-
-// try to handle the imgs straight in the browser with progressive jpgs instead 
-			this.setState({ 
-				src: newSrc,
-				loaded: true
-			});
-
+			this.imgObj = new window.Image();
+			this.imgObj.onload = this.onImageLoad;
+			this.imgObj.onerror = this.onImageLoad;
+			this.imgObj.src = newSrc;
 			
 			//the biggest image have been loaded, remove all listeners and cancel future functions
 			if(newSrc === image.data[(image.data.length-1)].src) {
@@ -219,8 +210,6 @@ class Image extends Component {
 		const state = this.state;
 		const classes = classnames( 'image', {'loaded': state.loaded && state.visible }, className);
 		const src = (state.src ? state.src : this.placeholderSrc);
-		//const src = (state.loaded && state.visible ? state.src : image.base64);
-		//const styles = {backgroundColor: (image.color ? image.color : '#ffffff')};
 		const styles = {backgroundImage: 'url(' + image.inlined + ')' };
 		return <div className={classes} style={styles}>
 			<img src={src} width={image.width} height={image.height} alt={image.alt || ''} />

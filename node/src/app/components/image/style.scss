@@ -34,6 +34,12 @@ div.image
 		-webkit-backface-visibility: hidden;
 		image-rendering: auto;
 		-ms-interpolation-mode: bicubic;
+		
+		@include opacity(0);
+		@include transition(opacity $transition_time $ease_out);
 	}
+	
+	&.loaded img {
 
+	}
 }

@@ -40,6 +40,7 @@ function aa_work_row_function($i=false, $row=false){
 				'text' => '',
 				'media_id_1' => '',
 				'media_id_2' => '',
+				'full' => false
 			)
 		);
 	}
@@ -53,10 +54,13 @@ function aa_work_row_function($i=false, $row=false){
 	
 		$html .= '<div class="typewrap">'; 
 		
-			$html .= '<select class="type" name="rows['.$i.'][content][type]" data-name="[content][type]">';
+			$html .= '<p><select class="type" name="rows['.$i.'][content][type]" data-name="[content][type]">';
 				$html .= '<option' . ( !$row['content']['type'] || ($row['content']['type'] == 'text') ? ' selected="selected"':'') . ' value="text">Text</option>';
 				$html .= '<option' . ($row['content']['type'] == 'media' ? ' selected="selected"':'') . ' value="media">Image</option>';
-			$html .= '</select>';
+			$html .= '</select></p>';
+
+			$html .= '<p><input class="type" type="checkbox" name="rows['.$i.'][content][full]" data-name="[content][full]"'.($row['content']['full'] ? ' checked="checked"':'').'> Full width</p>';
+
 			
 		$html .= '</div>';
 		
