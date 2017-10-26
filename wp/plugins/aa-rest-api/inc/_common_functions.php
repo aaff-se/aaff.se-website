@@ -49,7 +49,7 @@ function aa_get_image_data($id){
 		$temp_image = wp_get_attachment_image_src($id, $image_size);
 		//check if resized - or if it is the last one - if so we want the full image if needed
 		if($temp_image)
-			if($temp_image[3] || ($image_size === 'xxl'))
+			if($temp_image[3])
 				$all_images[] = array(
 					'src' => $temp_image[0],
 					'width' => $temp_image[1]

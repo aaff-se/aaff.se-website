@@ -1,7 +1,7 @@
 <?php 
 
 function aa_jpeg_quality_function( $quality, $context ) {
-	return 95;
+	return 98;
 }
 add_filter( 'jpeg_quality', 'aa_jpeg_quality_function', 10, 2 );
 
