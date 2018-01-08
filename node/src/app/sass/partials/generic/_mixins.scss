@@ -51,6 +51,11 @@
 	-o-transform: $args;
 	transform: $args;
 }
+@mixin filter($args...) {
+	-webkit-filter: $args;
+	filter: $args;
+}
+
 @mixin transform-origin($args...) {
 	-webkit-transform-origin: $args;
 	-moz-transform-origin: $args;

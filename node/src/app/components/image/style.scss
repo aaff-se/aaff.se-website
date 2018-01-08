@@ -1,7 +1,6 @@
 div.image
 {	
 	@include transform( translateZ(0) );
-	
 	overflow: hidden;
 	background-size: 100%;
 	image-rendering: pixelated;
@@ -39,7 +38,7 @@ div.image
 		@include transition(opacity $transition_time $ease_out);
 	}
 	
-	&.loaded img {
+	&.loaded {
 
 	}
 }
