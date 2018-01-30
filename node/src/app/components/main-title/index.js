@@ -95,8 +95,8 @@ class MainTitle extends Component {
 	}
 	
 	componentDidLeave() {
-		//gone!
-		this.setTransitionClassHidden();
+		//gone! we cant set a class to something that doesn't exist, DUH
+		//this.setTransitionClassHidden();
 	}
 
 	componentDidMount() {

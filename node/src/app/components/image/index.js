@@ -19,7 +19,8 @@ class Image extends Component {
 			visible: false,
 			imageWidth: null,
 			currentWidth: 0,
-			src: null
+			src: null,
+			showInlined: true
 		};
 		this.isRetina = isRetina();
 		this.onImageLoad = this.onImageLoad.bind(this);
@@ -28,6 +29,8 @@ class Image extends Component {
 		this.handleResizeFunc = this.handleResizeFunc.bind(this);
 		this.handleScroll = throttle(this.handleScroll.bind(this), 200);
 		this.imgLoadTimeout=null;
+		this.showInlinedImg
+		this.afterImgLoadTimeout=null;
 		this.imgObj = null;
 		this.placeholderSrc = "data:image/svg+xml;charset=utf-8,%3Csvg xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg' viewBox%3D'0 0 " + props.image.width + " "+ props.image.height +"'%2F%3E";
 		this.node = null;
@@ -58,8 +61,14 @@ class Image extends Component {
 			this.imgObj.onload = null;
 			delete this.imgObj;
 		}
-		if(this.imgLoadTimeout)
+		if(this.imgLoadTimeout) {
 			clearTimeout(this.imgLoadTimeout);
+			console.log('clearTimeout this.imgLoadTimeout');
+		}
+		if(this.afterImgLoadTimeout) {
+			clearTimeout(this.afterImgLoadTimeout);
+			console.log('clearTimeout this.afterImgLoadTimeout');
+		}
 	}
 
 	handleScroll() {
@@ -186,10 +195,19 @@ class Image extends Component {
 	}
 	
 	onImageLoad() {
+		if(!this.state.loaded)
+			this.afterImgLoadTimeout=setTimeout(()=>{
+				this.setState({ 
+					showInlined: false
+				});
+				console.log('afterImgLoadTimeout');
+			},200);
 		this.setState({ 
 			src: this.imgObj.src,
 			loaded: true
 		});
+		
+		
 		delete this.imgObj;
 	}
 	
@@ -210,7 +228,7 @@ class Image extends Component {
 		const state = this.state;
 		const classes = classnames( 'image', {'loaded': state.loaded && state.visible }, className);
 		const src = (state.src ? state.src : this.placeholderSrc);
-		const styles = {backgroundImage: 'url(' + image.inlined + ')' };
+		const styles = state.showInlined ? {backgroundColor: 'transparent', backgroundImage: 'url(' + image.inlined + ')' } : {};
 		return <div className={classes} style={styles}>
 			<img src={src} width={image.width} height={image.height} alt={image.alt || ''} />
 			<noscript dangerouslySetInnerHTML={this.noscriptImageHTML()} />
