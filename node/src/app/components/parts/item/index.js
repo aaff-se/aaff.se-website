@@ -1,20 +1,16 @@
 'use strict';
 
-import React, {Component} from 'react';
+import React from 'react';
 import classnames from 'classnames';
 
-class Item extends Component {
+const Item = (props) => {
 
-	constructor(props) {
-		super(props);
-	}
-	
-	render() {
-		const { children, id, className, style, html } = this.props;
-		const classes = classnames('item', className);
-			return <div style={style || {} } id={id || ''} className={classes}>{children}</div>
-	}
-	
+  const { children, id, className, style, html } = props;
+  const classes = classnames('item', className);
+
+  return <div style={style || {} } id={id || ''} className={classes}>{children}</div>
+
+
 }
 Item.defaultProps = {};
 

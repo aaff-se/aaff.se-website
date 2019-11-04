@@ -1,4 +1,4 @@
-import "babel-polyfill";
+import "@babel/polyfill";
 
 import {EventEmitter} from 'events';
 import filter from 'lodash/filter';

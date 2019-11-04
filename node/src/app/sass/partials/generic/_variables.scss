@@ -13,7 +13,7 @@ $color_white: #fff;
 $color_black: #000;
 
 //sort out landscape / portrait on mobile with orientation check
-$s: 400px; //larger / newer mobile - bigger font 
+$s: 400px; //larger / newer mobile - bigger font
 $sm: 470px; //used for checking if mobile is in landscape, but  still not as big as $m
 $m: 768px; // break to portrait tablet - 1 col, header  and logo to the right
 $m1extra: 769px; // used to keep font size change on portrait tablet
@@ -22,23 +22,23 @@ $l: 1280px; // landscape tablet / wider desktop - for font size
 $xl: 2048px; // max size - bigger font size
 $inner-max: 1910px;
 
-$font_size_xs: 12px;
-$font_size_xs_vw: 3.5vw; 
+$font_size_xs: 14px;
+$font_size_xs_vw: 4vw;
 
 $font_size_s: 14px;
-$font_size_s_vw: 3.5vw; 
+$font_size_s_vw: 3.5vw;
 
 $font_size_m: 18px;
-$font_size_m_vw: 2.25vw; 
+$font_size_m_vw: 2.25vw;
 
 $font_size_xm: 20px;
-$font_size_xm_vw: 2vw; 
+$font_size_xm_vw: 2vw;
 
 $font_size_l: 24px;
-$font_size_l_vw: 1.75vw; 
+$font_size_l_vw: 1.75vw;
 
 $font_size_xl: 32px;
-$font_size_xl_vw: 1.75vw; 
+$font_size_xl_vw: 1.75vw;
 
 $calc_font_size: calc( 16px + (24 - 16) * (100vw - 400px) / (1910 - 400) );
 

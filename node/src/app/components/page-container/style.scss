@@ -1,39 +1,47 @@
 .page-container {
+	@include opacity(1);
+	@include transform( translate3d(0,0,0) );
+	@include transition(
+		transform 0 linear,
+		opacity 0 linear
+	);
+	display: block;
+	position: relative;
+	z-index: 10;
+}
+
+.page-container.transition-enter {
+	@include opacity(0);
+	@include transform( translate3d(1em,0,0) );
+}
+
+.page-container.transition-enter-active {
+	@include opacity(1);
+	@include transform( translate3d(0,0,0) );
+	@include transition(
+		transform $transition_time*4 $transition_time*0 $easing,
+		opacity $transition_time*2 $transition_time*0 $ease_out
+	);
+}
+.page-container.transition-enter-done {
+	@include transition(
+		transform $transition_time*4 $transition_time*0 $easing,
+		opacity $transition_time*2 $transition_time*0 $ease_out
+	);
+}
+
+.page-container.transition-exit {
 	width: 100%;
 	float: left;
 	display: block;
 	position: absolute;
-	z-index: 100;
+	z-index: 5;
 	top:0;
 	left:0;
 	@include opacity(0);
-	@include transform( translate3d(1em,0,0) );
-	@include transition(
-		transform $transition_time*6 $easing,
-		opacity $transition_time*2 $ease_in
-	);
-}
-
-.page-container.hidden {
-	display: none;
-}
-
-.page-container.visible {
-	@include opacity(1);
-	@include transform( translate3d(0,0,0) );
-	@include transition(
-		transform $transition_time*6 $easing,
-		opacity $transition_time*2 $ease_in
-	);
-
-
-}
-
-.page-container.visible.fade-out {
-	@include opacity(0);
 	@include transform( translate3d(-1em,0,0) );
 	@include transition(
-		transform $transition_time*6 $easing,
-		opacity $transition_time*2 $ease_out
+		transform $transition_time*2 $transition_time*0 $easing,
+		opacity $transition_time*2 $transition_time*0 $ease_in
 	);
 }

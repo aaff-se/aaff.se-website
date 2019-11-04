@@ -1,22 +1,22 @@
-div.main-title {
-	
+ div.main-title {
+
 	float: left;
 	display: block;
 	position: relative;
 	padding: .5em 1em;
 	width: auto;
 	text-align: left;
-	
+
 	margin-top: 5.5em;
-	
-	@include opacity(0);
+
+	@include opacity(1);
 	@include transition(
-		transform $transition_time*6 $easing,
-		opacity $transition_time*2 $ease_in
+		transform $transition_time*3 $easing,
+		opacity $transition_time*1 $ease_in
 	);
 
 	@include transform(
-		translate3d(1em,0,0)
+		translate3d(0,0,0)
 	);
 
 	@media all and (orientation:landscape) and (min-width: 470px) {
@@ -29,7 +29,7 @@ div.main-title {
 		text-align: left;
 		background: none;
 	}
-	
+
 	@media all and (min-width: $m) {
 		margin-top: 0;
 		position: fixed;
@@ -40,7 +40,7 @@ div.main-title {
 		text-align: left;
 		background: none;
 	}
-		
+
 	h2 {
 		text-transform: uppercase;
 	}
@@ -52,32 +52,46 @@ div.main-title {
 	}
 }
 
+
 div.main-title.hidden {
 	display: none;
 }
 
-div.main-title.visible {
+
+div.main-title.transition-enter {
+	@include opacity(0);
+	@include transition(
+		transform 0 linear,
+		opacity 0 linear
+	);
+	@include transform(
+		translate3d(1em,0,0)
+	);
+}
+
+div.main-title.transition-enter-active {
 	@include opacity(1);
 	@include transition(
-		transform $transition_time*6 $easing,
-		opacity $transition_time*2 $ease_in
+		transform $transition_time*3 $transition_time*1 $easing,
+		opacity $transition_time*1 $transition_time*1 $ease_in
 	);
 	@include transform(
 		translate3d(0,0,0)
 	);
 }
 
-div.main-title.visible.fade-out {
+div.main-title.transition-exit {
 	@include opacity(0);
 	@include transition(
-		transform $transition_time*6 $easing,
-		opacity $transition_time*2 $ease_out
+		transform $transition_time*2 $easing,
+		opacity $transition_time*1 $ease_out
 	);
 	@include transform(
 		translate3d(-1em,0,0)
 	);
 }
 
+/*
 div.main-title {
 	display: none;
 	@media all and (orientation:landscape) and (min-width: 470px) {
@@ -87,6 +101,7 @@ div.main-title {
 		display: block;
 	}
 }
+*/
 
 div.page-container div.main-title {
 	display: block;

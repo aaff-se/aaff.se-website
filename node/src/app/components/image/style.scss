@@ -1,11 +1,11 @@
 div.image
-{	
+{
 	@include transform( translateZ(0) );
 	overflow: hidden;
 	background-size: 100%;
 	image-rendering: pixelated;
 	-ms-interpolation-mode: nearest-neighbor;
-	
+
 	&.main {
 		display: none;
 	}
@@ -18,7 +18,7 @@ div.image
 			display: none;
 		}
 	}
-	
+
 	@media all and (min-width: $m) {
 		&.main {
 			display: block;
@@ -33,11 +33,11 @@ div.image
 		-webkit-backface-visibility: hidden;
 		image-rendering: auto;
 		-ms-interpolation-mode: bicubic;
-		
+
 		@include opacity(0);
 		@include transition(opacity $transition_time $ease_out);
 	}
-	
+
 	&.loaded {
 
 	}

@@ -1,5 +1,5 @@
 main#page-work {
-	
+
 	//margin-top: 5.5em;
 
 	@media all and (orientation:landscape) and (min-width: $sm) {
@@ -8,28 +8,28 @@ main#page-work {
 	@media all and (min-width: $m) {
 		margin-top: 4em;
 	}
-	
+
 	section {
-		
+
 		margin: 0;
-		
+
 		@media all and (orientation:landscape) and (min-width: $sm) {
 			margin: 1em 0;
 		}
-		
+
 		@media all and (min-width: $m) {
 			margin: 1em 0;
 		}
-		
+
 		.item {
-		
+
 			&.text {
-				
+
 				padding: 0;
 				@media all and (min-width: $s) {
 					padding: 0 1em;
 				}
-				
+
 				@media all and (orientation:landscape) and (min-width: $sm) {
 					padding: 0 2em;
 				}

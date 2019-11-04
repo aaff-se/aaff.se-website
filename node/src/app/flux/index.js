@@ -4,7 +4,6 @@ import some from 'lodash/some';
 import mapValues from 'lodash/mapValues';
 import camelCase from 'lodash/camelCase';
 
-import {Modernizr} from 'adaptors/env';
 import Track from 'adaptors/track';
 import window from 'adaptors/window';
 
@@ -46,18 +45,18 @@ const Flux = Object.assign(
 			};
 			Flux.navigate(vurl.original, false, false, true, true);
 		},
-		
+
 		navigate(urlString, history, ignoreUrl, replaceState, force) {
-		
+
 			const vurl = virtualUrl(urlString);
 			const path = vurl.pathname + vurl.search;
 			let route = find(Routes, route => {
 				return some(route.patterns, pattern => RoutePattern.fromString(pattern).matches(path));
 			});
-			
+
 			let namedParams = [];
 			let params = [];
-			
+
 			if (!route) {
 				route = Routes.notfound;
 			} else {
@@ -67,14 +66,14 @@ const Flux = Object.assign(
 				namedParams = paramsResult ? paramsResult.namedParams : [];
 			}
 			applyRoute(route.id, namedParams, getHash(vurl), route.data.apply(null, params), route.statusCode);
-			
+
 			if (!ignoreUrl) {
 				setUrl(urlString, replaceState);
 			}
 			if (!history) {
 				//window.scrollTo(0, 0);
 			}
-			
+
 /*
 			switch(route.id) {
 				case 'blog':
@@ -88,7 +87,7 @@ const Flux = Object.assign(
 			Track('set', 'page', path);
 			Track('send', 'pageview');
 		}
-		
+
 /*
 		override(url) {
 			return (e) => {
@@ -96,7 +95,7 @@ const Flux = Object.assign(
 				Flux.navigate(url);
 			};
 		},
-		
+
 		overrideNoScroll(url) {
 			return (e) => {
 				e.preventDefault();

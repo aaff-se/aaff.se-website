@@ -1,243 +1,221 @@
 'use strict';
+import React, { useState, useEffect, useRef } from 'react';
 
-import React, {Component} from 'react';
-import ReactDOM from 'react-dom';
 import debounce from'lodash/debounce';
 import throttle from'lodash/throttle';
 import classnames from 'classnames';
+import window from 'adaptors/window';
 
 import isRetina from 'lib/isretina';
 import inViewport from 'lib/inviewport';
 import event from 'lib/event';
 
-class Image extends Component {
-	
-	constructor(props) {
-		super(props);
-		this.state = {
-			loaded: false,
-			visible: false,
-			imageWidth: null,
-			currentWidth: 0,
-			src: null,
-			showInlined: true
-		};
-		this.isRetina = isRetina();
-		this.onImageLoad = this.onImageLoad.bind(this);
-		this.largestWindowWidth = 0;
-		this.handleResize = debounce(this.handleResize.bind(this), 200);
-		this.handleResizeFunc = this.handleResizeFunc.bind(this);
-		this.handleScroll = throttle(this.handleScroll.bind(this), 200);
-		this.imgLoadTimeout=null;
-		this.showInlinedImg
-		this.afterImgLoadTimeout=null;
-		this.imgObj = null;
-		this.placeholderSrc = "data:image/svg+xml;charset=utf-8,%3Csvg xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg' viewBox%3D'0 0 " + props.image.width + " "+ props.image.height +"'%2F%3E";
-		this.node = null;
-		this.eventNode = null;
-	}
-	
-	componentDidMount() {
-		event.add(window, 'resize', this.handleResize);
-		event.add(window, 'scroll', this.handleScroll);
-		
-		this.imgLoadTimeout=setTimeout(()=>{
-			this.handleResizeFunc();
-			console.log('timeoutFunc');
-		},350);
-	}
-	
-	componentWillUnmount() {
-		if (this.handleResize.cancel) {
-			this.handleResize.cancel();
-		}
-		if (this.handleScroll.cancel) {
-			this.handleScroll.cancel();
-		}
-		event.remove(window, 'resize', this.handleResize);
-		event.remove(window, 'scroll', this.handleScroll);
 
-		if(this.imgObj) {
-			this.imgObj.onload = null;
-			delete this.imgObj;
-		}
-		if(this.imgLoadTimeout) {
-			clearTimeout(this.imgLoadTimeout);
-			console.log('clearTimeout this.imgLoadTimeout');
-		}
-		if(this.afterImgLoadTimeout) {
-			clearTimeout(this.afterImgLoadTimeout);
-			console.log('clearTimeout this.afterImgLoadTimeout');
-		}
-	}
+const Image = (props) => {
 
-	handleScroll() {
-		if(!this.node)
-			this.node = ReactDOM.findDOMNode(this);
-		if (inViewport(this.node, undefined, 0)) {
-			this.setState({ visible: true });
-			//image have come in view, remove scroll listeners as we only need to check resizes from now on
-			if (this.handleScroll.cancel) {
-				this.handleScroll.cancel();
-			}
-			event.remove(window, 'scroll', this.handleScroll);
-			
-			//have we loaded the image and stored all the vars yet? maybe not if we come from a transition
-			if(!this.state.imageWidth) {
-				this.handleResize();
-				
-			} else {
-				this.loadImage();
-			}
-		}
-	}
-	handleResize(){
-		this.handleResizeFunc();
-	}
-	handleResizeFunc() {
-		let windowWidth = document.documentElement.clientWidth;
+  const {image, className} = props;
 
-		//only do calc if we haven't done it for this size already - or if we couldn't get any proper data
-		if(this.largestWindowWidth < windowWidth || !this.state.imageWidth ) {
-			
-			this.largestWindowWidth = windowWidth;
-			
-			let size = getComputedStyle(ReactDOM.findDOMNode(this)).width;
-			size = Math.round(size.replace('px',''));
-			
-			this.setState({
-				imageWidth: size
-			});
-			
-			//is it visible already? then see if it needs reloading
-			if(this.state.visible) {
-				this.loadImage();
-				return;
-			}
-				
-		}
-		
-		if(this.state.visible && !this.state.loaded) {
-			this.loadImage();
-			return;
-		}
-		
-		//is it hidden? then check if it is in view now
-		if(!this.state.visible) {
-			this.handleScroll();
-		}
-	}
-	
-	loadImage(){
-		const {image} = this.props;
-		const state = this.state;
-		let newSrc = false;
-		//if the srcs exists, we have a width, and dont already use the biggest one:
-		if(image.data.length && state.imageWidth && (image.data[(image.data.length-1)].width !== state.currentWidth) ) {
-			
-			let i = 0;
-			let set = false;
-			let multiple = 1;
-			if(window.devicePixelRatio)
-				multiple = window.devicePixelRatio
-			else 
-				multiple = this.isRetina ? 2 : 1;
-			
-			console.log(multiple);
-			console.log(window.devicePixelRatio);
-			
-			while(i < image.data.length) {
-				
-				let thisImageData = image.data[i];
-				
-				if( (thisImageData.width / multiple) >= state.imageWidth && state.imageWidth > state.currentWidth ) {
-					
-					this.setState({ 
-						currentWidth: thisImageData.width
-					});
-					newSrc = thisImageData.src;
-					set = true;
-					break;
-				}
-				i++;
-				thisImageData = null;
-			}
-			
-			//we dont have an image big enough, 
-			if(!set && state.currentWidth === 0) {
-				
-				let lastImage = image.data[(image.data.length-1)];
-				this.setState({ 
-					currentWidth: lastImage.width
-				 });
-				 newSrc = lastImage.src;
-			}
-		}
-		
-		if(newSrc) {
-			this.imgObj = new window.Image();
-			this.imgObj.onload = this.onImageLoad;
-			this.imgObj.onerror = this.onImageLoad;
-			this.imgObj.src = newSrc;
-			
-			//the biggest image have been loaded, remove all listeners and cancel future functions
-			if(newSrc === image.data[(image.data.length-1)].src) {
-				event.remove(window, 'resize', this.handleResize);
-				event.remove(window, 'scroll', this.handleScroll);
-				if (this.handleResize.cancel) {
-					this.handleResize.cancel();
-				}
-				if (this.handleScroll.cancel) {
-					this.handleScroll.cancel();
-				}
-			}
-		}	
-	}
-	
-	onImageLoad() {
-		if(!this.state.loaded)
-			this.afterImgLoadTimeout=setTimeout(()=>{
-				this.setState({ 
-					showInlined: false
-				});
-				console.log('afterImgLoadTimeout');
-			},200);
-		this.setState({ 
-			src: this.imgObj.src,
-			loaded: true
-		});
-		
-		
-		delete this.imgObj;
-	}
-	
-	noscriptImageHTML(){
-		const {image, className} = this.props;
-		if(!image.data.length) return {__html: ''};
-		
-		let middleImageI = Math.floor(image.data.length/2);
-		if(middleImageI < 1) middleImageI = 1;
-		
-		const imageHtml = '<img class="noscript-img ' + className + '" src="' + image.data[middleImageI].src + '" width="' + image.width + '" height="' + image.height + '" alt="' + (image.alt ? image.alt : '') + '" />';
-		
-		return {__html: imageHtml};
-	}
-	
-	render() {
-		const {image, className} = this.props;
-		const state = this.state;
-		const classes = classnames( 'image', {'loaded': state.loaded && state.visible }, className);
-		const src = (state.src ? state.src : this.placeholderSrc);
-		const styles = state.showInlined ? {backgroundColor: 'transparent', backgroundImage: 'url(' + image.inlined + ')' } : {};
-		return <div className={classes} style={styles}>
-			<img src={src} width={image.width} height={image.height} alt={image.alt || ''} />
-			<noscript dangerouslySetInnerHTML={this.noscriptImageHTML()} />
-		</div>
-	}
+  const localIsRetina = isRetina();
+  const placeholderSrc = "data:image/svg+xml;charset=utf-8,%3Csvg xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg' viewBox%3D'0 0 " + props.image.width + " "+ props.image.height +"'%2F%3E";
+
+  const [currentWidth, setCurrentWidth] = useState(0);
+  const [imageWidth, setImageWidth] = useState(null);
+  const [inited, setInited] = useState(false);
+  const [largestWindowWidth, setLargestWindowWidth] = useState(0);
+  const [loaded, setLoaded] = useState(false);
+  const [showInlined, setShowInlined] = useState(true);
+  const [src, setSrc] = useState(placeholderSrc);
+  const [visible, setVisible] = useState(false);
+
+  const imgEl = useRef(null);
+
+  const classes = classnames( 'image', {'loaded': loaded && visible, 'loaded': loaded && visible }, className);
+  const styles = showInlined ? {backgroundColor: 'transparent', backgroundImage: 'url(' + image.inlined + ')' } : {};
+
+
+    let imgLoadTimeout=null;
+    let afterImgLoadTimeout=null;
+    let imgObj = null;
+
+  //run on mount/unmount
+  useEffect(() => {
+
+    if(!inited) {
+      event.add(window, 'resize', debounceResize);
+      event.add(window, 'scroll', throttleScroll);
+      setInited(true);
+    }
+
+    return () => {
+      if (debounceResize.cancel)
+        debounceResize.cancel();
+      if (throttleScroll.cancel)
+        throttleScroll.cancel();
+      event.remove(window, 'resize', debounceResize);
+      event.remove(window, 'scroll', throttleScroll);
+      if(imgObj) {
+        imgObj.onload = null;
+        imgObj.onerror = null;
+        imgObj = null;
+      }
+      if(imgLoadTimeout)
+        clearTimeout(imgLoadTimeout);
+      if(afterImgLoadTimeout)
+        clearTimeout(afterImgLoadTimeout);
+    };
+
+  },[]);
+
+  //run on updates
+  useEffect(() => {
+
+    if(!imageWidth)
+      handleResize();
+
+    //is it hidden? then check if it is in view now
+    if(!visible)
+      handleScroll();
+
+    //is it visible already? then see if it needs reloading
+    if(visible)
+      loadImage();
+
+  },[visible,loaded,imageWidth]);
+
+  const handleScroll = () => {
+    if (inViewport(imgEl.current, undefined, 0)) {
+      setVisible(true);
+
+      //image have come in view, remove scroll listeners as we only need to check resizes from now on
+      if (throttleScroll.cancel) {
+        throttleScroll.cancel();
+      }
+      event.remove(window, 'scroll', throttleScroll);
+    }
+
+  }
+  const throttleScroll = throttle(handleScroll, 200);
+
+  const handleResize = () => {
+    let windowWidth = document.documentElement.clientWidth;
+
+    //only do calc if we haven't done it for this size already - or if we couldn't get any proper data
+    if(largestWindowWidth < windowWidth || !imageWidth ) {
+
+      setLargestWindowWidth(windowWidth);
+      let size = getComputedStyle(imgEl.current).width;
+      size = Math.round(size.replace('px',''));
+
+      setImageWidth(size);
+    }
+  }
+  const debounceResize = debounce(handleResize, 200);
+
+  const loadImage = () => {
+    let newSrc = false;
+    let newWidth = false;
+    //if the srcs exists, we have a width, and dont already use the biggest one:
+    if(image.data.length && imageWidth && (image.data[(image.data.length-1)].width !== currentWidth) ) {
+
+      let i = 0;
+      let set = false;
+      let multiple = 1;
+      if(window.devicePixelRatio)
+        multiple = window.devicePixelRatio
+      else
+        multiple = localIsRetina ? 2 : 1;
+
+      while(i < image.data.length) {
+
+        let thisImageData = image.data[i];
+
+        if( (thisImageData.width / multiple) >= imageWidth && imageWidth > (currentWidth / multiple ) ) {
+
+          newSrc = thisImageData.src;
+          newWidth = thisImageData.width;
+          set = true;
+          break;
+        }
+        i++;
+        thisImageData = null;
+      }
+
+      //we dont have an image big enough,
+      if(!set && currentWidth === 0) {
+
+        let lastImage = image.data[(image.data.length-1)];
+        newSrc = lastImage.src;
+        newWidth = lastImage.width;
+      }
+    }
+
+    if(newSrc) {
+
+      //newSrc = newSrc.replace('https://cms.aaff.se/wp-content','');
+      imgObj = new window.Image();
+      imgObj.onload = onImageLoad;
+      imgObj.onerror = onImageError;
+      imgObj.width = newWidth;
+      imgObj.src = newSrc;
+
+    }
+  }
+
+  const onImageLoad = () => {
+
+    if(!loaded) {
+      afterImgLoadTimeout=setTimeout(function(){
+        setShowInlined(false);
+      },200);
+    }
+    setSrc(imgObj.src);
+    setCurrentWidth(imgObj.width);
+    setLoaded(true);
+
+    //the biggest image have been loaded, remove all listeners and cancel future functions
+    if(imgObj)
+      if(imgObj.src === image.data[(image.data.length-1)].src) {
+        event.remove(window, 'resize', debounceResize);
+        event.remove(window, 'scroll', throttleScroll);
+        if (debounceResize.cancel)
+          debounceResize.cancel();
+
+        if (throttleScroll.cancel)
+          throttleScroll.cancel();
+
+      }
+
+  }
+
+  const onImageError = () => {
+    //if we cant load it the first time, test it on a timeout, that we cancel if navigating away
+    if(imgLoadTimeout)
+      clearTimeout(imgLoadTimeout);
+    imgLoadTimeout = setTimeout(loadImage, 1000);
+  }
+
+  const noscriptImageHTML = () => {
+    if(!image.data.length) return {__html: ''};
+
+    let middleImageI = Math.floor(image.data.length/2);
+    if(middleImageI < 1) middleImageI = 1;
+
+    const imageHtml = '<img class="noscript-img' + (className ? ' ' + className:'') + '" src="' + image.data[middleImageI].src + '" width="' + image.width + '" height="' + image.height + '" alt="' + (image.alt ? image.alt : '') + '" />';
+
+    return {__html: imageHtml};
+  }
+
+
+  return (
+    <div className={classes} style={styles}>
+      <img ref={imgEl} src={src} width={image.width} height={image.height} alt={image.alt || ''} />
+      <noscript dangerouslySetInnerHTML={noscriptImageHTML()} />
+    </div>
+  );
 }
 
 Image.defaultProps = {
-	image: {}
+  image: {}
 };
 
 export default Image;

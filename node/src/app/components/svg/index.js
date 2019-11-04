@@ -1,27 +1,24 @@
 'use strict';
 
-import React, {Component} from 'react';
+import React from 'react';
 
-class SVG extends Component {
+const SVG = (props) => {
 
-	constructor(props) {
-		super(props);
-	}
-	
-	render() {
-		const { className, role, title, spritemapID, style, id } = this.props;
-		return <svg id={id || ''} 
-			className={className || ''}
-			role={role || 'img'}
-			title={title}
-			dangerouslySetInnerHTML={{
-			__html: `<title>${title}</title><use xlink:href='/spritemap.svg#${spritemapID}'/>`
-			}}
-			style={style}
-		/>;
-	}
-	
+  const { className, role, title, spritemapID, style, id } = props;
+
+  return (
+   <svg id={id || ''}
+      className={className || ''}
+      role={role || 'img'}
+      title={title}
+      dangerouslySetInnerHTML={{
+      __html: `<title>${title}</title><use xlink:href='/spritemap.svg#${spritemapID}'/>`
+      }}
+      style={style}
+    />
+  );
 };
+
 SVG.defaultProps = {};
 
 export default SVG;

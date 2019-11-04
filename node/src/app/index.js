@@ -10,7 +10,9 @@ import App from 'components/app';
 
 import Flux from 'app/flux';
 
+const rootEl = document.getElementById('root');
+
 window.env = env;
 Flux.init();
 
-ReactDOM.render(<App state={state} />, document.getElementById('root'));
+ReactDOM.hydrate(<App state={state} />, rootEl);

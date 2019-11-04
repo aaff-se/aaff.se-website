@@ -8,45 +8,45 @@ import Section from 'components/parts/section';
 import Item from 'components/parts/item';
 import Link from 'components/link';
 
-class WorkNext extends Component {
+const WorkNext = (props) => {
 
-	constructor(props) {
-		super(props);
-	}
+  const prevPostHtml = () => {
+    const { prevpost } = props;
+    if(!prevpost) return null;
+    return (
+      <Item className="prev-link">
+        <p>
+          <Link title={prevpost.title} href={prevpost.link}>{prevpost.text}</Link>
+        </p>
+      </Item>
+    );
+  }
 
-	prevPostHtml(){
-		const { prevpost } = this.props;
-		if(!prevpost) return null;
-		return <Item className="prev-link">
-				<p>
-					<Link title={prevpost.title} href={prevpost.link}>{prevpost.text}</Link>
-				</p>
-			</Item>
-	}
-	nextPostHtml(){
-		const { nextpost } = this.props;
-		return <Item className="next-link">
-				<p>
-					<Link title={nextpost.title} href={nextpost.link}>{nextpost.text}</Link>
-				</p>
-			</Item>
-	}
-	
-	render() {
-		return <Section className="next-prev-nav">
-			{this.nextPostHtml()}
-			{this.prevPostHtml()}
-		</Section>
-	}
-	
+  const nextPostHtml = () => {
+    const { nextpost } = props;
+    return (
+      <Item className="next-link">
+        <p>
+          <Link title={nextpost.title} href={nextpost.link}>{nextpost.text}</Link>
+        </p>
+      </Item>
+    );
+  }
+
+  return(
+    <Section className="next-prev-nav">
+      {nextPostHtml()}
+      {prevPostHtml()}
+    </Section>
+  );
 }
 WorkNext.defaultProps = {
-	prevpost: false,
-	nextpost: {
-		link: '/about-contact/#archive',
-		title: 'Project Archive',
-		text: 'Project Archive'
-	}
+  prevpost: false,
+  nextpost: {
+    link: '/about-contact/#archive',
+    title: 'Project Archive',
+    text: 'Project Archive'
+  }
 };
 
 export default WorkNext;

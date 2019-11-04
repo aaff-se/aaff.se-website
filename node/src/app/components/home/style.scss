@@ -7,23 +7,23 @@ main#page-home {
 	@media all and (min-width: $m) {
 		margin-top: 3em;
 	}
-	
+
 	section {
-		
+
 		padding: 1em 0;
-		
+
 		@media all and (orientation:landscape) and (min-width: $sm) {
 			padding: 3em 0;
 		}
-		
+
 		@media all and (min-width: $m) {
 			padding: 3em 0;
 		}
-		
+
 		.item {
 			margin:0;
 		}
-		
+
 /*
 		.item.image-wrapper {
 			.image {
@@ -39,7 +39,7 @@ main#page-home {
 			}
 		}
 */
-		
+
 		.title {
 			position: absolute;
 			top: 1.5em;
@@ -55,10 +55,10 @@ main#page-home {
 			@include opacity(0);
 
 			@include transition(
-				transform $transition_time*6 $easing,
-				opacity $transition_time*2 $ease-out
+				transform $transition_time*3 $easing,
+				opacity $transition_time*1 $ease-out
 			);
-			
+
 			@media all and (orientation:landscape) and (min-width: $sm) {
 				@include transform(
 					translate3d(-5em,0,0)
@@ -69,7 +69,7 @@ main#page-home {
 					translate3d(-5em,0,0)
 				);
 			}
-			
+
 			h2 {
 				text-transform: uppercase;
 			}
@@ -77,20 +77,20 @@ main#page-home {
 				text-transform: lowercase;
 			}
 		}
-		
+
 		a:hover {
-			
-			
+
+
 			.title {
 				@include opacity(1);
 
 				@include transform(
 					translate3d(-1em,0,0)
 				);
-				
+
 				@include transition(
-					transform $transition_time*6 $easing,
-					opacity $transition_time*2 $ease-in
+					transform $transition_time*3 $easing,
+					opacity $transition_time*1 $ease-in
 				);
 
 				@media all and (orientation:landscape) and (min-width: $sm) {
@@ -98,7 +98,7 @@ main#page-home {
 						translate3d(-4em,0,0)
 					);
 				}
-				
+
 				@media all and (min-width: $m) {
 					@include transform(
 						translate3d(-4em,0,0)
@@ -130,9 +130,9 @@ main#page-home section.current {
 
 
 html.touchevents {
-	
+
 	main#page-home section.current {
-		
+
 /*
 		.item.image-wrapper {
 			.image.loaded {
@@ -142,20 +142,20 @@ html.touchevents {
 			}
 		}
 */
-		
+
 		.title {
 			@include opacity(1);
-			
+
 			@include transform(
 				translate3d(-1em,0,0)
 			);
-			
+
 			@media all and (orientation:landscape) and (min-width: $sm) {
 				@include transform(
 					translate3d(-4em,0,0)
 				);
 			}
-			
+
 			@media all and (min-width: $m) {
 				@include transform(
 					translate3d(-4em,0,0)

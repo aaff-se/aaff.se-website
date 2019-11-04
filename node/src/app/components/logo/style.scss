@@ -8,9 +8,9 @@ div#logo {
 	z-index: 100;
 	pointer-events: none;
 	//perspective: 4em;
-	
+
 	@include opacity(0);
-	
+
 	@include transition(
 		opacity $transition_time*2 $transition_time*2 $ease-out
 
@@ -24,7 +24,7 @@ div#logo {
 		width: 6em;
 		pointer-events: auto;
 	}
-	
+
 	.inner-wrapper {
 		vertical-align: middle;
 		display: table-cell;
@@ -32,19 +32,19 @@ div#logo {
 		line-height: 1em;
 		transform-style: preserve-3d;
 		@include transition(
-			transform $transition_time*2 $easeOutQuad
+			transform $transition_time $easeOutQuad
 		);
 		@include transform(rotateY(0deg));
 
 	}
-	
+
 	.inner-wrapper.animating {
 		@include transform(rotateY(90deg));
 		@include transition(
-			transform $transition_time*2 $easeInQuad
+			transform $transition_time $easeInQuad
 		);
 	}
-	
+
 	a {
 		pointer-events: auto;
 		display: inline-block;
@@ -52,23 +52,17 @@ div#logo {
 		font-size: 1em;
 		line-height: 1em;
 	}
-	
+
 	svg {
 		height: 2em;
 		width: 2em;
 		display: block;
 		position: relative;
-		
+
 	}
-	
+
 }
 
 div#logo.loaded {
 	@include opacity(1);
-}
-
-div#logo:hover .inner-wrapper {
-		@include transition(
-			transform $transition_time $ease-out
-		);
 }

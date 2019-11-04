@@ -21,13 +21,10 @@ let env = {
 
 const path = require('path');
 const webpack = require('webpack');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const fs = require('fs-extra');
- 
-//needs compass-mixins installed
-const COMPASS_MIXINS_DIR = path.resolve(__dirname, 'node_modules/compass-mixins/lib');
 
 const BASE_DIR = path.resolve(__dirname);
 
@@ -44,42 +41,15 @@ let app_plugins = {};
 let server_plugins = {};
 let sw_plugins = {};
 
-const uglifyPlugin = new webpack.optimize.UglifyJsPlugin({
-	sourceMap: false,
-	compress: {
-		sequences: true,
-		dead_code: true,
-		conditionals: true,
-		booleans: true,
-		unused: true,
-		if_return: true,
-		join_vars: true,
-		drop_console: true
-	},
-	mangle: {
-		except: ['$super', '$', 'exports', 'require']
-	},
-	output: {
-		comments: false
-	}
-});
 let options = {
 	children: true,
 	chunks: false
 };
 app_plugins.prod = [
-	new CleanWebpackPlugin(['build'], {
-		root: BASE_DIR,
-		verbose: false, 
-		dry: false,
-		exclude: ['./build/public/.well-known']
-
-	}),
-	new ExtractTextPlugin({filename: '[chunkhash].css', allChunks: true}),
+	new MiniCssExtractPlugin({filename: '[chunkhash].css', allChunks: true}),
 	new webpack.DefinePlugin({
 		'process.env': env
 	}),
-	uglifyPlugin,
 	function() {
 		this.plugin("done", function(stats) {
 			fs.outputFile(
@@ -91,12 +61,7 @@ app_plugins.prod = [
 
 ];
 app_plugins.dev = [
-	new CleanWebpackPlugin(['build'], {
-		root: BASE_DIR,
-		verbose: true, 
-		dry: false,
-	}),
-	new ExtractTextPlugin({filename: '[chunkhash].css', allChunks: true}),
+	new MiniCssExtractPlugin({filename: '[chunkhash].css', allChunks: true}),
 	new webpack.DefinePlugin({
 		'process.env': env
 	}),
@@ -114,13 +79,10 @@ server_plugins.prod = [
 	new webpack.DefinePlugin({
 		'process.env': env
 	}),
-	uglifyPlugin,
 	new CopyWebpackPlugin([{
-		from: {
-			glob: SRC_STATIC_DIR,
-			dot: true
-		},
-		to: BUILD_DIR
+		from: SRC_STATIC_DIR,
+		to: BUILD_DIR,
+		toType: 'dir',
 	}])
 ];
 server_plugins.dev = [
@@ -128,11 +90,9 @@ server_plugins.dev = [
 		'process.env': env
 	}),
 	new CopyWebpackPlugin([{
-		from: {
-			glob: SRC_STATIC_DIR,
-			dot: true
-		},
-		to: BUILD_DIR
+		from: SRC_STATIC_DIR,
+		to: BUILD_DIR,
+		toType: 'dir',
 	}])
 ];
 
@@ -140,12 +100,23 @@ sw_plugins.prod = [
 	new webpack.DefinePlugin({
 		'process.env': env
 	}),
-	uglifyPlugin
+	new CleanWebpackPlugin({
+		root: BUILD_DIR,
+		verbose: false,
+		dry: false,
+		beforeEmit: true
+	}),
 ];
 sw_plugins.dev = [
 	new webpack.DefinePlugin({
 		'process.env': env
-	})
+	}),
+	new CleanWebpackPlugin({
+		root: BUILD_DIR,
+		verbose: true,
+		dry: false,
+		beforeEmit: true
+	}),
 ];
 
 
@@ -154,20 +125,17 @@ const appLoaders = [
 		test: /\.js$/,
 		include: SRC_APP_DIR,
 		loader: 'babel-loader',
-		query: {
-			presets: [
-				'react',
-				['es2015', {'modules': false}]
-			]
-		}
 	},
 	{
 		test: /\.scss$/,
-		loader: ExtractTextPlugin.extract({
-			fallback: 'style-loader', 
-//			use: `css-loader!sass-loader?includePaths[]=${COMPASS_MIXINS_DIR}`
-			use: `css-loader!sass-loader`
-		})
+		use: [{
+            loader: MiniCssExtractPlugin.loader
+          },
+          {
+            loader: "css-loader",
+          },
+          "sass-loader"
+        ]
 	}
 ];
 
@@ -176,12 +144,6 @@ const serverLoaders = [
 		test: /\.js$/,
 		include: BASE_DIR,
 		loader: 'babel-loader',
-		query: {
-			presets: [
-				'react',
-				['es2015', {'modules': false}]
-			]
-		}
 	},
 	{
 		test: /\.scss$/,
@@ -194,11 +156,6 @@ const swLoaders = [
 		test: /\.js$/,
 		include: BASE_DIR,
 		loader: 'babel-loader',
-		query: {
-			presets: [
-				['es2015', {'modules': false}]
-			]
-		}
 	}
 ];
 
@@ -220,13 +177,24 @@ module.exports = [
 	{
 		name: 'client',
 		target: 'web',
+		mode: (PROD ? 'production':'development'),
 		context: SRC_APP_DIR,
+		node: {
+      fs: 'empty',
+		},
 		entry: {
 			app: './index.js'
 		},
 		output: {
 			path: BUILD_PUBLIC_DIR,
 			filename: '[chunkhash].js'
+		},
+		optimization: {
+			minimize: (PROD ? true:false),
+			splitChunks: {
+        // include all types of chunks
+        chunks: 'all'
+      },
 		},
 		module: {
 			rules: appLoaders
@@ -239,6 +207,7 @@ module.exports = [
 	{
 		name: 'server',
 		target: 'node',
+		mode: (PROD ? 'production':'development'),
 		context: SRC_SERVER_DIR,
 		node: {
 		  __dirname: false,
@@ -246,6 +215,9 @@ module.exports = [
 		},
 		entry: {
 			server: './index.js'
+		},
+		optimization: {
+			minimize: (PROD ? true:false),
 		},
 		output: {
 			path: BUILD_SERVER_DIR,
@@ -264,6 +236,7 @@ module.exports = [
 	{
 		name: 'serviceworker',
 		target: 'web',
+		mode: (PROD ? 'production':'development'),
 		context: SRC_SW_DIR,
 		node: {
 		  __dirname: false,
@@ -275,6 +248,9 @@ module.exports = [
 		output: {
 			path: BUILD_PUBLIC_DIR,
 			filename: 'sw.js'
+		},
+		optimization: {
+			minimize: (PROD ? true:false),
 		},
 		externals: /^[a-z\-0-9]+$/,
 		module: {

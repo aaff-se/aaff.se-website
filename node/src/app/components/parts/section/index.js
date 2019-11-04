@@ -1,24 +1,19 @@
 'use strict';
 
-import React, {Component} from 'react';
+import React from 'react';
 
-class Section extends Component {
+const Section = (props) => {
 
-	constructor(props) {
-		super(props);
-	}
-	
-	render() {
-		const { children, id, className, style } = this.props;
-		
-		return <section style={style} id={id || ''} className={className}>
-			<div className="inner">
-				{children}
-				<div className="clear"></div>
-			</div>
-		</section>
-	}
-	
+  const { children, id, className, style, reference } = props;
+
+  return (
+     <section ref={reference} style={style} id={id || ''} className={className}>
+      <div className="inner">
+        {children}
+        <div className="clear"></div>
+      </div>
+    </section>
+  );
 }
 Section.defaultProps = {};
 

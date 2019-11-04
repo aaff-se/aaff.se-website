@@ -12,7 +12,7 @@
 	background: $color_body_dark;
 	color: $color_background;
 }
-::-moz-selection { 
+::-moz-selection {
 	background: $color_body_dark;
 	color: $color_background;
 }
@@ -32,17 +32,12 @@ body {
 	font-size: $font_size_xs;
 	font-size: $font_size_xs_vw;
 	overflow-x: hidden;
-	
-	@include transition(
-		color $transition_time*1.5 $transition_time*3 linear,
-		background $transition_time*1.5 $transition_time*3 linear
-	);
 
 	@media all and (min-width: $s) {
 		font-size: $font_size_s;
 		font-size: $font_size_s_vw;
 	}
-	
+
 	@media all and (orientation:landscape) and (min-width: $sm) {
 		font-size: $font_size_m;
 		font-size: $font_size_m_vw;
@@ -63,16 +58,16 @@ body {
 		font-size: $font_size_xl;
 		font-size: $font_size_xl_vw;
 	}
-	
-	&.inv {
+
+  	&.inv {
 		background: $color_body_dark;
 		color: $color_background;
 	}
-	
+
 	&.the404 {
 		background: #250df6;
 		color: $color_white;
-		
+
 		a {
 			color: $color_white;
 		}
@@ -82,7 +77,6 @@ body {
 a,
 a:visited,
 a:focus {
-
 	position: relative;
 	text-decoration: none;
 	color: inherit;
@@ -119,9 +113,9 @@ body.touch a:active {
 	height: auto;
 	float: left;
 	display: block;
-	
+
 	&.loaded {
-		
+
 		img {
 			@include opacity(1);
 			background: none;

@@ -1,8 +1,6 @@
 'use strict';
 
-import React, {Component} from 'react';
-import PropTypes from 'prop-types';
-import ReactDOM from 'react-dom';
+import React, {useState, useEffect, useRef} from 'react';
 import classnames from 'classnames';
 
 import throttle from'lodash/throttle';
@@ -19,95 +17,82 @@ import Group from 'components/parts/group';
 import Item from 'components/parts/item';
 import Image from 'components/image';
 
-class HomeItem extends Component {
+const HomeItem = (props) => {
 
-	constructor(props) {
-		super(props);
-		this.state = props.state;
-		this.state.sectionStyle = { };
-		
-		this.node = null;
-		
-		this.handleScroll = throttle(this.handleScroll.bind(this), 200);
-		this.handleResize = debounce(this.handleResize.bind(this), 200);
-	}
-	
-	componentDidMount() {
-		event.add(window, 'scroll', this.handleScroll);
-		event.add(window, 'resize', this.handleResize);
-		setTimeout(this.handleScroll, 350);
+  const { data, className } = props;
 
-	}
-	
-	componentWillUnmount() {
-		if (this.handleScroll.cancel) {
-			this.handleScroll.cancel();
-		}
-		if (this.handleResize.cancel) {
-			this.handleResize.cancel();
-		}
-		event.remove(window, 'scroll', this.handleScroll);
-		event.remove(window, 'resize', this.handleResize);
-	}
+  const [current, setCurrent] = useState(false);
 
-	handleScroll() {
-		
-		//check if this section is centered
-		const {isCurrent} = this.state;
-		
-		if(!this.node)
-			this.node = ReactDOM.findDOMNode(this);
-			
-		if(inCenter(this.node) || inFull(this.node)) {
-			if(!isCurrent){
-				this.setState({isCurrent: true});
-			}
-		} else {
-			if(isCurrent){
-				this.setState({isCurrent: false});
-			}
-		}
-	}
-	
-	handleResize() {
-		
-		//run the scroll-check on resize as well
-		this.handleScroll();
-	}
-	
-	render() {
-		const { data,className } = this.props;
-		const {sectionStyle, isCurrent}  = this.state;
-		const classNames = classnames( className, {'current': isCurrent });
-		
-		return <Section className={classNames}>
-			
-			<Group href={data.link} title={data.client + ' - ' + data.type}>
+  //item reference needs to be sent down to a real dom obj, hence the "reference={itemEl}" on "Section"
+  const itemEl = useRef(null);
 
-				<Item className="title">
-					<h2>{data.client}</h2><h3>{data.type}</h3>
-				</Item>
+  useEffect(() => {
+    event.add(window, 'scroll', throttleScroll);
+    event.add(window, 'resize', debounceResize);
+    setTimeout(handleScroll, 150);
 
-				<Item className="image-wrapper">
-				
-					{(data.image.main && !data.image.alternative ? <Image image={data.image.main} /> : null)}
-	
-					{(data.image.main && data.image.alternative ? <Image className="main" image={data.image.main} /> : null)}
-					
-					{(data.image.alternative ? <Image className="alternative" image={data.image.alternative} /> : null)}
-				</Item>
-			
-			</Group>
-			
-		</Section>;
-	}
-	
+    return () => {
+      if (throttleScroll.cancel)
+        throttleScroll.cancel();
+      if (debounceResize.cancel)
+        debounceResize.cancel();
+      event.remove(window, 'scroll', throttleScroll);
+      event.remove(window, 'resize', debounceResize);
+
+    };
+  },[]);
+
+
+  const handleScroll = () => {
+
+    //check if this section is centered
+
+    if( inFull(itemEl.current) || inCenter(itemEl.current) )
+      setCurrent(true);
+    else
+      setCurrent(false);
+
+  }
+  const throttleScroll = throttle(handleScroll, 200);
+
+  const handleResize = () => {
+
+    //run the scroll-check on resize as well
+    handleScroll();
+  }
+  const debounceResize = debounce(handleResize, 200);
+
+  const classNames = classnames( className, {'current': current });
+
+  return(
+    <Section reference={itemEl} className={classNames}>
+
+      <Group addToCursor={'cursor-project'} href={data.link} title={data.client + ' - ' + data.type}>
+
+        <Item className="title">
+          <h2>{data.client}</h2><h3>{data.type}</h3>
+        </Item>
+
+        <Item className="image-wrapper">
+
+          {(data.image.main && !data.image.alternative ? <Image image={data.image.main} /> : null)}
+
+          {(data.image.main && data.image.alternative ? <Image className="main" image={data.image.main} /> : null)}
+
+          {(data.image.alternative ? <Image className="alternative" image={data.image.alternative} /> : null)}
+        </Item>
+
+      </Group>
+
+    </Section>
+  );
+
 }
-HomeItem.propTypes = { data: PropTypes.object };
-HomeItem.defaultProps = { 
-	data: {},
-	className: {},
-	state: {}
+HomeItem.defaultProps = {
+  data: {},
+  className: {},
+  state: {},
+  updateCursorState: ()=>{}
 
 };
 
